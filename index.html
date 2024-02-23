@@ -17,8 +17,8 @@
         }
 
         img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 50px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
         }
     </style>
     <script>
@@ -44,7 +44,7 @@
                 tableHTML += '<tr>';
                 for (var j = 0; j < columns.length; j++) {
                     if (j < 2) {
-                        tableHTML += '<td><img src="' + columns[j] + '" alt="Logo"></td>';
+                        tableHTML += '<td><img src="' + columns[j] + '" alt="Logo" style="width:50px;height:auto;"></td>';
                     } else {
                         tableHTML += '<td>' + columns[j] + '</td>';
                     }
