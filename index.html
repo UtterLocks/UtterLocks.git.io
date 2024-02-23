@@ -3,12 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
+    <title>Utter Locks</title>
+    <script>
+        // Function to fetch CSV data and generate the table
+        function fetchAndGenerateTable() {
+            // URL of your CSV file on GitHub
+            var csvUrl = 'https://raw.githubusercontent.com/UtterLocks/UtterLocks/main/Logo Retrieval and SQ24 - Sheet81.csv';
+
+            // Fetch CSV data
+            fetch(csvUrl)
+                .then(response => response.text())
+                .then(csvData => generateTable(csvData))
+                .catch(error => console.error('Error fetching CSV:', error));
+        }
+
+        // Function to parse CSV data and generate the table
+        function generateTable(csvData) {
+            var rows = csvData.split('\n');
+            var tableHTML = '<table border="1"><thead><tr><th>Logo</th><th>Logo</th><th>Data 1</th><th>Data 2</th></tr></thead><tbody>';
+
+            for (var i = 0; i < rows.length; i++) {
+                var columns = rows[i].split('\t');
+                tableHTML += '<tr>';
+                for (var j = 0; j < columns.length; j++) {
+                    if (j < 2) {
+                        tableHTML += '<td><img src="' + columns[j] + '" alt="Logo"></td>';
+                    } else {
+                        tableHTML += '<td>' + columns[j] + '</td>';
+                    }
+                }
+                tableHTML += '</tr>';
+            }
+
+            tableHTML += '</tbody></table>';
+            document.getElementById('data-table').innerHTML = tableHTML;
+        }
+    </script>
 </head>
 <body>
 
-    <h1>Hello, World!</h1>
-    <p>This is a basic HTML page for your website.</p>
+    <h1>Utter Locks</h1>
+
+    <div id="data-table"></div>
+
+    <script>
+        // Call the function to fetch CSV data and generate the table
+        fetchAndGenerateTable();
+    </script>
 
 </body>
 </html>
