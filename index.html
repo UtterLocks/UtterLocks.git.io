@@ -7,21 +7,28 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
 
+        header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
         main {
             text-align: center;
-            margin-top: 20px; /* Add margin at the top */
+            margin-top: 20px;
         }
 
         table {
             border-collapse: collapse;
-            width: 60%; /* Adjust the width as needed */
-            margin: 20px auto; /* Add margin around the table */
+            width: 60%;
+            margin: 20px auto;
         }
 
         th, td {
@@ -76,8 +83,11 @@
 </head>
 <body>
 
-    <main>
+    <header>
         <h1>Utter Locks</h1>
+    </header>
+
+    <main>
         <div id="data-table"></div>
     </main>
 
