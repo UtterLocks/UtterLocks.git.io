@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utter Locks</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        img {
+            max-width: 50px; /* Adjust the size as needed */
+            max-height: 50px; /* Adjust the size as needed */
+        }
+    </style>
     <script>
         // Function to fetch CSV data and generate the table
         function fetchAndGenerateTable() {
@@ -20,7 +37,7 @@
         // Function to parse CSV data and generate the table
         function generateTable(csvData) {
             var rows = csvData.split('\n');
-            var tableHTML = '<table border="1"><thead><tr><th>Logo</th><th>Logo</th><th>Data 1</th><th>Data 2</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr><th>Logo</th><th>Logo</th><th>Data 1</th><th>Data 2</th></tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
