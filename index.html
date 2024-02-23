@@ -23,7 +23,7 @@
             var tableHTML = '<table border="1"><thead><tr><th>Logo</th><th>Logo</th><th>Data 1</th><th>Data 2</th></tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
-                var columns = rows[i].split('\t');
+                var columns = rows[i].split(',');
                 tableHTML += '<tr>';
                 for (var j = 0; j < columns.length; j++) {
                     if (j < 2) {
