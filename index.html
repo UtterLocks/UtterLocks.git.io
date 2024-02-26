@@ -11,6 +11,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            transition: background-color 0.5s ease; /* Smooth transition for background color */
         }
 
         header {
@@ -104,6 +105,27 @@
             tableHTML += '</tbody></table>';
             document.getElementById('data-table').innerHTML = tableHTML;
         }
+
+        // Function to handle scroll event and change background color
+        function handleScroll() {
+            var body = document.body;
+            var header = document.querySelector('header');
+
+            // Change background color when scrolling
+            if (window.scrollY > 0) {
+                body.style.backgroundColor = '#fff'; // White background
+                header.style.backgroundColor = '#fff'; // White background for header
+            } else {
+                body.style.backgroundColor = 'transparent'; // Translucent background
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'; // Translucent background for header
+            }
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Call the function to fetch CSV data and generate the table
+        fetchAndGenerateTable();
     </script>
 </head>
 <body>
@@ -115,11 +137,6 @@
     <main>
         <div id="data-table"></div>
     </main>
-
-    <script>
-        // Call the function to fetch CSV data and generate the table
-        fetchAndGenerateTable();
-    </script>
 
 </body>
 </html>
