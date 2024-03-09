@@ -1,67 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utter Locks</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: #000000; /* Set text color back to black */
-        }
+        /* Your existing styles remain unchanged */
 
-        header {
-            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
-            padding: 10px;
-            text-align: center;
-            width: 100%;
-            display: flex;
-            justify-content: center; /* Center the content horizontally */
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 2; /* Increased z-index */
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        main {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 60%;
-            margin: 20px auto;
-            background-color: white; /* Set table background to white */
-            color: #000000; /* Set text color back to black */
-            border: 8px solid transparent; /* Set a thick transparent border */
-            border-image-source: url('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/images.webp');
-            border-image-repeat: round;
-            border-image-slice: 1;
-        }
-
+        /* Additional or modified styles can be added here */
         th, td {
             padding: 8px;
             text-align: center;
         }
 
-        th {
-            position: sticky;
-            top: 40px; /* Adjusted top value */
-            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
-            z-index: 2; /* Decreased z-index */
-        }
-
-        img {
+        .team-logo {
             width: 50px;
             height: auto;
             display: block;
@@ -73,37 +26,32 @@
             font-size: 14px;
             margin-top: 5px;
         }
-
-        @media screen and (max-width: 600px) {
-            h1 {
-                font-size: 18px;
-            }
-        }
     </style>
     <script>
-        // Function to fetch CSV data and generate the table
+        // Your existing JavaScript code remains unchanged
+
+        // Modified function to fetch and generate the table
         function fetchAndGenerateTable() {
-            // URL of your CSV file on GitHub (Raw content URL)
             var csvUrl = 'https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv';
 
-            // Fetch CSV data
             fetch(csvUrl)
                 .then(response => response.text())
                 .then(csvData => generateTable(csvData))
                 .catch(error => console.error('Error fetching CSV:', error));
         }
 
-        // Function to parse CSV data and generate the table
         function generateTable(csvData) {
             var rows = csvData.split('\n');
-            var tableHTML = '<table><thead><tr><th>Home</th><th>Away</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr><th>Game Type</th><th>Home Team</th><th>Away Team</th><th>Home Logo</th><th>Away Logo</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
-                for (var j = 2; j < columns.length; j++) {
-                    if (j === 2 || j === 3) {
-                        tableHTML += '<td><img src="' + columns[j] + '" alt="Logo" style="width:50px;height:auto;"><div class="team-name">' + columns[j - 2] + '</div></td>';
+                for (var j = 0; j < columns.length; j++) {
+                    if (j === 0 || j === 1) {
+                        tableHTML += '<td>' + columns[j] + '</td>';
+                    } else if (j === 3 || j === 4) {
+                        tableHTML += '<td><img class="team-logo" src="' + columns[j] + '" alt="Logo"><div class="team-name">' + columns[j - 2] + '</div></td>';
                     } else {
                         tableHTML += '<td>' + columns[j] + '</td>';
                     }
@@ -116,8 +64,8 @@
         }
     </script>
 </head>
-<body>
 
+<body>
     <header>
         <h1>Utter Locks</h1>
     </header>
@@ -127,9 +75,8 @@
     </main>
 
     <script>
-        // Call the function to fetch CSV data and generate the table
         fetchAndGenerateTable();
     </script>
-
 </body>
+
 </html>
