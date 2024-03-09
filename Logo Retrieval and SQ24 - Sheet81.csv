@@ -1,25 +1,408 @@
-Indiana St.,Missouri St.,https://a.espncdn.com/i/teamlogos/ncaa/500/282.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2623.png,-5.3,146.6
-Winthrop,Longwood,https://a.espncdn.com/i/teamlogos/ncaa/500/2737.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2344.png,-10.4,149.4
-North Carolina A&T,William & Mary,https://a.espncdn.com/i/teamlogos/ncaa/500/2448.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png,5.1,134.9
-Northern Iowa,Belmont,https://a.espncdn.com/i/teamlogos/ncaa/500/2460.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2057.png,1.7,153.7
-Elon,Hampton,https://a.espncdn.com/i/teamlogos/ncaa/500/2210.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2261.png,-2.8,152.6
-Mercer,The Citadel,https://a.espncdn.com/i/teamlogos/ncaa/500/2382.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2643.png,2,145.1
-UNC Asheville,Charleston Southern,https://a.espncdn.com/i/teamlogos/ncaa/500/2427.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2127.png,-10.8,146.6
-Drake,Evansville,https://a.espncdn.com/i/teamlogos/ncaa/500/2181.png,https://a.espncdn.com/i/teamlogos/ncaa/500/339.png,-11.6,151.7
-East Tennessee St.,VMI,https://a.espncdn.com/i/teamlogos/ncaa/500/2193.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2678.png,1,146.8
-Little Rock,Western Illinois,https://a.espncdn.com/i/teamlogos/ncaa/500/2031.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2710.png,-2.5,139.3
-Gardner Webb,Presbyterian,https://a.espncdn.com/i/teamlogos/ncaa/500/2241.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2506.png,-8.8,159.2
-Oral Roberts,South Dakota,https://a.espncdn.com/i/teamlogos/ncaa/500/198.png,https://a.espncdn.com/i/teamlogos/ncaa/500/233.png,-4,147.6
-San Diego,Pepperdine,https://a.espncdn.com/i/teamlogos/ncaa/500/301.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2492.png,6.1,162.1
-Bradley,Illinois Chicago,https://a.espncdn.com/i/teamlogos/ncaa/500/71.png,https://a.espncdn.com/i/teamlogos/ncaa/500/82.png,-9.1,140.7
-Tennessee Martin,Morehead St.,https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2413.png,9.4,146.5
-Portland,Loyola Marymount,https://a.espncdn.com/i/teamlogos/ncaa/500/2501.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2351.png,1.9,134
-Western Michigan,Akron,https://a.espncdn.com/i/teamlogos/ncaa/500/2711.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2006.png,4.9,138.1
-Miami OH,Ohio,https://a.espncdn.com/i/teamlogos/ncaa/500/193.png,https://a.espncdn.com/i/teamlogos/ncaa/500/195.png,-0.6,147.1
-Bowling Green,Ball St.,https://a.espncdn.com/i/teamlogos/ncaa/500/189.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2050.png,0.3,144.1
-Buffalo,Northern Illinois,https://a.espncdn.com/i/teamlogos/ncaa/500/2084.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2459.png,2.5,151.8
-Central Michigan,Eastern Michigan,https://a.espncdn.com/i/teamlogos/ncaa/500/2117.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2199.png,-5.9,126.8
-Dayton,VCU,https://a.espncdn.com/i/teamlogos/ncaa/500/2168.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2670.png,-8.2,134.4
-Toledo,Kent St.,https://a.espncdn.com/i/teamlogos/ncaa/500/2649.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2309.png,-5,158.8
-Tulane,Wichita St.,https://a.espncdn.com/i/teamlogos/ncaa/500/2655.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2724.png,-5.7,163.1
-San Diego St.,Boise St.,https://a.espncdn.com/i/teamlogos/ncaa/500/21.png,https://a.espncdn.com/i/teamlogos/ncaa/500/68.png,-5.4,141.1
+Neutral,Brown,-11.2,137.6,https://a.espncdn.com/i/teamlogos/ncaa/500/225.png
+Neutral,Yale,,,https://a.espncdn.com/i/teamlogos/ncaa/500/43.png
+Away,Brown,-15,138,https://a.espncdn.com/i/teamlogos/ncaa/500/225.png
+Home,Yale,,,https://a.espncdn.com/i/teamlogos/ncaa/500/43.png
+Neutral,Mercer,-10.2,157.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2382.png
+Neutral,Samford,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2535.png
+Away,Mercer,-14.6,158.1,https://a.espncdn.com/i/teamlogos/ncaa/500/2382.png
+Home,Samford,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2535.png
+Neutral,Arkansas,-16.3,180.6,https://a.espncdn.com/i/teamlogos/ncaa/500/8.png
+Neutral,Alabama,,,https://a.espncdn.com/i/teamlogos/ncaa/500/333.png
+Away,Arkansas,-21.4,181.1,https://a.espncdn.com/i/teamlogos/ncaa/500/8.png
+Home,Alabama,,,https://a.espncdn.com/i/teamlogos/ncaa/500/333.png
+Neutral,Campbell,-6.9,145,https://a.espncdn.com/i/teamlogos/ncaa/500/2097.png
+Neutral,Monmouth,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2405.png
+Away,Campbell,-11,145.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2097.png
+Home,Monmouth,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2405.png
+Neutral,Georgetown,-17.3,157.3,https://a.espncdn.com/i/teamlogos/ncaa/500/46.png
+Neutral,St. John's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2599.png
+Away,Georgetown,-21.7,157.8,https://a.espncdn.com/i/teamlogos/ncaa/500/46.png
+Home,St. John's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2599.png
+Neutral,Longwood,-5.9,154.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2344.png
+Neutral,High Point,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2272.png
+Away,Longwood,-10.3,155.1,https://a.espncdn.com/i/teamlogos/ncaa/500/2344.png
+Home,High Point,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2272.png
+Neutral,Le Moyne,-4.7,133.4,https://a.espncdn.com/i/teamlogos/ncaa/500/2330.png
+Neutral,Merrimack,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2771.png
+Away,Le Moyne,-8.4,133.6,https://a.espncdn.com/i/teamlogos/ncaa/500/2330.png
+Home,Merrimack,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2771.png
+Neutral,Memphis,-5.1,163.5,https://a.espncdn.com/i/teamlogos/ncaa/500/235.png
+Neutral,Florida Atlantic,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2226.png
+Away,Memphis,-9.7,163.7,https://a.espncdn.com/i/teamlogos/ncaa/500/235.png
+Home,Florida Atlantic,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2226.png
+Neutral,Saint Louis,-10.1,156.7,https://a.espncdn.com/i/teamlogos/ncaa/500/139.png
+Neutral,St. Bonaventure,,,https://a.espncdn.com/i/teamlogos/ncaa/500/179.png
+Away,Saint Louis,-14.5,157,https://a.espncdn.com/i/teamlogos/ncaa/500/139.png
+Home,St. Bonaventure,,,https://a.espncdn.com/i/teamlogos/ncaa/500/179.png
+Neutral,Georgia Southern,-15.4,145.8,https://a.espncdn.com/i/teamlogos/ncaa/500/290.png
+Neutral,Appalachian St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2026.png
+Away,Georgia Southern,-19.5,146.2,https://a.espncdn.com/i/teamlogos/ncaa/500/290.png
+Home,Appalachian St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2026.png
+Neutral,Rhode Island,-2.3,151.2,https://a.espncdn.com/i/teamlogos/ncaa/500/227.png
+Neutral,Fordham,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2230.png
+Away,Rhode Island,-6.5,151.3,https://a.espncdn.com/i/teamlogos/ncaa/500/227.png
+Home,Fordham,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2230.png
+Neutral,Davidson,0,138.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2166.png
+Neutral,Saint Joseph's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2603.png
+Away,Davidson,-3.9,138.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2166.png
+Home,Saint Joseph's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2603.png
+Neutral,Siena,-14.5,135.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2561.png
+Neutral,Iona,,,https://a.espncdn.com/i/teamlogos/ncaa/500/314.png
+Away,Siena,-18.3,135.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2561.png
+Home,Iona,,,https://a.espncdn.com/i/teamlogos/ncaa/500/314.png
+Neutral,Western Kentucky,-2.8,151.9,https://a.espncdn.com/i/teamlogos/ncaa/500/98.png
+Neutral,Liberty,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2335.png
+Away,Western Kentucky,-7,152,https://a.espncdn.com/i/teamlogos/ncaa/500/98.png
+Home,Liberty,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2335.png
+Neutral,George Washington,-9.8,148.1,https://a.espncdn.com/i/teamlogos/ncaa/500/45.png
+Neutral,Duquesne,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2184.png
+Away,George Washington,-13.9,148.4,https://a.espncdn.com/i/teamlogos/ncaa/500/45.png
+Home,Duquesne,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2184.png
+Neutral,West Virginia,-9.9,142.9,https://a.espncdn.com/i/teamlogos/ncaa/500/277.png
+Neutral,Cincinnati,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png
+Away,West Virginia,-13.9,143.2,https://a.espncdn.com/i/teamlogos/ncaa/500/277.png
+Home,Cincinnati,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png
+Neutral,Cornell,10.3,165.7,https://a.espncdn.com/i/teamlogos/ncaa/500/172.png
+Neutral,Columbia,,,https://a.espncdn.com/i/teamlogos/ncaa/500/171.png
+Away,Cornell,5.7,165.4,https://a.espncdn.com/i/teamlogos/ncaa/500/172.png
+Home,Columbia,,,https://a.espncdn.com/i/teamlogos/ncaa/500/171.png
+Neutral,Iowa St.,9.9,130.5,https://a.espncdn.com/i/teamlogos/ncaa/500/66.png
+Neutral,Kansas St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2306.png
+Away,Iowa St.,6.2,130.3,https://a.espncdn.com/i/teamlogos/ncaa/500/66.png
+Home,Kansas St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2306.png
+Neutral,Texas A&M,3.5,145,https://a.espncdn.com/i/teamlogos/ncaa/500/245.png
+Neutral,Mississippi,,,https://a.espncdn.com/i/teamlogos/ncaa/500/145.png
+Away,Texas A&M,-0.5,144.9,https://a.espncdn.com/i/teamlogos/ncaa/500/245.png
+Home,Mississippi,,,https://a.espncdn.com/i/teamlogos/ncaa/500/145.png
+Neutral,Oklahoma,-1.2,143.6,https://a.espncdn.com/i/teamlogos/ncaa/500/201.png
+Neutral,Texas,,,https://a.espncdn.com/i/teamlogos/ncaa/500/251.png
+Away,Oklahoma,-5.2,143.6,https://a.espncdn.com/i/teamlogos/ncaa/500/201.png
+Home,Texas,,,https://a.espncdn.com/i/teamlogos/ncaa/500/251.png
+Neutral,UNC Asheville,3.5,149.6,https://a.espncdn.com/i/teamlogos/ncaa/500/2427.png
+Neutral,Gardner Webb,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2241.png
+Away,UNC Asheville,-0.7,149.6,https://a.espncdn.com/i/teamlogos/ncaa/500/2427.png
+Home,Gardner Webb,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2241.png
+Neutral,Maine,-1.2,135.9,https://a.espncdn.com/i/teamlogos/ncaa/500/311.png
+Neutral,Bryant,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2803.png
+Away,Maine,-5,136,https://a.espncdn.com/i/teamlogos/ncaa/500/311.png
+Home,Bryant,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2803.png
+Neutral,Wagner,-4,119.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2681.png
+Neutral,Central Connecticut,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2115.png
+Away,Wagner,-7.3,120,https://a.espncdn.com/i/teamlogos/ncaa/500/2681.png
+Home,Central Connecticut,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2115.png
+Neutral,Quinnipiac,0.1,135,https://a.espncdn.com/i/teamlogos/ncaa/500/2514.png
+Neutral,Saint Peter's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2612.png
+Away,Quinnipiac,-3.7,135,https://a.espncdn.com/i/teamlogos/ncaa/500/2514.png
+Home,Saint Peter's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2612.png
+Neutral,Niagara,-1.7,128.5,https://a.espncdn.com/i/teamlogos/ncaa/500/315.png
+Neutral,Marist,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2368.png
+Away,Niagara,-5.3,128.6,https://a.espncdn.com/i/teamlogos/ncaa/500/315.png
+Home,Marist,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2368.png
+Neutral,East Tennessee St.,-2.8,137.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2193.png
+Neutral,UNC Greensboro,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2430.png
+Away,East Tennessee St.,-6.6,137.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2193.png
+Home,UNC Greensboro,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2430.png
+Neutral,William & Mary,-9.9,128.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png
+Neutral,Towson,,,https://a.espncdn.com/i/teamlogos/ncaa/500/119.png
+Away,William & Mary,-13.5,129.1,https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png
+Home,Towson,,,https://a.espncdn.com/i/teamlogos/ncaa/500/119.png
+Neutral,Notre Dame,-6.8,130.9,https://a.espncdn.com/i/teamlogos/ncaa/500/87.png
+Neutral,Virginia Tech,,,https://a.espncdn.com/i/teamlogos/ncaa/500/259.png
+Away,Notre Dame,-10.4,131.1,https://a.espncdn.com/i/teamlogos/ncaa/500/87.png
+Home,Virginia Tech,,,https://a.espncdn.com/i/teamlogos/ncaa/500/259.png
+Neutral,Richmond,2.9,130.5,https://a.espncdn.com/i/teamlogos/ncaa/500/257.png
+Neutral,George Mason,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2244.png
+Away,Richmond,-0.7,130.4,https://a.espncdn.com/i/teamlogos/ncaa/500/257.png
+Home,George Mason,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2244.png
+Neutral,Creighton,4.6,134.1,https://a.espncdn.com/i/teamlogos/ncaa/500/156.png
+Neutral,Villanova,,,https://a.espncdn.com/i/teamlogos/ncaa/500/222.png
+Away,Creighton,0.9,134,https://a.espncdn.com/i/teamlogos/ncaa/500/156.png
+Home,Villanova,,,https://a.espncdn.com/i/teamlogos/ncaa/500/222.png
+Neutral,South Carolina,-1.6,131.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2579.png
+Neutral,Mississippi St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/344.png
+Away,South Carolina,-5.3,131.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2579.png
+Home,Mississippi St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/344.png
+Neutral,UMBC,-9.1,166,https://a.espncdn.com/i/teamlogos/ncaa/500/2378.png
+Neutral,UMass Lowell,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2349.png
+Away,UMBC,-13.7,166.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2378.png
+Home,UMass Lowell,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2349.png
+Neutral,Utah Tech,-7,142.5,https://a.espncdn.com/i/teamlogos/ncaa/500/3101.png
+Neutral,Stephen F. Austin,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2617.png
+Away,Utah Tech,-11,142.7,https://a.espncdn.com/i/teamlogos/ncaa/500/3101.png
+Home,Stephen F. Austin,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2617.png
+Neutral,Binghamton,-0.8,145.4,https://a.espncdn.com/i/teamlogos/ncaa/500/2066.png
+Neutral,New Hampshire,,,https://a.espncdn.com/i/teamlogos/ncaa/500/160.png
+Away,Binghamton,-4.8,145.4,https://a.espncdn.com/i/teamlogos/ncaa/500/2066.png
+Home,New Hampshire,,,https://a.espncdn.com/i/teamlogos/ncaa/500/160.png
+Neutral,South Florida,9.8,146,https://a.espncdn.com/i/teamlogos/ncaa/500/58.png
+Neutral,Tulsa,,,https://a.espncdn.com/i/teamlogos/ncaa/500/202.png
+Away,South Florida,5.7,145.8,https://a.espncdn.com/i/teamlogos/ncaa/500/58.png
+Home,Tulsa,,,https://a.espncdn.com/i/teamlogos/ncaa/500/202.png
+Neutral,Albany,-11.8,146.5,https://a.espncdn.com/i/teamlogos/ncaa/500/399.png
+Neutral,Vermont,,,https://a.espncdn.com/i/teamlogos/ncaa/500/261.png
+Away,Albany,-15.9,146.9,https://a.espncdn.com/i/teamlogos/ncaa/500/399.png
+Home,Vermont,,,https://a.espncdn.com/i/teamlogos/ncaa/500/261.png
+Neutral,Louisiana,-0.1,155.1,https://a.espncdn.com/i/teamlogos/ncaa/500/309.png
+Neutral,Arkansas St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2032.png
+Away,Louisiana,-4.4,155.1,https://a.espncdn.com/i/teamlogos/ncaa/500/309.png
+Home,Arkansas St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2032.png
+Neutral,Middle Tennessee,-12,125.4,https://a.espncdn.com/i/teamlogos/ncaa/500/2393.png
+Neutral,Louisiana Tech,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2348.png
+Away,Middle Tennessee,-15.5,125.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2393.png
+Home,Louisiana Tech,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2348.png
+Neutral,Jacksonville St.,-2.9,130.7,https://a.espncdn.com/i/teamlogos/ncaa/500/55.png
+Neutral,Sam Houston St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2534.png
+Away,Jacksonville St.,-6.5,130.8,https://a.espncdn.com/i/teamlogos/ncaa/500/55.png
+Home,Sam Houston St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2534.png
+Neutral,Northern Iowa,-7.5,153.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2460.png
+Neutral,Indiana St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/282.png
+Away,Northern Iowa,-11.8,153.5,https://a.espncdn.com/i/teamlogos/ncaa/500/2460.png
+Home,Indiana St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/282.png
+Neutral,Mississippi Valley St.,-16.6,131.7,https://a.espncdn.com/i/teamlogos/ncaa/500/2400.png
+Neutral,Jackson St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2296.png
+Away,Mississippi Valley St.,-20.3,132.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2400.png
+Home,Jackson St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2296.png
+Neutral,Canisius,7.5,139,https://a.espncdn.com/i/teamlogos/ncaa/500/2099.png
+Neutral,Manhattan,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2363.png
+Away,Canisius,3.6,138.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2099.png
+Home,Manhattan,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2363.png
+Neutral,Fairfield,3.5,148.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2217.png
+Neutral,Mount St. Mary's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/116.png
+Away,Fairfield,-0.6,148.7,https://a.espncdn.com/i/teamlogos/ncaa/500/2217.png
+Home,Mount St. Mary's,,,https://a.espncdn.com/i/teamlogos/ncaa/500/116.png
+Neutral,Charlotte,4.3,127,https://a.espncdn.com/i/teamlogos/ncaa/500/2429.png
+Neutral,East Carolina,,,https://a.espncdn.com/i/teamlogos/ncaa/500/151.png
+Away,Charlotte,0.8,126.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2429.png
+Home,East Carolina,,,https://a.espncdn.com/i/teamlogos/ncaa/500/151.png
+Neutral,FIU,1.1,143.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png
+Neutral,New Mexico St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/166.png
+Away,FIU,-3,143.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png
+Home,New Mexico St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/166.png
+Neutral,Arkansas Pine Bluff,-5.6,163.5,https://a.espncdn.com/i/teamlogos/ncaa/500/2029.png
+Neutral,Alcorn St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2016.png
+Away,Arkansas Pine Bluff,-10.2,163.7,https://a.espncdn.com/i/teamlogos/ncaa/500/2029.png
+Home,Alcorn St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2016.png
+Neutral,Kentucky,-9.1,165.8,https://a.espncdn.com/i/teamlogos/ncaa/500/96.png
+Neutral,Tennessee,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png
+Away,Kentucky,-13.7,166.1,https://a.espncdn.com/i/teamlogos/ncaa/500/96.png
+Home,Tennessee,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png
+Neutral,Kansas,-7.8,132.6,https://a.espncdn.com/i/teamlogos/ncaa/500/2305.png
+Neutral,Houston,,,https://a.espncdn.com/i/teamlogos/ncaa/500/248.png
+Away,Kansas,-11.5,132.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2305.png
+Home,Houston,,,https://a.espncdn.com/i/teamlogos/ncaa/500/248.png
+Neutral,Bethune Cookman,4,141.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2065.png
+Neutral,Florida A&M,,,https://a.espncdn.com/i/teamlogos/ncaa/500/50.png
+Away,Bethune Cookman,0.1,141.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2065.png
+Home,Florida A&M,,,https://a.espncdn.com/i/teamlogos/ncaa/500/50.png
+Neutral,La Salle,-9.4,141.6,https://a.espncdn.com/i/teamlogos/ncaa/500/2325.png
+Neutral,Loyola Chicago,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2350.png
+Away,La Salle,-13.4,141.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2325.png
+Home,Loyola Chicago,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2350.png
+Neutral,Miami FL,-0.3,154.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png
+Neutral,Florida St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/52.png
+Away,Miami FL,-4.6,154.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png
+Home,Florida St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/52.png
+Neutral,Colorado St.,17.8,134,https://a.espncdn.com/i/teamlogos/ncaa/500/36.png
+Neutral,Air Force,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2005.png
+Away,Colorado St.,14.1,133.5,https://a.espncdn.com/i/teamlogos/ncaa/500/36.png
+Home,Air Force,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2005.png
+Neutral,Utah Valley,2.6,133.7,https://a.espncdn.com/i/teamlogos/ncaa/500/3084.png
+Neutral,Abilene Christian,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2000.png
+Away,Utah Valley,-1.2,133.6,https://a.espncdn.com/i/teamlogos/ncaa/500/3084.png
+Home,Abilene Christian,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2000.png
+Neutral,Florida,17.1,154.8,https://a.espncdn.com/i/teamlogos/ncaa/500/57.png
+Neutral,Vanderbilt,,,https://a.espncdn.com/i/teamlogos/ncaa/500/238.png
+Away,Florida,12.8,154.3,https://a.espncdn.com/i/teamlogos/ncaa/500/57.png
+Home,Vanderbilt,,,https://a.espncdn.com/i/teamlogos/ncaa/500/238.png
+Neutral,Colorado,12.3,146.3,https://a.espncdn.com/i/teamlogos/ncaa/500/38.png
+Neutral,Oregon St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/204.png
+Away,Colorado,8.2,146,https://a.espncdn.com/i/teamlogos/ncaa/500/38.png
+Home,Oregon St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/204.png
+Neutral,Marquette,7.8,156.7,https://a.espncdn.com/i/teamlogos/ncaa/500/269.png
+Neutral,Xavier,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2752.png
+Away,Marquette,3.5,156.5,https://a.espncdn.com/i/teamlogos/ncaa/500/269.png
+Home,Xavier,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2752.png
+Neutral,UCF,-3.6,142.4,https://a.espncdn.com/i/teamlogos/ncaa/500/2116.png
+Neutral,TCU,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png
+Away,UCF,-7.6,142.5,https://a.espncdn.com/i/teamlogos/ncaa/500/2116.png
+Home,TCU,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png
+Neutral,Seattle,0.6,136,https://a.espncdn.com/i/teamlogos/ncaa/500/2547.png
+Neutral,Tarleton St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2627.png
+Away,Seattle,-3.2,136,https://a.espncdn.com/i/teamlogos/ncaa/500/2547.png
+Home,Tarleton St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2627.png
+Neutral,Southern,8.2,136,https://a.espncdn.com/i/teamlogos/ncaa/500/2582.png
+Neutral,Alabama A&M,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2010.png
+Away,Southern,4.4,135.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2582.png
+Home,Alabama A&M,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2010.png
+Neutral,Grambling St.,2.1,123.4,https://a.espncdn.com/i/teamlogos/ncaa/500/2755.png
+Neutral,Alabama St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2011.png
+Away,Grambling St.,-1.3,123.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2755.png
+Home,Alabama St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2011.png
+Neutral,Boston College,9.5,155,https://a.espncdn.com/i/teamlogos/ncaa/500/103.png
+Neutral,Louisville,,,https://a.espncdn.com/i/teamlogos/ncaa/500/97.png
+Away,Boston College,5.2,154.8,https://a.espncdn.com/i/teamlogos/ncaa/500/103.png
+Home,Louisville,,,https://a.espncdn.com/i/teamlogos/ncaa/500/97.png
+Neutral,Texas St.,-5.4,136.8,https://a.espncdn.com/i/teamlogos/ncaa/500/326.png
+Neutral,Troy,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2653.png
+Away,Texas St.,-9.2,137,https://a.espncdn.com/i/teamlogos/ncaa/500/326.png
+Home,Troy,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2653.png
+Neutral,Wofford,-2.6,148.4,https://a.espncdn.com/i/teamlogos/ncaa/500/2747.png
+Neutral,Chattanooga,,,https://a.espncdn.com/i/teamlogos/ncaa/500/236.png
+Away,Wofford,-6.7,148.5,https://a.espncdn.com/i/teamlogos/ncaa/500/2747.png
+Home,Chattanooga,,,https://a.espncdn.com/i/teamlogos/ncaa/500/236.png
+Neutral,Bradley,-1.2,145.7,https://a.espncdn.com/i/teamlogos/ncaa/500/71.png
+Neutral,Drake,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2181.png
+Away,Bradley,-5.3,145.8,https://a.espncdn.com/i/teamlogos/ncaa/500/71.png
+Home,Drake,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2181.png
+Neutral,Northeastern,-2,145.5,https://a.espncdn.com/i/teamlogos/ncaa/500/111.png
+Neutral,Stony Brook,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2619.png
+Away,Northeastern,-6.1,145.6,https://a.espncdn.com/i/teamlogos/ncaa/500/111.png
+Home,Stony Brook,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2619.png
+Neutral,Princeton,11.2,143.8,https://a.espncdn.com/i/teamlogos/ncaa/500/163.png
+Neutral,Penn,,,https://a.espncdn.com/i/teamlogos/ncaa/500/219.png
+Away,Princeton,7.2,143.5,https://a.espncdn.com/i/teamlogos/ncaa/500/163.png
+Home,Penn,,,https://a.espncdn.com/i/teamlogos/ncaa/500/219.png
+Neutral,UC Davis,-0.5,148.1,https://a.espncdn.com/i/teamlogos/ncaa/500/302.png
+Neutral,Long Beach St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/299.png
+Away,UC Davis,-4.6,148.1,https://a.espncdn.com/i/teamlogos/ncaa/500/302.png
+Home,Long Beach St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/299.png
+Neutral,Clemson,0.4,150.8,https://a.espncdn.com/i/teamlogos/ncaa/500/228.png
+Neutral,Wake Forest,,,https://a.espncdn.com/i/teamlogos/ncaa/500/154.png
+Away,Clemson,-3.8,150.8,https://a.espncdn.com/i/teamlogos/ncaa/500/228.png
+Home,Wake Forest,,,https://a.espncdn.com/i/teamlogos/ncaa/500/154.png
+Neutral,Prairie View A&M,-6,137.5,https://a.espncdn.com/i/teamlogos/ncaa/500/2504.png
+Neutral,Texas Southern,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2640.png
+Away,Prairie View A&M,-9.9,137.7,https://a.espncdn.com/i/teamlogos/ncaa/500/2504.png
+Home,Texas Southern,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2640.png
+Neutral,Baylor,4,149.8,https://a.espncdn.com/i/teamlogos/ncaa/500/239.png
+Neutral,Texas Tech,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png
+Away,Baylor,-0.2,149.7,https://a.espncdn.com/i/teamlogos/ncaa/500/239.png
+Home,Texas Tech,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png
+Neutral,Georgia,-14.9,149.5,https://a.espncdn.com/i/teamlogos/ncaa/500/61.png
+Neutral,Auburn,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2.png
+Away,Georgia,-19.1,149.9,https://a.espncdn.com/i/teamlogos/ncaa/500/61.png
+Home,Auburn,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2.png
+Neutral,North Carolina,-0.5,151.6,https://a.espncdn.com/i/teamlogos/ncaa/500/153.png
+Neutral,Duke,,,https://a.espncdn.com/i/teamlogos/ncaa/500/150.png
+Away,North Carolina,-4.7,151.7,https://a.espncdn.com/i/teamlogos/ncaa/500/153.png
+Home,Duke,,,https://a.espncdn.com/i/teamlogos/ncaa/500/150.png
+Neutral,Utah,2.5,152.2,https://a.espncdn.com/i/teamlogos/ncaa/500/254.png
+Neutral,Oregon,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png
+Away,Utah,-1.7,152.2,https://a.espncdn.com/i/teamlogos/ncaa/500/254.png
+Home,Oregon,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png
+Neutral,Cal Poly,-17.6,134,https://a.espncdn.com/i/teamlogos/ncaa/500/13.png
+Neutral,UC San Diego,,,https://a.espncdn.com/i/teamlogos/ncaa/500/28.png
+Away,Cal Poly,-21.4,134.5,https://a.espncdn.com/i/teamlogos/ncaa/500/13.png
+Home,UC San Diego,,,https://a.espncdn.com/i/teamlogos/ncaa/500/28.png
+Neutral,Oral Roberts,-8.6,153,https://a.espncdn.com/i/teamlogos/ncaa/500/198.png
+Neutral,South Dakota St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2571.png
+Away,Oral Roberts,-12.9,153.2,https://a.espncdn.com/i/teamlogos/ncaa/500/198.png
+Home,South Dakota St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2571.png
+Neutral,Wyoming,1.9,141.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png
+Neutral,Fresno St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/278.png
+Away,Wyoming,-2.1,141.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png
+Home,Fresno St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/278.png
+Neutral,Sacramento St.,-0.2,127.6,https://a.espncdn.com/i/teamlogos/ncaa/500/16.png
+Neutral,Idaho,,,https://a.espncdn.com/i/teamlogos/ncaa/500/70.png
+Away,Sacramento St.,-3.8,127.6,https://a.espncdn.com/i/teamlogos/ncaa/500/16.png
+Home,Idaho,,,https://a.espncdn.com/i/teamlogos/ncaa/500/70.png
+Neutral,Southern Utah,8.6,158.7,https://a.espncdn.com/i/teamlogos/ncaa/500/253.png
+Neutral,UT Rio Grande Valley,,,https://a.espncdn.com/i/teamlogos/ncaa/500/292.png
+Away,Southern Utah,4.2,158.5,https://a.espncdn.com/i/teamlogos/ncaa/500/253.png
+Home,UT Rio Grande Valley,,,https://a.espncdn.com/i/teamlogos/ncaa/500/292.png
+Neutral,N.C. State,-3.7,144.5,https://a.espncdn.com/i/teamlogos/ncaa/500/152.png
+Neutral,Pittsburgh,,,https://a.espncdn.com/i/teamlogos/ncaa/500/221.png
+Away,N.C. State,-7.8,144.6,https://a.espncdn.com/i/teamlogos/ncaa/500/152.png
+Home,Pittsburgh,,,https://a.espncdn.com/i/teamlogos/ncaa/500/221.png
+Neutral,Morehead St.,5.3,144.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2413.png
+Neutral,Little Rock,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2031.png
+Away,Morehead St.,1.2,144.1,https://a.espncdn.com/i/teamlogos/ncaa/500/2413.png
+Home,Little Rock,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2031.png
+Neutral,North Texas,9.6,128.5,https://a.espncdn.com/i/teamlogos/ncaa/500/249.png
+Neutral,Rice,,,https://a.espncdn.com/i/teamlogos/ncaa/500/242.png
+Away,North Texas,6,128.3,https://a.espncdn.com/i/teamlogos/ncaa/500/249.png
+Home,Rice,,,https://a.espncdn.com/i/teamlogos/ncaa/500/242.png
+Neutral,Grand Canyon,10.1,134.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2253.png
+Neutral,Cal Baptist,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2856.png
+Away,Grand Canyon,6.3,134.7,https://a.espncdn.com/i/teamlogos/ncaa/500/2253.png
+Home,Cal Baptist,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2856.png
+Neutral,Georgia Tech,-5.4,119.6,https://a.espncdn.com/i/teamlogos/ncaa/500/59.png
+Neutral,Virginia,,,https://a.espncdn.com/i/teamlogos/ncaa/500/258.png
+Away,Georgia Tech,-8.7,119.8,https://a.espncdn.com/i/teamlogos/ncaa/500/59.png
+Home,Virginia,,,https://a.espncdn.com/i/teamlogos/ncaa/500/258.png
+Neutral,Connecticut,12.2,138.2,https://a.espncdn.com/i/teamlogos/ncaa/500/41.png
+Neutral,Providence,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2507.png
+Away,Connecticut,8.4,137.9,https://a.espncdn.com/i/teamlogos/ncaa/500/41.png
+Home,Providence,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2507.png
+Neutral,Furman,-2.5,151.5,https://a.espncdn.com/i/teamlogos/ncaa/500/231.png
+Neutral,Western Carolina,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2717.png
+Away,Furman,-6.7,151.6,https://a.espncdn.com/i/teamlogos/ncaa/500/231.png
+Home,Western Carolina,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2717.png
+Neutral,New Mexico,0.8,161.3,https://a.espncdn.com/i/teamlogos/ncaa/500/167.png
+Neutral,Utah St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/328.png
+Away,New Mexico,-3.8,161.4,https://a.espncdn.com/i/teamlogos/ncaa/500/167.png
+Home,Utah St.,,,https://a.espncdn.com/i/teamlogos/ncaa/500/328.png
+Neutral,Marshall,-14,154.1,https://a.espncdn.com/i/teamlogos/ncaa/500/276.png
+Neutral,James Madison,,,https://a.espncdn.com/i/teamlogos/ncaa/500/256.png
+Away,Marshall,-18.3,154.5,https://a.espncdn.com/i/teamlogos/ncaa/500/276.png
+Home,James Madison,,,https://a.espncdn.com/i/teamlogos/ncaa/500/256.png
+Neutral,Missouri,-5.5,150.1,https://a.espncdn.com/i/teamlogos/ncaa/500/142.png
+Neutral,LSU,,,https://a.espncdn.com/i/teamlogos/ncaa/500/99.png
+Away,Missouri,-9.7,150.3,https://a.espncdn.com/i/teamlogos/ncaa/500/142.png
+Home,LSU,,,https://a.espncdn.com/i/teamlogos/ncaa/500/99.png
+Neutral,DePaul,-19.5,143.3,https://a.espncdn.com/i/teamlogos/ncaa/500/305.png
+Neutral,Seton Hall,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2550.png
+Away,DePaul,-23.6,143.9,https://a.espncdn.com/i/teamlogos/ncaa/500/305.png
+Home,Seton Hall,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2550.png
+Neutral,Hampton,-13.6,145.2,https://a.espncdn.com/i/teamlogos/ncaa/500/2261.png
+Neutral,Delaware,,,https://a.espncdn.com/i/teamlogos/ncaa/500/48.png
+Away,Hampton,-17.6,145.6,https://a.espncdn.com/i/teamlogos/ncaa/500/2261.png
+Home,Delaware,,,https://a.espncdn.com/i/teamlogos/ncaa/500/48.png
+Neutral,Minnesota,-3.1,141,https://a.espncdn.com/i/teamlogos/ncaa/500/135.png
+Neutral,Northwestern,,,https://a.espncdn.com/i/teamlogos/ncaa/500/77.png
+Away,Minnesota,-7.1,141.1,https://a.espncdn.com/i/teamlogos/ncaa/500/135.png
+Home,Northwestern,,,https://a.espncdn.com/i/teamlogos/ncaa/500/77.png
+Neutral,Oklahoma St.,-12.5,151.3,https://a.espncdn.com/i/teamlogos/ncaa/500/197.png
+Neutral,BYU,,,https://a.espncdn.com/i/teamlogos/ncaa/500/252.png
+Away,Oklahoma St.,-16.8,151.7,https://a.espncdn.com/i/teamlogos/ncaa/500/197.png
+Home,BYU,,,https://a.espncdn.com/i/teamlogos/ncaa/500/252.png
+Neutral,UC Irvine,11.4,135.1,https://a.espncdn.com/i/teamlogos/ncaa/500/300.png
+Neutral,Cal St. Fullerton,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2239.png
+Away,UC Irvine,7.7,134.8,https://a.espncdn.com/i/teamlogos/ncaa/500/300.png
+Home,Cal St. Fullerton,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2239.png
+Neutral,Denver,-3.2,157.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2172.png
+Neutral,UMKC,,,https://a.espncdn.com/i/teamlogos/ncaa/500/140.png
+Away,Denver,-7.6,157.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2172.png
+Home,UMKC,,,https://a.espncdn.com/i/teamlogos/ncaa/500/140.png
+Neutral,Arizona,16.8,162.3,https://a.espncdn.com/i/teamlogos/ncaa/500/12.png
+Neutral,USC,,,https://a.espncdn.com/i/teamlogos/ncaa/500/30.png
+Away,Arizona,12.3,161.9,https://a.espncdn.com/i/teamlogos/ncaa/500/12.png
+Home,USC,,,https://a.espncdn.com/i/teamlogos/ncaa/500/30.png
+Neutral,San Diego,-10.5,152.5,https://a.espncdn.com/i/teamlogos/ncaa/500/301.png
+Neutral,Santa Clara,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2541.png
+Away,San Diego,-14.7,152.8,https://a.espncdn.com/i/teamlogos/ncaa/500/301.png
+Home,Santa Clara,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2541.png
+Neutral,UC Riverside,-2.1,145.3,https://a.espncdn.com/i/teamlogos/ncaa/500/27.png
+Neutral,UC Santa Barbara,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2540.png
+Away,UC Riverside,-6.2,145.4,https://a.espncdn.com/i/teamlogos/ncaa/500/27.png
+Home,UC Santa Barbara,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2540.png
+Neutral,Idaho St.,3.9,139.5,https://a.espncdn.com/i/teamlogos/ncaa/500/304.png
+Neutral,Northern Arizona,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2464.png
+Away,Idaho St.,0,139.4,https://a.espncdn.com/i/teamlogos/ncaa/500/304.png
+Home,Northern Arizona,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2464.png
+Neutral,UNLV,-4.4,138.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png
+Neutral,Nevada,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2440.png
+Away,UNLV,-8.3,139.1,https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png
+Home,Nevada,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2440.png
+Neutral,Arizona St.,-1.6,129.3,https://a.espncdn.com/i/teamlogos/ncaa/500/9.png
+Neutral,UCLA,,,https://a.espncdn.com/i/teamlogos/ncaa/500/26.png
+Away,Arizona St.,-5.2,129.4,https://a.espncdn.com/i/teamlogos/ncaa/500/9.png
+Home,UCLA,,,https://a.espncdn.com/i/teamlogos/ncaa/500/26.png
+Neutral,Cal St. Bakersfield,-3.6,130.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2934.png
+Neutral,Hawaii,,,https://a.espncdn.com/i/teamlogos/ncaa/500/62.png
+Away,Cal St. Bakersfield,-7.3,130.9,https://a.espncdn.com/i/teamlogos/ncaa/500/2934.png
+Home,Hawaii,,,https://a.espncdn.com/i/teamlogos/ncaa/500/62.png
+Neutral,Portland,-17.5,147.8,https://a.espncdn.com/i/teamlogos/ncaa/500/2501.png
+Neutral,San Francisco,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2539.png
+Away,Portland,-21.6,148.3,https://a.espncdn.com/i/teamlogos/ncaa/500/2501.png
+Home,San Francisco,,,https://a.espncdn.com/i/teamlogos/ncaa/500/2539.png
