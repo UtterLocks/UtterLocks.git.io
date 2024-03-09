@@ -95,15 +95,15 @@
 
         function generateTable(csvData) {
             var rows = csvData.split('\n');
-            var tableHTML = '<table><thead><tr><th>Location</th><th>Away</th><th>Home</th><th>Away Logo</th><th>Home Logo</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr><th>Location</th><th>Away Logo</th><th>Home Logo</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
 
-            for (var i = 1; i < rows.length; i++) {
+            for (var i = 1; i < rows.length; i++) { // Start from 1 to skip header row
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
                 for (var j = 0; j < columns.length; j++) {
                     if (j === 3 || j === 4) {
                         tableHTML += '<td><img src="' + columns[j] + '" alt="' + columns[j - 2] + ' Logo" style="width:50px;height:auto;"><div class="team-name">' + columns[j - 2] + '</div></td>';
-                    } else {
+                    } else if (j !== 1 && j !== 2) { // Exclude columns titled "Away" and "Home"
                         tableHTML += '<td>' + columns[j] + '</td>';
                     }
                 }
