@@ -1,20 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utter Locks</title>
     <style>
-        /* Your existing styles remain unchanged */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #000000;
+        }
 
-        /* Additional or modified styles can be added here */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        main {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 20px auto;
+            background-color: white;
+            color: #000000;
+            border: 8px solid transparent;
+            border-image-source: url('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/images.webp');
+            border-image-repeat: round;
+            border-image-slice: 1;
+        }
+
         th, td {
             padding: 8px;
             text-align: center;
         }
 
-        .team-logo {
+        th {
+            position: sticky;
+            top: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+        }
+
+        img {
             width: 50px;
             height: auto;
             display: block;
@@ -22,52 +69,44 @@
             margin-right: auto;
         }
 
-        .team-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
         .team-name {
             font-size: 14px;
             margin-top: 5px;
         }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+        }
     </style>
     <script>
-        // Your existing JavaScript code remains unchanged
-
-        // Modified function to fetch and generate the table
         function fetchAndGenerateTable() {
             var csvUrl = 'https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv';
 
             fetch(csvUrl)
                 .then(response => response.text())
                 .then(csvData => generateTable(csvData))
-                .catch(error => console.error('Error fetching CSV:', error));
+                .catch(error => {
+                    console.error('Error fetching CSV:', error);
+                    document.getElementById('data-table').innerHTML = 'Error fetching data. Please try again later.';
+                });
         }
 
         function generateTable(csvData) {
             var rows = csvData.split('\n');
-            var tableHTML = '<table><thead><tr><th>Game Type</th><th>Home</th><th>Away</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr><th>Location</th><th>Away</th><th>Home</th><th>Away Logo</th><th>Home Logo</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
 
-            for (var i = 0; i < rows.length; i++) {
+            for (var i = 1; i < rows.length; i++) {
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
-                
-                // Game Type Column
-                tableHTML += '<td>' + columns[0] + '</td>';
-                
-                // Home Column (Team and Logo)
-                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[4] + '" alt="Logo"><div class="team-name">' + columns[3] + '</div></td>';
-                
-                // Away Column (Team and Logo)
-                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[5] + '" alt="Logo"><div class="team-name">' + columns[2] + '</div></td>';
-                
-                // Spread and Total Columns
-                tableHTML += '<td>' + columns[6] + '</td>';
-                tableHTML += '<td>' + columns[7] + '</td>';
-                
+                for (var j = 0; j < columns.length; j++) {
+                    if (j === 3 || j === 4) {
+                        tableHTML += '<td><img src="' + columns[j] + '" alt="' + columns[j - 2] + ' Logo" style="width:50px;height:auto;"><div class="team-name">' + columns[j - 2] + '</div></td>';
+                    } else {
+                        tableHTML += '<td>' + columns[j] + '</td>';
+                    }
+                }
                 tableHTML += '</tr>';
             }
 
@@ -76,8 +115,8 @@
         }
     </script>
 </head>
-
 <body>
+
     <header>
         <h1>Utter Locks</h1>
     </header>
@@ -89,6 +128,6 @@
     <script>
         fetchAndGenerateTable();
     </script>
-</body>
 
+</body>
 </html>
