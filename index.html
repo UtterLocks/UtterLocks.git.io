@@ -54,17 +54,17 @@
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
-                for (var j = 0; j < columns.length; j++) {
-                    if (j === 1) { // Combine Home Team and Home Logo
-                        tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[j + 1] + '" alt="Logo"><div class="team-name">' + columns[j] + '</div></td>';
-                        j++; // Skip the next column since it's already used
-                    } else if (j === 3) { // Combine Away Team and Away Logo
-                        tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[j + 1] + '" alt="Logo"><div class="team-name">' + columns[j] + '</div></td>';
-                        j++; // Skip the next column since it's already used
-                    } else {
-                        tableHTML += '<td>' + columns[j] + '</td>';
-                    }
-                }
+                
+                // Home Column (Team and Logo)
+                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[3] + '" alt="Logo"><div class="team-name">' + columns[2] + '</div></td>';
+                
+                // Away Column (Team and Logo)
+                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[5] + '" alt="Logo"><div class="team-name">' + columns[4] + '</div></td>';
+                
+                // Spread and Total Columns
+                tableHTML += '<td>' + columns[6] + '</td>';
+                tableHTML += '<td>' + columns[7] + '</td>';
+                
                 tableHTML += '</tr>';
             }
 
