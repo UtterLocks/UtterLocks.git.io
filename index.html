@@ -22,6 +22,12 @@
             margin-right: auto;
         }
 
+        .team-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .team-name {
             font-size: 14px;
             margin-top: 5px;
@@ -42,16 +48,18 @@
 
         function generateTable(csvData) {
             var rows = csvData.split('\n');
-            var tableHTML = '<table><thead><tr><th>Game Type</th><th>Home Team</th><th>Away Team</th><th>Home Logo</th><th>Away Logo</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr><th>Game Type</th><th>Home</th><th>Away</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
                 for (var j = 0; j < columns.length; j++) {
-                    if (j === 0 || j === 1) {
-                        tableHTML += '<td>' + columns[j] + '</td>';
-                    } else if (j === 3 || j === 4) {
-                        tableHTML += '<td><img class="team-logo" src="' + columns[j] + '" alt="Logo"><div class="team-name">' + columns[j - 2] + '</div></td>';
+                    if (j === 0 || j === 1 || j === 2) {
+                        if (j === 1 || j === 2) {
+                            tableHTML += '<td class="team-info"><img class="team-logo" src="' + columns[j + 1] + '" alt="Logo"><div class="team-name">' + columns[j] + '</div></td>';
+                        } else {
+                            tableHTML += '<td>' + columns[j] + '</td>';
+                        }
                     } else {
                         tableHTML += '<td>' + columns[j] + '</td>';
                     }
