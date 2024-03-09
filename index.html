@@ -55,11 +55,14 @@
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
                 
+                // Game Type Column
+                tableHTML += '<td>' + columns[0] + '</td>';
+                
                 // Home Column (Team and Logo)
-                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[3] + '" alt="Logo"><div class="team-name">' + columns[2] + '</div></td>';
+                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[4] + '" alt="Logo"><div class="team-name">' + columns[3] + '</div></td>';
                 
                 // Away Column (Team and Logo)
-                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[5] + '" alt="Logo"><div class="team-name">' + columns[4] + '</div></td>';
+                tableHTML += '<td class="team-container"><img class="team-logo" src="' + columns[5] + '" alt="Logo"><div class="team-name">' + columns[2] + '</div></td>';
                 
                 // Spread and Total Columns
                 tableHTML += '<td>' + columns[6] + '</td>';
