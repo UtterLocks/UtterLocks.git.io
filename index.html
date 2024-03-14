@@ -96,7 +96,7 @@
         // Function to parse CSV data and generate the table
         function generateTable(csvData) {
             var rows = csvData.split('\n');
-            var tableHTML = '<table><thead><tr><th>Away</th><th>Home</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr><th>Home</th><th>Away</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
