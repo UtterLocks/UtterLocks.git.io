@@ -96,15 +96,14 @@
         // Function to parse CSV data and generate the table
         function generateTable(csvData) {
             var rows = csvData.split('\n');
-            var tableHTML = '<table><thead><tr><th>Away</th><th>Home</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr><th>Home</th><th>Away</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
-                // Now switching home and away columns
-                for (var j = 1; j < columns.length; j++) {
-                    if (j === 1 || j === 2) {
-                        tableHTML += '<td><img src="' + columns[j] + '" alt="Logo" style="width:50px;height:auto;"><div class="team-name">' + columns[j + 1] + '</div></td>';
+                for (var j = 2; j < columns.length; j++) {
+                    if (j === 2 || j === 3) {
+                        tableHTML += '<td><img src="' + columns[j] + '" alt="Logo" style="width:50px;height:auto;"><div class="team-name">' + columns[j - 2] + '</div></td>';
                     } else {
                         tableHTML += '<td>' + columns[j] + '</td>';
                     }
@@ -133,4 +132,4 @@
     </script>
 
 </body>
-</html>
+</html> 
