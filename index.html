@@ -121,7 +121,7 @@
 
             // Define table headers based on table type
             if (isEloTable) {
-                tableHTML += '<th>Team</th><th>Elo</th>';
+                tableHTML += '<th>Logo</th><th>Team</th><th>Elo</th>';
             } else {
                 tableHTML += '<th>Home</th><th>Away</th><th>Spread</th><th>Total</th>';
             }
@@ -133,9 +133,12 @@
                 tableHTML += '<tr>';
 
                 if (isEloTable) {
-                    tableHTML += `<td>${columns[0]}</td>`;
+                    // For Elo table
+                    tableHTML += `<td><img src="${columns[0]}" alt="Logo"></td>`;
                     tableHTML += `<td>${columns[1]}</td>`;
+                    tableHTML += `<td>${columns[2]}</td>`;
                 } else {
+                    // For first table
                     tableHTML += `<td><img src="${columns[2]}" alt="Logo"><div class="team-name">${columns[0]}</div></td>`;
                     tableHTML += `<td><img src="${columns[3]}" alt="Logo"><div class="team-name">${columns[1]}</div></td>`;
                     tableHTML += `<td>${columns[4]}</td>`;
