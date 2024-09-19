@@ -20,7 +20,7 @@
             text-align: center;
             width: 100%;
             display: flex;
-            justify-content: center; /* Center the content horizontally */
+            flex-direction: column;
             align-items: center;
             position: sticky;
             top: 0;
@@ -37,17 +37,19 @@
         }
 
         .nav-buttons button {
-            padding: 10px 20px;
+            padding: 5px 10px;
             margin: 5px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
+            border: 1px solid #007bff;
+            background-color: transparent;
+            color: #007bff;
+            font-size: 14px;
             cursor: pointer;
+            border-radius: 5px;
         }
 
         .nav-buttons button:hover {
-            background-color: #0056b3;
+            background-color: #007bff;
+            color: white;
         }
 
         .table-container {
@@ -58,7 +60,7 @@
 
         table {
             border-collapse: collapse;
-            width: 60%;
+            width: 80%;
             margin: 20px auto;
             background-color: white; /* Set table background to white */
             color: #000000; /* Set text color back to black */
@@ -136,7 +138,7 @@
                     // For Elo table
                     tableHTML += `<td><img src="${columns[0]}" alt="Logo"></td>`;
                     tableHTML += `<td>${columns[1]}</td>`;
-                    tableHTML += `<td>${columns[2]}</td>`;
+                    tableHTML += `<td>${Math.round(columns[2])}</td>`;
                 } else {
                     // For first table
                     tableHTML += `<td><img src="${columns[2]}" alt="Logo"><div class="team-name">${columns[0]}</div></td>`;
@@ -179,8 +181,8 @@
     <header>
         <h1>Utter Locks</h1>
         <div class="nav-buttons">
-            <button onclick="showTable('table1')">Table 1</button>
-            <button onclick="showTable('table2')">Table 2</button>
+            <button onclick="showTable('table1')">Lines</button>
+            <button onclick="showTable('table2')">ELO</button>
         </div>
     </header>
 
