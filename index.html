@@ -32,7 +32,26 @@
             font-size: 24px;
         }
 
-        main {
+        .nav-buttons {
+            margin: 10px;
+        }
+
+        .nav-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .table-container {
+            display: none;
             text-align: center;
             margin-top: 20px;
         }
@@ -82,56 +101,90 @@
     </style>
     <script>
         // Function to fetch CSV data and generate the table
-        function fetchAndGenerateTable() {
-            // URL of your CSV file on GitHub (Raw content URL)
-            var csvUrl = 'https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv';
-
+        function fetchAndGenerateTable(url, containerId, isEloTable = false) {
             // Fetch CSV data
-            fetch(csvUrl)
+            fetch(url)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
                     return response.text();
                 })
-                .then(csvData => generateTable(csvData))
+                .then(csvData => generateTable(csvData, containerId, isEloTable))
                 .catch(error => console.error('Error fetching CSV:', error));
         }
 
         // Function to parse CSV data and generate the table
-        function generateTable(csvData) {
+        function generateTable(csvData, containerId, isEloTable) {
             var rows = csvData.split('\n').filter(row => row.trim() !== '');
-            var tableHTML = '<table><thead><tr><th>Home</th><th>Away</th><th>Spread</th><th>Total</th></tr></thead><tbody>';
+            var tableHTML = '<table><thead><tr>';
+
+            // Define table headers based on table type
+            if (isEloTable) {
+                tableHTML += '<th>Team</th><th>Elo</th>';
+            } else {
+                tableHTML += '<th>Home</th><th>Away</th><th>Spread</th><th>Total</th>';
+            }
+
+            tableHTML += '</tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
-                tableHTML += `<td><img src="${columns[2]}" alt="Logo"><div class="team-name">${columns[0]}</div></td>`;
-                tableHTML += `<td><img src="${columns[3]}" alt="Logo"><div class="team-name">${columns[1]}</div></td>`;
-                tableHTML += `<td>${columns[4]}</td>`;
-                tableHTML += `<td>${columns[5]}</td>`;
+
+                if (isEloTable) {
+                    tableHTML += `<td>${columns[0]}</td>`;
+                    tableHTML += `<td>${columns[1]}</td>`;
+                } else {
+                    tableHTML += `<td><img src="${columns[2]}" alt="Logo"><div class="team-name">${columns[0]}</div></td>`;
+                    tableHTML += `<td><img src="${columns[3]}" alt="Logo"><div class="team-name">${columns[1]}</div></td>`;
+                    tableHTML += `<td>${columns[4]}</td>`;
+                    tableHTML += `<td>${columns[5]}</td>`;
+                }
+
                 tableHTML += '</tr>';
             }
 
             tableHTML += '</tbody></table>';
-            document.getElementById('data-table').innerHTML = tableHTML;
+            document.getElementById(containerId).innerHTML = tableHTML;
         }
+
+        // Function to switch between tables
+        function showTable(tableId) {
+            var tables = document.querySelectorAll('.table-container');
+            tables.forEach(table => {
+                if (table.id === tableId) {
+                    table.style.display = 'block';
+                } else {
+                    table.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch data for both tables
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1');
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO.csv', 'table2', true);
+            
+            // Set up initial view
+            showTable('table1');
+        });
     </script>
 </head>
 <body>
 
     <header>
         <h1>Utter Locks</h1>
+        <div class="nav-buttons">
+            <button onclick="showTable('table1')">Table 1</button>
+            <button onclick="showTable('table2')">Table 2</button>
+        </div>
     </header>
 
     <main>
-        <div id="data-table"></div>
+        <div id="table1" class="table-container"></div>
+        <div id="table2" class="table-container"></div>
     </main>
-
-    <script>
-        // Call the function to fetch CSV data and generate the table
-        fetchAndGenerateTable();
-    </script>
 
 </body>
 </html>
