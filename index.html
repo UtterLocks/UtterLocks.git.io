@@ -6,6 +6,7 @@
     <title>Utter Locks</title>
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
     <style>
+        /* General styling */
         body {
             display: flex;
             flex-direction: column;
@@ -107,7 +108,7 @@
     </style>
     <script>
         // Function to fetch CSV data and generate the table
-        function fetchAndGenerateTable(url, containerId) {
+        function fetchAndGenerateTable(url, containerId, columns) {
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -115,24 +116,36 @@
                     }
                     return response.text();
                 })
-                .then(csvData => generateTable(csvData, containerId))
+                .then(csvData => generateTable(csvData, containerId, columns))
                 .catch(error => console.error('Error fetching CSV:', error));
         }
 
-        // Function to parse CSV data and generate the table
-        function generateTable(csvData, containerId) {
-            var rows = csvData.split('\n').filter(row => row.trim() !== '');
-            var tableHTML = '<table><thead><tr>';
-            tableHTML += '<th>Home</th><th>Away</th><th>Spread</th><th>Total</th>';
+        // Function to parse CSV data and generate the table with specified columns
+        function generateTable(csvData, containerId, columns) {
+            const rows = csvData.split('\n').filter(row => row.trim() !== '');
+            let tableHTML = '<table><thead><tr>';
+            columns.forEach(col => tableHTML += `<th>${col}</th>`);
             tableHTML += '</tr></thead><tbody>';
 
-            for (var i = 0; i < rows.length; i++) {
-                var columns = rows[i].split(',');
+            for (let i = 0; i < rows.length; i++) {
+                const cols = rows[i].split(',');
                 tableHTML += '<tr>';
-                tableHTML += `<td><img src="${columns[2]}" alt="Home Logo"><div class="team-name">${columns[0]}</div></td>`;
-                tableHTML += `<td><img src="${columns[3]}" alt="Away Logo"><div class="team-name">${columns[1]}</div></td>`;
-                tableHTML += `<td>${columns[4]}</td>`;
-                tableHTML += `<td>${columns[5]}</td>`;
+                
+                if (containerId === 'table1') { // Lines table
+                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
+                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
+                    tableHTML += `<td>${cols[4]}</td>`;
+                    tableHTML += `<td>${cols[5]}</td>`;
+                } else if (containerId === 'table2') { // ELO table
+                    tableHTML += `<td><img src="${cols[1]}" alt="Team Logo"><div class="team-name">${cols[0]}</div></td>`;
+                    tableHTML += `<td>${cols[2]}</td>`;
+                } else if (containerId === 'table3') { // CBB table
+                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
+                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
+                    tableHTML += `<td>${cols[4]}</td>`;
+                    tableHTML += `<td>${cols[5]}</td>`;
+                }
+
                 tableHTML += '</tr>';
             }
 
@@ -142,17 +155,16 @@
 
         // Function to switch between tables
         function showTable(tableId) {
-            var tables = document.querySelectorAll('.table-container');
-            tables.forEach(table => {
+            document.querySelectorAll('.table-container').forEach(table => {
                 table.style.display = (table.id === tableId) ? 'block' : 'none';
             });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             // Fetch data for all tables
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1');
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2');
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3');
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1', ['Home', 'Away', 'Spread', 'Total']);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
             
             showTable('table1'); // Default table to show
         });
@@ -165,14 +177,14 @@
         <div class="nav-buttons">
             <button onclick="showTable('table1')">Lines</button>
             <button onclick="showTable('table2')">ELO</button>
-            <button onclick="showTable('table3')">CBB</button> <!-- New CBB Tab -->
+            <button onclick="showTable('table3')">CBB</button>
         </div>
     </header>
 
     <main>
         <div id="table1" class="table-container"></div>
         <div id="table2" class="table-container"></div>
-        <div id="table3" class="table-container"></div> <!-- New CBB Table -->
+        <div id="table3" class="table-container"></div>
     </main>
 
 </body>
