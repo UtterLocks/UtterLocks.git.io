@@ -12,11 +12,11 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #000000; /* Set text color back to black */
+            color: #000000;
         }
 
         header {
-            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             text-align: center;
             width: 100%;
@@ -25,29 +25,29 @@
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 2; /* Increased z-index */
+            z-index: 2;
         }
 
         h1 {
             margin: 0;
             font-size: 24px;
-            font-family: 'Fjalla One', sans-serif; /* Apply Fjalla One font */
+            font-family: 'Fjalla One', sans-serif;
         }
 
         .nav-buttons {
-            margin: 5px; /* Reduced margin */
+            margin: 5px;
         }
 
         .nav-buttons button {
             padding: 5px 10px;
-            margin: 3px; /* Reduced margin */
+            margin: 3px;
             border: 1px solid #007bff;
             background-color: transparent;
             color: #007bff;
             font-size: 14px;
             cursor: pointer;
             border-radius: 5px;
-            font-family: 'Fjalla One', sans-serif; /* Apply Fjalla One font */
+            font-family: 'Fjalla One', sans-serif;
         }
 
         .nav-buttons button:hover {
@@ -58,16 +58,16 @@
         .table-container {
             display: none;
             text-align: center;
-            margin-top: 10px; /* Reduced margin-top */
+            margin-top: 10px;
         }
 
         table {
             border-collapse: collapse;
             width: 80%;
             margin: 20px auto;
-            background-color: white; /* Set table background to white */
-            color: #000000; /* Set text color back to black */
-            border: 8px solid transparent; /* Set a thick transparent border */
+            background-color: white;
+            color: #000000;
+            border: 8px solid transparent;
             border-image-source: url('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/images.webp');
             border-image-repeat: round;
             border-image-slice: 1;
@@ -76,14 +76,14 @@
         th, td {
             padding: 8px;
             text-align: center;
-            font-family: 'Fjalla One', sans-serif; /* Apply Fjalla One font */
+            font-family: 'Fjalla One', sans-serif;
         }
 
         th {
             position: sticky;
-            top: 40px; /* Adjusted top value */
-            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
-            z-index: 2; /* Decreased z-index */
+            top: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
         }
 
         img {
@@ -107,8 +107,7 @@
     </style>
     <script>
         // Function to fetch CSV data and generate the table
-        function fetchAndGenerateTable(url, containerId, isEloTable = false) {
-            // Fetch CSV data
+        function fetchAndGenerateTable(url, containerId) {
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -116,41 +115,24 @@
                     }
                     return response.text();
                 })
-                .then(csvData => generateTable(csvData, containerId, isEloTable))
+                .then(csvData => generateTable(csvData, containerId))
                 .catch(error => console.error('Error fetching CSV:', error));
         }
 
         // Function to parse CSV data and generate the table
-        function generateTable(csvData, containerId, isEloTable) {
+        function generateTable(csvData, containerId) {
             var rows = csvData.split('\n').filter(row => row.trim() !== '');
             var tableHTML = '<table><thead><tr>';
-
-            // Define table headers based on table type
-            if (isEloTable) {
-                tableHTML += '<th>Logo</th><th>Team</th><th>Elo</th>';
-            } else {
-                tableHTML += '<th>Home</th><th>Away</th><th>Spread</th><th>Total</th>';
-            }
-
+            tableHTML += '<th>Home</th><th>Away</th><th>Spread</th><th>Total</th>';
             tableHTML += '</tr></thead><tbody>';
 
             for (var i = 0; i < rows.length; i++) {
                 var columns = rows[i].split(',');
                 tableHTML += '<tr>';
-
-                if (isEloTable) {
-                    // For Elo table
-                    tableHTML += `<td><img src="${columns[0]}" alt="Logo"></td>`;
-                    tableHTML += `<td>${columns[1]}</td>`;
-                    tableHTML += `<td>${Math.round(columns[2])}</td>`;
-                } else {
-                    // For first table
-                    tableHTML += `<td><img src="${columns[2]}" alt="Logo"><div class="team-name">${columns[0]}</div></td>`;
-                    tableHTML += `<td><img src="${columns[3]}" alt="Logo"><div class="team-name">${columns[1]}</div></td>`;
-                    tableHTML += `<td>${columns[4]}</td>`;
-                    tableHTML += `<td>${columns[5]}</td>`;
-                }
-
+                tableHTML += `<td><img src="${columns[2]}" alt="Home Logo"><div class="team-name">${columns[0]}</div></td>`;
+                tableHTML += `<td><img src="${columns[3]}" alt="Away Logo"><div class="team-name">${columns[1]}</div></td>`;
+                tableHTML += `<td>${columns[4]}</td>`;
+                tableHTML += `<td>${columns[5]}</td>`;
                 tableHTML += '</tr>';
             }
 
@@ -162,21 +144,17 @@
         function showTable(tableId) {
             var tables = document.querySelectorAll('.table-container');
             tables.forEach(table => {
-                if (table.id === tableId) {
-                    table.style.display = 'block';
-                } else {
-                    table.style.display = 'none';
-                }
+                table.style.display = (table.id === tableId) ? 'block' : 'none';
             });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Fetch data for both tables
+            // Fetch data for all tables
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1');
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', true);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2');
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3');
             
-            // Set up initial view
-            showTable('table1');
+            showTable('table1'); // Default table to show
         });
     </script>
 </head>
@@ -187,12 +165,14 @@
         <div class="nav-buttons">
             <button onclick="showTable('table1')">Lines</button>
             <button onclick="showTable('table2')">ELO</button>
+            <button onclick="showTable('table3')">CBB</button> <!-- New CBB Tab -->
         </div>
     </header>
 
     <main>
         <div id="table1" class="table-container"></div>
         <div id="table2" class="table-container"></div>
+        <div id="table3" class="table-container"></div> <!-- New CBB Table -->
     </main>
 
 </body>
