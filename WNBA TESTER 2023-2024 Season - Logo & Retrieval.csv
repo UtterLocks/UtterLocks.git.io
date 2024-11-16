@@ -1,14 +1,14 @@
-BUF,KC,https://a.espncdn.com/i/teamlogos/nfl/500/buf.png,https://a.espncdn.com/i/teamlogos/nfl/500/kc.png,0.5,56.5
-PHI,WAS,https://a.espncdn.com/i/teamlogos/nfl/500/phi.png,https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png,7.0,50.0
-PIT,BAL,https://a.espncdn.com/i/teamlogos/nfl/500/pit.png,https://a.espncdn.com/i/teamlogos/nfl/500/bal.png,0.0,49.0
-TEN,MIN,https://a.espncdn.com/i/teamlogos/nfl/500/ten.png,https://a.espncdn.com/i/teamlogos/nfl/500/min.png,-3.5,35.5
-NO,CLE,https://a.espncdn.com/i/teamlogos/nfl/500/no.png,https://a.espncdn.com/i/teamlogos/nfl/500/cle.png,3.0,39.0
-DET,JAX,https://a.espncdn.com/i/teamlogos/nfl/500/det.png,https://a.espncdn.com/i/teamlogos/nfl/500/jax.png,12.0,40.0
-CHI,GB,https://a.espncdn.com/i/teamlogos/nfl/500/chi.png,https://a.espncdn.com/i/teamlogos/nfl/500/gb.png,-3.0,36.0
-MIA,LV,https://a.espncdn.com/i/teamlogos/nfl/500/mia.png,https://a.espncdn.com/i/teamlogos/nfl/500/lv.png,8.0,42.0
-NE,LA,https://a.espncdn.com/i/teamlogos/nfl/500/ne.png,https://a.espncdn.com/i/teamlogos/nfl/500/lar.png,-4.5,37.5
-NYJ,IND,https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png,https://a.espncdn.com/i/teamlogos/nfl/500/ind.png,6.5,40.5
-DEN,ATL,https://a.espncdn.com/i/teamlogos/nfl/500/den.png,https://a.espncdn.com/i/teamlogos/nfl/500/atl.png,-1.0,40.0
-SF,SEA,https://a.espncdn.com/i/teamlogos/nfl/500/sf.png,https://a.espncdn.com/i/teamlogos/nfl/500/sea.png,10.5,50.5
-LAC,CIN,https://a.espncdn.com/i/teamlogos/nfl/500/lac.png,https://a.espncdn.com/i/teamlogos/nfl/500/cin.png,4.5,47.5
-DAL,HOU,https://a.espncdn.com/i/teamlogos/nfl/500/dal.png,https://a.espncdn.com/i/teamlogos/nfl/500/hou.png,-7.0,36.0
+BUF,KC,https://a.espncdn.com/i/teamlogos/nfl/500/buf.png,https://a.espncdn.com/i/teamlogos/nfl/500/kc.png,KC 2.5,Over 46
+PHI,WAS,https://a.espncdn.com/i/teamlogos/nfl/500/phi.png,https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png,PHI 3.5,Over 48.5
+PIT,BAL,https://a.espncdn.com/i/teamlogos/nfl/500/pit.png,https://a.espncdn.com/i/teamlogos/nfl/500/bal.png,PIT 3,Over 48
+TEN,MIN,https://a.espncdn.com/i/teamlogos/nfl/500/ten.png,https://a.espncdn.com/i/teamlogos/nfl/500/min.png,TEN 6,Under 39.5
+NO,CLE,https://a.espncdn.com/i/teamlogos/nfl/500/no.png,https://a.espncdn.com/i/teamlogos/nfl/500/cle.png,NO 1,Under 44.5
+DET,JAX,https://a.espncdn.com/i/teamlogos/nfl/500/det.png,https://a.espncdn.com/i/teamlogos/nfl/500/jax.png,JAX 13.5,Under 47
+CHI,GB,https://a.espncdn.com/i/teamlogos/nfl/500/chi.png,https://a.espncdn.com/i/teamlogos/nfl/500/gb.png,CHI 5.5,Under 40.5
+MIA,LV,https://a.espncdn.com/i/teamlogos/nfl/500/mia.png,https://a.espncdn.com/i/teamlogos/nfl/500/lv.png,MIA 7.5,Under 44
+NE,LA,https://a.espncdn.com/i/teamlogos/nfl/500/ne.png,https://a.espncdn.com/i/teamlogos/nfl/500/lar.png,NE 4.5,Under 43.5
+NYJ,IND,https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png,https://a.espncdn.com/i/teamlogos/nfl/500/ind.png,NYJ 4,Under 43.5
+DEN,ATL,https://a.espncdn.com/i/teamlogos/nfl/500/den.png,https://a.espncdn.com/i/teamlogos/nfl/500/atl.png,ATL 2.5,Under 44
+SF,SEA,https://a.espncdn.com/i/teamlogos/nfl/500/sf.png,https://a.espncdn.com/i/teamlogos/nfl/500/sea.png,SF 6.5,Over 48
+LAC,CIN,https://a.espncdn.com/i/teamlogos/nfl/500/lac.png,https://a.espncdn.com/i/teamlogos/nfl/500/cin.png,LAC 1.5,Under 48
+DAL,HOU,https://a.espncdn.com/i/teamlogos/nfl/500/dal.png,https://a.espncdn.com/i/teamlogos/nfl/500/hou.png,DAL 7.5,Under 42
