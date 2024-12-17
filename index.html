@@ -108,7 +108,7 @@
     </style>
     <script>
         // Function to fetch CSV data and generate the table
-        function fetchAndGenerateTable(url, containerId) {
+        function fetchAndGenerateTable(url, containerId, customHeaders = []) {
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -116,17 +116,17 @@
                     }
                     return response.text();
                 })
-                .then(csvData => generateTable(csvData, containerId))
+                .then(csvData => generateTable(csvData, containerId, customHeaders))
                 .catch(error => console.error('Error fetching CSV:', error));
         }
 
         // Function to parse CSV data and generate the table with dynamic columns
-        function generateTable(csvData, containerId) {
+        function generateTable(csvData, containerId, customHeaders) {
             const rows = csvData.split('\n').filter(row => row.trim() !== '');
             let tableHTML = '<table>';
 
-            // Extract column titles from the first row
-            const headers = rows[0].split(',');
+            // Use custom headers if provided, otherwise use the first row as headers
+            const headers = customHeaders.length > 0 ? customHeaders : rows[0].split(',');
             tableHTML += '<thead><tr>';
             headers.forEach(header => tableHTML += `<th>${header.trim()}</th>`);
             tableHTML += '</tr></thead>';
@@ -136,14 +136,25 @@
             for (let i = 1; i < rows.length; i++) {
                 const cols = rows[i].split(',');
                 tableHTML += '<tr>';
-                cols.forEach((col, index) => {
-                    // If the column contains a URL (like a logo), display the image
-                    if (col.trim().startsWith('http')) {
-                        tableHTML += `<td><img src="${col.trim()}" alt="Team Logo"></td>`;
-                    } else {
-                        tableHTML += `<td>${col.trim()}</td>`;
-                    }
-                });
+
+                // Merge Home and Home Logo into a single column
+                if (cols[0] && cols[1]) {
+                    tableHTML += `<td><img src="${cols[1].trim()}" alt="Home Logo"><div class="team-name">${cols[0].trim()}</div></td>`;
+                } else {
+                    tableHTML += '<td></td>';
+                }
+
+                // Merge Away and Away Logo into a single column
+                if (cols[2] && cols[3]) {
+                    tableHTML += `<td><img src="${cols[3].trim()}" alt="Away Logo"><div class="team-name">${cols[2].trim()}</div></td>`;
+                } else {
+                    tableHTML += '<td></td>';
+                }
+
+                // Spread and Total columns
+                tableHTML += `<td>${cols[4] ? cols[4].trim() : ''}</td>`;
+                tableHTML += `<td>${cols[5] ? cols[5].trim() : ''}</td>`;
+
                 tableHTML += '</tr>';
             }
             tableHTML += '</tbody></table>';
@@ -159,11 +170,20 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Fetch data for NFL and NFL ELO tables
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1');
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2');
+            // Fetch data for NFL and NFL ELO tables with custom headers
+            fetchAndGenerateTable(
+                'https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv',
+                'table1',
+                ['Home', 'Away', 'Spread', 'Total']
+            );
 
-            // Fetch and generate CBB table
+            fetchAndGenerateTable(
+                'https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO',
+                'table2',
+                ['Logo & Team', 'Rating']
+            );
+
+            // Fetch and generate CBB table with dynamic headers
             fetchAndGenerateTable(
                 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQmyjRIPetseriU68RD6q5IXGU1D9NNxmzSfdL0LTJaI8HUZy81-2IqJAjApqrldqFBexr0dbeVw4BG/pub?gid=395651667&single=true&output=csv',
                 'table3'
