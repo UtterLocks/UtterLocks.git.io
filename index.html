@@ -127,30 +127,16 @@
             columns.forEach(col => tableHTML += `<th>${col}</th>`);
             tableHTML += '</tr></thead><tbody>';
 
-            for (let i = 0; i < rows.length; i++) {
+            for (let i = 1; i < rows.length; i++) { // Skip the header row
                 const cols = rows[i].split(',');
 
                 tableHTML += '<tr>';
-                
-                if (containerId === 'table1') { // Lines table
-                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
-                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
-                    tableHTML += `<td>${cols[4]}</td>`;
-                    tableHTML += `<td>${cols[5]}</td>`;
-                } else if (containerId === 'table2') { // ELO table
-                    const logoUrl = cols[0].trim();  // Make sure no spaces in URL
-                    const teamName = cols[1].trim();
-                    const eloValue = cols[2].trim();
-                    
-                    tableHTML += `<td><img src="${logoUrl}" alt="Team Logo"><div class="team-name">${teamName}</div></td>`;
-                    tableHTML += `<td>${eloValue}</td>`;
-                } else if (containerId === 'table3') { // CBB table
+                if (containerId === 'table3') { // CBB table logic
                     tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
                     tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
                     tableHTML += `<td>${cols[4]}</td>`;
                     tableHTML += `<td>${cols[5]}</td>`;
                 }
-
                 tableHTML += '</tr>';
             }
 
@@ -169,7 +155,7 @@
             // Fetch data for all tables
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1', ['Home', 'Away', 'Spread', 'Total']);
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
+            fetchAndGenerateTable('https://docs.google.com/spreadsheets/d/e/2PACX-1vQmyjRIPetseriU68RD6q5IXGU1D9NNxmzSfdL0LTJaI8HUZy81-2IqJAjApqrldqFBexr0dbeVw4BG/pub?gid=1998098866&single=true&output=csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
             
             showTable('table1'); // Default table to show
         });
