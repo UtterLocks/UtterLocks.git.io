@@ -136,7 +136,14 @@
             for (let i = 1; i < rows.length; i++) {
                 const cols = rows[i].split(',');
                 tableHTML += '<tr>';
-                cols.forEach(col => tableHTML += `<td>${col.trim()}</td>`);
+                cols.forEach((col, index) => {
+                    // If the column contains a URL (like a logo), display the image
+                    if (col.trim().startsWith('http')) {
+                        tableHTML += `<td><img src="${col.trim()}" alt="Team Logo"></td>`;
+                    } else {
+                        tableHTML += `<td>${col.trim()}</td>`;
+                    }
+                });
                 tableHTML += '</tr>';
             }
             tableHTML += '</tbody></table>';
