@@ -136,25 +136,14 @@
             for (let i = 1; i < rows.length; i++) {
                 const cols = rows[i].split(',');
                 tableHTML += '<tr>';
-
-                // Merge Home and Home Logo into a single column
-                if (cols[0] && cols[1]) {
-                    tableHTML += `<td><img src="${cols[1].trim()}" alt="Home Logo"><div class="team-name">${cols[0].trim()}</div></td>`;
-                } else {
-                    tableHTML += '<td></td>';
-                }
-
-                // Merge Away and Away Logo into a single column
-                if (cols[2] && cols[3]) {
-                    tableHTML += `<td><img src="${cols[3].trim()}" alt="Away Logo"><div class="team-name">${cols[2].trim()}</div></td>`;
-                } else {
-                    tableHTML += '<td></td>';
-                }
-
-                // Spread and Total columns
-                tableHTML += `<td>${cols[4] ? cols[4].trim() : ''}</td>`;
-                tableHTML += `<td>${cols[5] ? cols[5].trim() : ''}</td>`;
-
+                cols.forEach((col, index) => {
+                    // If the column contains a URL (like a logo), display the image
+                    if (col.trim().startsWith('http')) {
+                        tableHTML += `<td><img src="${col.trim()}" alt="Team Logo"></td>`;
+                    } else {
+                        tableHTML += `<td>${col.trim()}</td>`;
+                    }
+                });
                 tableHTML += '</tr>';
             }
             tableHTML += '</tbody></table>';
@@ -174,13 +163,13 @@
             fetchAndGenerateTable(
                 'https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv',
                 'table1',
-                ['Home', 'Away', 'Spread', 'Total']
+                ['Home', 'Away', 'Home Logo', 'Away Logo', 'Spread', 'Total']
             );
 
             fetchAndGenerateTable(
                 'https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO',
                 'table2',
-                ['Logo & Team', 'Rating']
+                ['Logo', 'Team', 'Rating']
             );
 
             // Fetch and generate CBB table with dynamic headers
