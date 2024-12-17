@@ -3,85 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Tables with Spread Grades</title>
+    <title>Utter Locks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
     <style>
-        /* General table styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
+        /* General styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #000000;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
             text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 2;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-family: 'Fjalla One', sans-serif;
         }
-        th {
-            background-color: #333;
+
+        .nav-buttons {
+            margin: 5px;
+        }
+
+        .nav-buttons button {
+            padding: 5px 10px;
+            margin: 3px;
+            border: 1px solid #007bff;
+            background-color: transparent;
+            color: #007bff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Fjalla One', sans-serif;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #007bff;
             color: white;
-            text-transform: uppercase;
         }
-        td img {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            margin-right: 5px;
-        }
-        td .team-name {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        /* Table container styles */
+
         .table-container {
             display: none;
+            text-align: center;
+            margin-top: 10px;
         }
-        .table-container.active {
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            color: #000000;
+            border: 8px solid transparent;
+            border-image-source: url('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/images.webp');
+            border-image-repeat: round;
+            border-image-slice: 1;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            font-family: 'Fjalla One', sans-serif;
+        }
+
+        th {
+            position: sticky;
+            top: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+        }
+
+        img {
+            width: 50px;
+            height: auto;
             display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
-        /* Button styles */
-        .tab-button {
-            margin: 5px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
+
+        .team-name {
             font-size: 14px;
-            border-radius: 5px;
+            margin-top: 5px;
         }
-        .tab-button:hover {
-            background-color: #0056b3;
-        }
-        /* Conditional cell styling */
-        .spread-A {
-            background-color: #28a745; /* Green */
-            color: white;
-        }
-        .spread-B {
-            background-color: #ffc107; /* Yellow */
-            color: black;
-        }
-        .spread-C {
-            background-color: #dc3545; /* Red */
-            color: white;
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
         }
     </style>
-</head>
-<body>
-    <h1>Sports Tables with Spread Grades</h1>
-
-    <!-- Buttons to switch tables -->
-    <button class="tab-button" onclick="showTable('table1')">WNBA Table</button>
-    <button class="tab-button" onclick="showTable('table2')">NFL ELO Table</button>
-    <button class="tab-button" onclick="showTable('table3')">Logo & Spread Table</button>
-
-    <!-- Table Containers -->
-    <div id="table1" class="table-container active"></div>
-    <div id="table2" class="table-container"></div>
-    <div id="table3" class="table-container"></div>
-
     <script>
         // Function to fetch CSV data and generate the table
         function fetchAndGenerateTable(url, containerId, columns) {
@@ -92,55 +116,81 @@
                     }
                     return response.text();
                 })
-                .then(csv => {
-                    const rows = csv.split("\n").map(row => row.split(","));
-                    const table = document.createElement("table");
-                    const headerRow = document.createElement("tr");
-
-                    // Create table headers
-                    columns.forEach(column => {
-                        const th = document.createElement("th");
-                        th.textContent = column;
-                        headerRow.appendChild(th);
-                    });
-                    table.appendChild(headerRow);
-
-                    // Create table rows
-                    rows.slice(1).forEach(row => {
-                        const tr = document.createElement("tr");
-                        columns.forEach((column, index) => {
-                            const td = document.createElement("td");
-                            let cellValue = row[index] || "";
-
-                            // Add conditional styling to Spread column
-                            if (column === "Spread") {
-                                if (cellValue.trim() === "A") td.classList.add("spread-A");
-                                else if (cellValue.trim() === "B") td.classList.add("spread-B");
-                                else if (cellValue.trim() === "C") td.classList.add("spread-C");
-                            }
-                            td.textContent = cellValue;
-                            tr.appendChild(td);
-                        });
-                        table.appendChild(tr);
-                    });
-
-                    // Append table to the container
-                    document.getElementById(containerId).appendChild(table);
-                })
-                .catch(error => console.error("Error loading CSV:", error));
+                .then(csvData => generateTable(csvData, containerId, columns))
+                .catch(error => console.error('Error fetching CSV:', error));
         }
 
-        // Function to switch tables
+        // Function to parse CSV data and generate the table with specified columns
+        function generateTable(csvData, containerId, columns) {
+            const rows = csvData.split('\n').filter(row => row.trim() !== '');
+            let tableHTML = '<table><thead><tr>';
+            columns.forEach(col => tableHTML += `<th>${col}</th>`);
+            tableHTML += '</tr></thead><tbody>';
+
+            for (let i = 0; i < rows.length; i++) {
+                const cols = rows[i].split(',');
+
+                tableHTML += '<tr>';
+                
+                if (containerId === 'table1') { // Lines table
+                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
+                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
+                    tableHTML += `<td>${cols[4]}</td>`;
+                    tableHTML += `<td>${cols[5]}</td>`;
+                } else if (containerId === 'table2') { // ELO table
+                    const logoUrl = cols[0].trim();  // Make sure no spaces in URL
+                    const teamName = cols[1].trim();
+                    const eloValue = cols[2].trim();
+                    
+                    tableHTML += `<td><img src="${logoUrl}" alt="Team Logo"><div class="team-name">${teamName}</div></td>`;
+                    tableHTML += `<td>${eloValue}</td>`;
+                } else if (containerId === 'table3') { // CBB table
+                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
+                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
+                    tableHTML += `<td>${cols[4]}</td>`;
+                    tableHTML += `<td>${cols[5]}</td>`;
+                }
+
+                tableHTML += '</tr>';
+            }
+
+            tableHTML += '</tbody></table>';
+            document.getElementById(containerId).innerHTML = tableHTML;
+        }
+
+        // Function to switch between tables
         function showTable(tableId) {
-            const tables = document.querySelectorAll(".table-container");
-            tables.forEach(table => table.classList.remove("active"));
-            document.getElementById(tableId).classList.add("active");
+            document.querySelectorAll('.table-container').forEach(table => {
+                table.style.display = (table.id === tableId) ? 'block' : 'none';
+            });
         }
 
-        // Fetch and populate tables
-        fetchAndGenerateTable("https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA_Table.csv", "table1", ["Team", "Spread", "Points"]);
-        fetchAndGenerateTable("https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO_Table.csv", "table2", ["Team", "Spread", "ELO"]);
-        fetchAndGenerateTable("https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv", "table3", ["Team", "Spread", "Logo"]);
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch data for all tables
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1', ['Home', 'Away', 'Spread', 'Total']);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
+            
+            showTable('table1'); // Default table to show
+        });
     </script>
+</head>
+<body>
+
+    <header>
+        <h1>Utter Locks</h1>
+        <div class="nav-buttons">
+            <button onclick="showTable('table1')">NFL</button>
+            <button onclick="showTable('table2')">NFL ELO</button>
+            <button onclick="showTable('table3')">CBB</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="table1" class="table-container"></div>
+        <div id="table2" class="table-container"></div>
+        <div id="table3" class="table-container"></div>
+    </main>
+
 </body>
 </html>
