@@ -128,13 +128,7 @@
             // Extract column titles from the first row
             const headers = rows[0].split(',');
             tableHTML += '<thead><tr>';
-            headers.forEach(header => {
-                if (header.trim() === 'Home' || header.trim() === 'Away') {
-                    tableHTML += `<th>Team and Logo</th>`;
-                } else {
-                    tableHTML += `<th>${header.trim()}</th>`;
-                }
-            });
+            headers.forEach(header => tableHTML += `<th>${header.trim()}</th>`);
             tableHTML += '</tr></thead>';
 
             // Generate table rows
@@ -142,20 +136,7 @@
             for (let i = 1; i < rows.length; i++) {
                 const cols = rows[i].split(',');
                 tableHTML += '<tr>';
-
-                cols.forEach((col, index) => {
-                    if (headers[index].trim() === 'Home' || headers[index].trim() === 'Away') {
-                        // Add the team and logo to the same column
-                        const team = col.trim();
-                        tableHTML += `<td>
-                                        <img src="https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/logos/${team}.png" alt="${team} Logo">
-                                        <div class="team-name">${team}</div>
-                                      </td>`;
-                    } else {
-                        tableHTML += `<td>${col.trim()}</td>`;
-                    }
-                });
-
+                cols.forEach(col => tableHTML += `<td>${col.trim()}</td>`);
                 tableHTML += '</tr>';
             }
             tableHTML += '</tbody></table>';
