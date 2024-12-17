@@ -152,9 +152,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Fetch data for all tables
+            // Fetch data for NFL and NFL ELO tables
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1');
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2');
+
+            // Fetch and generate CBB table
             fetchAndGenerateTable(
                 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQmyjRIPetseriU68RD6q5IXGU1D9NNxmzSfdL0LTJaI8HUZy81-2IqJAjApqrldqFBexr0dbeVw4BG/pub?gid=395651667&single=true&output=csv',
                 'table3'
