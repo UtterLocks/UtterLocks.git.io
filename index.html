@@ -100,6 +100,13 @@
             margin-top: 5px;
         }
 
+        .google-sheet {
+            display: none;
+            width: 100%;
+            height: 70vh;
+            border: none;
+        }
+
         @media screen and (max-width: 600px) {
             h1 {
                 font-size: 18px;
@@ -163,6 +170,9 @@
             document.querySelectorAll('.table-container').forEach(table => {
                 table.style.display = (table.id === tableId) ? 'block' : 'none';
             });
+            document.querySelectorAll('.google-sheet').forEach(sheet => {
+                sheet.style.display = (sheet.id === tableId) ? 'block' : 'none';
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -170,7 +180,7 @@
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1', ['Home', 'Away', 'Spread', 'Total']);
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
-            
+
             showTable('table1'); // Default table to show
         });
     </script>
@@ -183,6 +193,7 @@
             <button onclick="showTable('table1')">NFL</button>
             <button onclick="showTable('table2')">NFL ELO</button>
             <button onclick="showTable('table3')">CBB</button>
+            <button onclick="showTable('googleSheet')">Google Sheet</button>
         </div>
     </header>
 
@@ -190,6 +201,7 @@
         <div id="table1" class="table-container"></div>
         <div id="table2" class="table-container"></div>
         <div id="table3" class="table-container"></div>
+        <iframe id="googleSheet" class="google-sheet" src="https://docs.google.com/spreadsheets/d/1-ToKVr5mukLJ5AOsUUjFFMzEXkOc8PG3hvLtW8cMiew/pubhtml?widget=true&amp;headers=false"></iframe>
     </main>
 
 </body>
