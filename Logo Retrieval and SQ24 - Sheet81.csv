@@ -1,26 +1,63 @@
-FIU,Utah Tech,https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png,https://a.espncdn.com/i/teamlogos/ncaa/500/3101.png,Utah Tech 6,Under 149
-Princeton,Akron,https://a.espncdn.com/i/teamlogos/ncaa/500/163.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2006.png,Princeton 5.5,Over 155
-Michigan St.,Western Michigan,https://a.espncdn.com/i/teamlogos/ncaa/500/127.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2711.png,Michigan St. 27.5,Under 146.5
-Cornell,Siena,https://a.espncdn.com/i/teamlogos/ncaa/500/172.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2561.png,Cornell 11,Under 149
-Rutgers,Columbia,https://a.espncdn.com/i/teamlogos/ncaa/500/164.png,https://a.espncdn.com/i/teamlogos/ncaa/500/171.png,Rutgers 11.5,Over 157
-Auburn,Monmouth,https://a.espncdn.com/i/teamlogos/ncaa/500/2.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2405.png,Monmouth 35.5,Under 154
-Kansas St.,Cincinnati,https://a.espncdn.com/i/teamlogos/ncaa/500/2306.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png,Cincinnati 3.5,Under 140.5
-McNeese St.,Southeastern Louisiana,https://a.espncdn.com/i/teamlogos/ncaa/500/2377.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2545.png,Southeastern Louisiana 15,Under 134
-South Carolina,Presbyterian,https://a.espncdn.com/i/teamlogos/ncaa/500/2579.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2506.png,South Carolina 18,Under 138.5
-Iowa,New Hampshire,https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png,https://a.espncdn.com/i/teamlogos/ncaa/500/160.png,Iowa 34,Under 159.5
-Missouri,Alabama St.,https://a.espncdn.com/i/teamlogos/ncaa/500/142.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2011.png,Missouri 24,Over 154.5
-Oklahoma St.,Houston,https://a.espncdn.com/i/teamlogos/ncaa/500/197.png,https://a.espncdn.com/i/teamlogos/ncaa/500/248.png,Houston 11.5,Over 136.5
-Arizona,TCU,https://a.espncdn.com/i/teamlogos/ncaa/500/12.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png,TCU 14.5,Over 144.5
-Grand Canyon,Bryant,https://a.espncdn.com/i/teamlogos/ncaa/500/2253.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2803.png,Bryant 13.5,Over 157.5
-Arkansas,Oakland,https://a.espncdn.com/i/teamlogos/ncaa/500/8.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2473.png,Arkansas 17,Under 142
-Vanderbilt,New Orleans,https://a.espncdn.com/i/teamlogos/ncaa/500/238.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2443.png,New Orleans 31,Over 157.5
-Colorado,Iowa St.,https://a.espncdn.com/i/teamlogos/ncaa/500/38.png,https://a.espncdn.com/i/teamlogos/ncaa/500/66.png,Colorado 9,Over 146.5
-Nebraska,Southern,https://a.espncdn.com/i/teamlogos/ncaa/500/158.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2582.png,Nebraska 22.5,Over 142
-Mississippi St.,Bethune Cookman,https://a.espncdn.com/i/teamlogos/ncaa/500/344.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2065.png,Mississippi St. 29,Under 145.5
-Washington St.,Loyola Marymount,https://a.espncdn.com/i/teamlogos/ncaa/500/265.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2351.png,Washington St. 8,Under 150
-Oregon St.,Portland,https://a.espncdn.com/i/teamlogos/ncaa/500/204.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2501.png,Oregon St. 18,Over 139.5
-San Francisco,Santa Clara,https://a.espncdn.com/i/teamlogos/ncaa/500/2539.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2541.png,San Francisco 4.5,Over 145
-Cal Baptist,UC Irvine,https://a.espncdn.com/i/teamlogos/ncaa/500/2856.png,https://a.espncdn.com/i/teamlogos/ncaa/500/300.png,UC Irvine 4,Over 142.5
-San Diego,Pacific,https://a.espncdn.com/i/teamlogos/ncaa/500/301.png,https://a.espncdn.com/i/teamlogos/ncaa/500/279.png,Pacific 0,Under 144.5
-Seattle,Nicholls,https://a.espncdn.com/i/teamlogos/ncaa/500/2547.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2447.png,Seattle 9,Under 147
-Pepperdine,Gonzaga,https://a.espncdn.com/i/teamlogos/ncaa/500/2492.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2250.png,Gonzaga 21,Over 158
+Home,Away,Home Logo,Away Logo,Spread Bet,Total Bet
+Winthrop,USC Upstate,https://a.espncdn.com/i/teamlogos/ncaa/500/2737.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2908.png,Winthrop 15,Over 164.5
+Holy Cross,Loyola MD,https://a.espncdn.com/i/teamlogos/ncaa/500/107.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2352.png,Loyola MD 3,Over 140
+Appalachian St.,Troy,https://a.espncdn.com/i/teamlogos/ncaa/500/2026.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2653.png,Appalachian St. 2.5,Under 132.5
+Penn St.,Northwestern,https://a.espncdn.com/i/teamlogos/ncaa/500/213.png,https://a.espncdn.com/i/teamlogos/ncaa/500/77.png,Northwestern 4.5,Over 145
+Florida Atlantic,Memphis,https://a.espncdn.com/i/teamlogos/ncaa/500/2226.png,https://a.espncdn.com/i/teamlogos/ncaa/500/235.png,Memphis 3,Over 163
+Jacksonville,Lipscomb,https://a.espncdn.com/i/teamlogos/ncaa/500/294.png,https://a.espncdn.com/i/teamlogos/ncaa/500/288.png,Jacksonville 5.5,Under 140.5
+Marshall,Texas St.,https://a.espncdn.com/i/teamlogos/ncaa/500/276.png,https://a.espncdn.com/i/teamlogos/ncaa/500/326.png,Texas St. 1,Over 142.5
+Liberty,Western Kentucky,https://a.espncdn.com/i/teamlogos/ncaa/500/2335.png,https://a.espncdn.com/i/teamlogos/ncaa/500/98.png,Liberty 9,Under 146
+Oakland,Milwaukee,https://a.espncdn.com/i/teamlogos/ncaa/500/2473.png,https://a.espncdn.com/i/teamlogos/ncaa/500/270.png,Milwaukee 1,Under 145.5
+FIU,Middle Tennessee,https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2393.png,FIU 4,Under 149
+High Point,Radford,https://a.espncdn.com/i/teamlogos/ncaa/500/2272.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2515.png,Radford 9,Over 145
+Hofstra,William & Mary,https://a.espncdn.com/i/teamlogos/ncaa/500/2275.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png,Hofstra 5.5,Under 150
+Georgia St.,South Alabama,https://a.espncdn.com/i/teamlogos/ncaa/500/2247.png,https://a.espncdn.com/i/teamlogos/ncaa/500/6.png,South Alabama 4.5,Under 139.5
+Campbell,Drexel,https://a.espncdn.com/i/teamlogos/ncaa/500/2097.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2182.png,Drexel 3.5,Under 135.5
+Northeastern,Delaware,https://a.espncdn.com/i/teamlogos/ncaa/500/111.png,https://a.espncdn.com/i/teamlogos/ncaa/500/48.png,Northeastern 5.5,Over 152
+Lehigh,Bucknell,https://a.espncdn.com/i/teamlogos/ncaa/500/2329.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2083.png,Bucknell 3,Over 140.5
+North Carolina A&T,Elon,https://a.espncdn.com/i/teamlogos/ncaa/500/2448.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2210.png,Elon 6,Over 150.5
+Lafayette,Boston University,https://a.espncdn.com/i/teamlogos/ncaa/500/322.png,https://a.espncdn.com/i/teamlogos/ncaa/500/104.png,Boston University 1.5,Over 128
+Detroit Mercy,Robert Morris,https://a.espncdn.com/i/teamlogos/ncaa/500/2174.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2523.png,Detroit Mercy 5.5,Under 142
+Colgate,Army,https://a.espncdn.com/i/teamlogos/ncaa/500/2142.png,https://a.espncdn.com/i/teamlogos/ncaa/500/349.png,Army 6,Under 144.5
+Navy,American,https://a.espncdn.com/i/teamlogos/ncaa/500/2426.png,https://a.espncdn.com/i/teamlogos/ncaa/500/44.png,American 2,Over 138
+Coastal Carolina,Louisiana,https://a.espncdn.com/i/teamlogos/ncaa/500/324.png,https://a.espncdn.com/i/teamlogos/ncaa/500/309.png,Coastal Carolina 2,Under 137.5
+UNC Wilmington,Towson,https://a.espncdn.com/i/teamlogos/ncaa/500/350.png,https://a.espncdn.com/i/teamlogos/ncaa/500/119.png,UNC Wilmington 5,Under 138
+Charleston,Hampton,https://a.espncdn.com/i/teamlogos/ncaa/500/232.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2261.png,Hampton 10,Over 146
+Monmouth,Stony Brook,https://a.espncdn.com/i/teamlogos/ncaa/500/2405.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2619.png,Monmouth 6,Under 143.5
+West Georgia,Florida Gulf Coast,https://a.espncdn.com/i/teamlogos/ncaa/500/2698.png,https://a.espncdn.com/i/teamlogos/ncaa/500/526.png,West Georgia 8,Under 138
+James Madison,Southern Miss,https://a.espncdn.com/i/teamlogos/ncaa/500/256.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2572.png,Southern Miss 11,Over 141
+Old Dominion,Arkansas St.,https://a.espncdn.com/i/teamlogos/ncaa/500/295.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2032.png,Arkansas St. 11,Under 153
+Georgia Southern,Louisiana Monroe,https://a.espncdn.com/i/teamlogos/ncaa/500/290.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2433.png,Georgia Southern 10,Under 149
+Queens,Stetson,https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png,https://a.espncdn.com/i/teamlogos/ncaa/500/56.png,Queens 9,Under 155.5
+Wright St.,Green Bay,https://a.espncdn.com/i/teamlogos/ncaa/500/2750.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2739.png,Wright St. 12.5,Over 153
+North Alabama,Bellarmine,https://a.espncdn.com/i/teamlogos/ncaa/500/2453.png,https://a.espncdn.com/i/teamlogos/ncaa/500/91.png,North Alabama 14,Over 148.5
+Minnesota,Purdue,https://a.espncdn.com/i/teamlogos/ncaa/500/135.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2509.png,Purdue 5.5,Under 136
+North Dakota St.,St. Thomas,https://a.espncdn.com/i/teamlogos/ncaa/500/2449.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2900.png,St. Thomas 3,Under 153
+Murray St.,Illinois St.,https://a.espncdn.com/i/teamlogos/ncaa/500/93.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2287.png,Illinois St. 6,Over 137
+UMKC,South Dakota,https://a.espncdn.com/i/teamlogos/ncaa/500/140.png,https://a.espncdn.com/i/teamlogos/ncaa/500/233.png,Kansas City 4,Over 156
+Northern Arizona,Idaho St.,https://a.espncdn.com/i/teamlogos/ncaa/500/2464.png,https://a.espncdn.com/i/teamlogos/ncaa/500/304.png,Idaho St. 4,Under 142.5
+Northern Colorado,Weber St.,https://a.espncdn.com/i/teamlogos/ncaa/500/2458.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2692.png,Northern Colorado 6.5,Under 151.5
+North Dakota,Nebraska Omaha,https://a.espncdn.com/i/teamlogos/ncaa/500/155.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2437.png,Nebraska Omaha 4.5,Over 150
+Cal Poly,UC Irvine,https://a.espncdn.com/i/teamlogos/ncaa/500/13.png,https://a.espncdn.com/i/teamlogos/ncaa/500/300.png,UC Irvine 8,Over 158
+Indiana,Rutgers,https://a.espncdn.com/i/teamlogos/ncaa/500/84.png,https://a.espncdn.com/i/teamlogos/ncaa/500/164.png,Rutgers 5.5,Over 157
+Tennessee Martin,Little Rock,https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2031.png,Little Rock 1.5,Under 137
+Tennessee St.,Southeast Missouri,https://a.espncdn.com/i/teamlogos/ncaa/500/2634.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2546.png,Southeast Missouri 2.5,Over 151.5
+Central Arkansas,Eastern Kentucky,https://a.espncdn.com/i/teamlogos/ncaa/500/2110.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2198.png,Eastern Kentucky 7,Under 152
+Tennessee Tech,Southern Indiana,https://a.espncdn.com/i/teamlogos/ncaa/500/2635.png,https://a.espncdn.com/i/teamlogos/ncaa/500/88.png,Southern Indiana 4,Under 145.5
+Eastern Illinois,Lindenwood,https://a.espncdn.com/i/teamlogos/ncaa/500/2197.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2815.png,Eastern Illinois 3,Under 137
+UTEP,Louisiana Tech,https://a.espncdn.com/i/teamlogos/ncaa/500/2638.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2348.png,Louisiana Tech 2.5,Over 137.5
+New Mexico St.,Sam Houston St.,https://a.espncdn.com/i/teamlogos/ncaa/500/166.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2534.png,New Mexico St. 0,Over 149
+Eastern Washington,Montana,https://a.espncdn.com/i/teamlogos/ncaa/500/331.png,https://a.espncdn.com/i/teamlogos/ncaa/500/149.png,Eastern Washington 2,Under 154
+Idaho,Montana St.,https://a.espncdn.com/i/teamlogos/ncaa/500/70.png,https://a.espncdn.com/i/teamlogos/ncaa/500/147.png,Montana St. 1.5,Over 145
+SIUE,Western Illinois,https://a.espncdn.com/i/teamlogos/ncaa/500/2565.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2710.png,Western Illinois 7.5,Under 134.5
+South Dakota St.,Denver,https://a.espncdn.com/i/teamlogos/ncaa/500/2571.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2172.png,South Dakota St. 15,Under 151
+Gonzaga,Portland,https://a.espncdn.com/i/teamlogos/ncaa/500/2250.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2501.png,Portland 34,Under 161
+Washington,Maryland,https://a.espncdn.com/i/teamlogos/ncaa/500/264.png,https://a.espncdn.com/i/teamlogos/ncaa/500/120.png,Maryland 6.5,Over 148
+Cal St. Bakersfield,UC Davis,https://a.espncdn.com/i/teamlogos/ncaa/500/2934.png,https://a.espncdn.com/i/teamlogos/ncaa/500/302.png,Cal St. Bakersfield 1.5,Under 135
+Oregon,Illinois,https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png,https://a.espncdn.com/i/teamlogos/ncaa/500/356.png,Oregon 4.5,Over 155
+Loyola Marymount,Oregon St.,https://a.espncdn.com/i/teamlogos/ncaa/500/2351.png,https://a.espncdn.com/i/teamlogos/ncaa/500/204.png,Oregon St. 3,Under 137
+Long Beach St.,UC Riverside,https://a.espncdn.com/i/teamlogos/ncaa/500/299.png,https://a.espncdn.com/i/teamlogos/ncaa/500/27.png,UC Riverside 4.5,Under 137.5
+Cal St. Fullerton,CSUN,https://a.espncdn.com/i/teamlogos/ncaa/500/2239.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2463.png,Cal St. Fullerton 4.5,Over 142.5
+Saint Mary's,Pepperdine,https://a.espncdn.com/i/teamlogos/ncaa/500/2608.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2492.png,Pepperdine 17,Under 142.5
+San Diego,Santa Clara,https://a.espncdn.com/i/teamlogos/ncaa/500/301.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2541.png,Santa Clara 13.5,Over 151.5
+Pacific,San Francisco,https://a.espncdn.com/i/teamlogos/ncaa/500/279.png,https://a.espncdn.com/i/teamlogos/ncaa/500/2539.png,San Francisco 13,Under 141
