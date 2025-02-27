@@ -68,10 +68,6 @@
             margin: 20px auto;
             background-color: white;
             color: #000000;
-            border: 8px solid transparent;
-            border-image-source: url('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/images.webp');
-            border-image-repeat: round;
-            border-image-slice: 1;
         }
 
         th, td {
@@ -81,8 +77,6 @@
         }
 
         th {
-            position: sticky;
-            top: 40px;
             background-color: rgba(255, 255, 255, 0.8);
             z-index: 2;
         }
@@ -99,35 +93,15 @@
             font-size: 14px;
             margin-top: 5px;
         }
-
-        .google-sheet {
-            display: none;
-            width: 100%;
-            height: 70vh;
-            border: none;
-        }
-
-        @media screen and (max-width: 600px) {
-            h1 {
-                font-size: 18px;
-            }
-        }
     </style>
     <script>
-        // Function to fetch CSV data and generate the table
         function fetchAndGenerateTable(url, containerId, columns) {
             fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
+                .then(response => response.text())
                 .then(csvData => generateTable(csvData, containerId, columns))
                 .catch(error => console.error('Error fetching CSV:', error));
         }
 
-        // Function to parse CSV data and generate the table with specified columns
         function generateTable(csvData, containerId, columns) {
             const rows = csvData.split('\n').filter(row => row.trim() !== '');
             let tableHTML = '<table><thead><tr>';
@@ -136,64 +110,39 @@
 
             for (let i = 0; i < rows.length; i++) {
                 const cols = rows[i].split(',');
-
                 tableHTML += '<tr>';
                 
-                if (containerId === 'table1') { // Lines table
-                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
-                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
-                    tableHTML += `<td>${cols[4]}</td>`;
-                    tableHTML += `<td>${cols[5]}</td>`;
-                } else if (containerId === 'table2') { // ELO table
-                    const logoUrl = cols[0].trim();  // Make sure no spaces in URL
-                    const teamName = cols[1].trim();
-                    const eloValue = cols[2].trim();
-                    
-                    tableHTML += `<td><img src="${logoUrl}" alt="Team Logo"><div class="team-name">${teamName}</div></td>`;
-                    tableHTML += `<td>${eloValue}</td>`;
-                } else if (containerId === 'table3') { // CBB table
-                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
-                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
-                    tableHTML += `<td>${cols[4]}</td>`;
-                    tableHTML += `<td>${cols[5]}</td>`;
+                if (containerId === 'table4') { // Rankings table
+                    tableHTML += `<td>${cols[0]}</td>`;
+                    tableHTML += `<td>${cols[1]}</td>`;
+                    tableHTML += `<td><img src="${cols[2]}" alt="${cols[1]} Logo"></td>`;
                 }
-
+                
                 tableHTML += '</tr>';
             }
-
             tableHTML += '</tbody></table>';
             document.getElementById(containerId).innerHTML = tableHTML;
         }
 
-        // Function to switch between tables
         function showTable(tableId) {
             document.querySelectorAll('.table-container').forEach(table => {
                 table.style.display = (table.id === tableId) ? 'block' : 'none';
             });
-            document.querySelectorAll('.google-sheet').forEach(sheet => {
-                sheet.style.display = (sheet.id === tableId) ? 'block' : 'none';
-            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Fetch data for all tables
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1', ['Home', 'Away', 'Spread', 'Total']);
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
-
-            showTable('table1'); // Default table to show
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Copy%20of%20Sheet80.csv', 'table4', ['Rank', 'Team', 'Logo']);
         });
     </script>
 </head>
 <body>
-
     <header>
         <h1>Utter Locks</h1>
         <div class="nav-buttons">
             <button onclick="showTable('table1')">NFL</button>
             <button onclick="showTable('table2')">NFL ELO</button>
             <button onclick="showTable('table3')">CBB</button>
-            <button onclick="showTable('googleSheet')">Net Units</button>
+            <button onclick="showTable('table4')">Rankings</button>
         </div>
     </header>
 
@@ -201,8 +150,7 @@
         <div id="table1" class="table-container"></div>
         <div id="table2" class="table-container"></div>
         <div id="table3" class="table-container"></div>
-        <iframe id="googleSheet" class="google-sheet" src="https://docs.google.com/spreadsheets/d/1-ToKVr5mukLJ5AOsUUjFFMzEXkOc8PG3hvLtW8cMiew/pubhtml?widget=true&amp;headers=false"></iframe>
+        <div id="table4" class="table-container"></div>
     </main>
-
 </body>
 </html>
