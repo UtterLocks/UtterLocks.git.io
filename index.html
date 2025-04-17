@@ -106,8 +106,11 @@
             z-index: 10; /* Keep it below the header */
             display: none; /* Initially hidden */
             display: flex; /* Enable Flexbox for centering the iframe */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            padding-top: 60px; /* Add some top padding to lower the content */
+            box-sizing: border-box; /* Include padding in width and height */
         }
 
         #profits-container iframe {
