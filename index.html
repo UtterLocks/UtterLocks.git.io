@@ -1,113 +1,202 @@
-<style>
-    /* General styling */
-    body {
-        display: flex; /* Enable Flexbox for the body */
-        flex-direction: column;
-        align-items: center; /* Center items horizontally in the body */
-        justify-content: center; /* Center items vertically in the body */
-        height: 100vh;
-        margin: 0;
-        color: #000000;
-        overflow: hidden; /* Prevent scrollbars when profits is full screen */
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utter Locks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <style>
+        /* General styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #000000;
+        }
 
-    header {
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 10px;
-        text-align: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 2;
-    }
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
 
-    h1 {
-        margin: 0;
-        font-size: 24px;
-        font-family: 'Fjalla One', sans-serif;
-    }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-family: 'Fjalla One', sans-serif;
+        }
 
-    .nav-buttons {
-        margin: 5px;
-    }
+        .nav-buttons {
+            margin: 5px;
+        }
 
-    .nav-buttons button {
-        padding: 5px 10px;
-        margin: 3px;
-        border: 1px solid #007bff;
-        background-color: transparent;
-        color: #007bff;
-        font-size: 14px;
-        cursor: pointer;
-        border-radius: 5px;
-        font-family: 'Fjalla One', sans-serif;
-    }
+        .nav-buttons button {
+            padding: 5px 10px;
+            margin: 3px;
+            border: 1px solid #007bff;
+            background-color: transparent;
+            color: #007bff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Fjalla One', sans-serif;
+        }
 
-    .nav-buttons button:hover {
-        background-color: #007bff;
-        color: white;
-    }
+        .nav-buttons button:hover {
+            background-color: #007bff;
+            color: white;
+        }
 
-    .table-container {
-        display: none;
-        text-align: center;
-        margin-top: 10px;
-        width: 80%; /* Keep the 80% width for other tables */
-    }
+        .table-container {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+            width: 80%; /* Keep the 80% width for other tables */
+        }
 
-    table {
-        border-collapse: collapse;
-        width: 100%; /* Make tables inside .table-container take full width */
-        margin: 20px auto;
-        background-color: white;
-        color: #000000;
-    }
+        table {
+            border-collapse: collapse;
+            width: 100%; /* Make tables inside .table-container take full width */
+            margin: 20px auto;
+            background-color: white;
+            color: #000000;
+        }
 
-    th, td {
-        padding: 8px;
-        text-align: center;
-        font-family: 'Fjalla One', sans-serif;
-    }
+        th, td {
+            padding: 8px;
+            text-align: center;
+            font-family: 'Fjalla One', sans-serif;
+        }
 
-    th {
-        background-color: rgba(255, 255, 255, 0.8);
-        z-index: 2;
-    }
+        th {
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+        }
 
-    img {
-        width: 50px;
-        height: auto;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+        img {
+            width: 50px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .team-name {
-        font-size: 14px;
-        margin-top: 5px;
-    }
+        .team-name {
+            font-size: 14px;
+            margin-top: 5px;
+        }
 
-    /* Style for the profits container when visible */
-    #profits-container {
-        position: fixed; /* Take it out of the normal flow */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: white; /* Optional: Add a background color */
-        z-index: 10; /* Ensure it's on top of other elements */
-        display: none; /* Initially hidden */
-        display: flex; /* Enable Flexbox for centering the iframe */
-        align-items: center; /* Center vertically */
-        justify-content: center; /* Center horizontally */
-    }
+        /* Style for the profits container when visible */
+        #profits-container {
+            position: fixed; /* Take it out of the normal flow */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Optional: Add a background color */
+            z-index: 10; /* Ensure it's on top of other elements */
+            display: none; /* Initially hidden */
+        }
 
-    #profits-container iframe {
-        width: 80%; /* Adjust as needed for the iframe's size within the full screen */
-        height: 80%; /* Adjust as needed for the iframe's size within the full screen */
-        border: none; /* Remove the border for a cleaner look */
-    }
-</style>
+        #profits-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none; /* Remove the border for a cleaner look */
+        }
+    </style>
+    <script>
+        function fetchAndGenerateTable(url, containerId, columns) {
+            fetch(url)
+                .then(response => response.text())
+                .then(csvData => generateTable(csvData, containerId, columns))
+                .catch(error => console.error('Error fetching CSV:', error));
+        }
+
+        function generateTable(csvData, containerId, columns) {
+            const rows = csvData.split('\n').filter(row => row.trim() !== '');
+            let tableHTML = '<table><thead><tr>';
+            columns.forEach(col => tableHTML += `<th>${col}</th>`);
+            tableHTML += '</tr></thead><tbody>';
+
+            for (let i = 0; i < rows.length; i++) {
+                const cols = rows[i].split(',');
+                tableHTML += '<tr>';
+
+                if (containerId === 'table1' || containerId === 'table3') {
+                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
+                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
+                    tableHTML += `<td>${cols[4]}</td>`;
+                    tableHTML += `<td>${cols[5]}</td>`;
+                } else if (containerId === 'table2') {
+                    tableHTML += `<td><img src="${cols[0].trim()}" alt="Team Logo"><div class="team-name">${cols[1].trim()}</div></td>`;
+                    tableHTML += `<td>${cols[2].trim()}</td>`;
+                } else if (containerId === 'table4') {
+                    tableHTML += `<td>${cols[0]}</td>`;
+                    tableHTML += `<td>${cols[1]}</td>`;
+                    tableHTML += `<td><img src="${cols[2]}" alt="${cols[1]} Logo"></td>`;
+                }
+                // No 'table5' logic needed here
+
+                tableHTML += '</tr>';
+            }
+            tableHTML += '</tbody></table>';
+            document.getElementById(containerId).innerHTML = tableHTML;
+        }
+
+        function showTable(tableId) {
+            document.querySelectorAll('.table-container, #profits-container').forEach(element => {
+                element.style.display = 'none'; // Hide all initially
+            });
+
+            if (tableId === 'table5') {
+                document.getElementById('profits-container').style.display = 'block';
+            } else {
+                document.getElementById(tableId).style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1', ['Home', 'Away', 'Spread', 'Total']);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
+            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Copy%20of%20Sheet80.csv', 'table4', ['Rank', 'Team', 'Logo']);
+
+            // Initially hide all containers
+            document.querySelectorAll('.table-container, #profits-container').forEach(element => {
+                element.style.display = 'none';
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Utter Locks</h1>
+        <div class="nav-buttons">
+            <button onclick="showTable('table1')">NFL</button>
+            <button onclick="showTable('table2')">NFL ELO</button>
+            <button onclick="showTable('table3')">CBB</button>
+            <button onclick="showTable('table4')">Rankings</button>
+            <button onclick="showTable('table5')">Profits</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="table1" class="table-container"></div>
+        <div id="table2" class="table-container"></div>
+        <div id="table3" class="table-container"></div>
+        <div id="table4" class="table-container"></div>
+        <div id="profits-container">
+            <iframe src="YOUR_GOOGLE_SHEET_EMBED_URL_HERE" frameborder="0"></iframe>
+        </div>
+    </main>
+</body>
+</html>
