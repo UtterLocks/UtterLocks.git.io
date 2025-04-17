@@ -93,6 +93,19 @@
             font-size: 14px;
             margin-top: 5px;
         }
+
+        /* Style for the iframe */
+        #profits-container {
+            width: 80%; /* Adjust as needed */
+            margin: 20px auto;
+            display: none; /* Initially hidden */
+        }
+
+        #profits-container iframe {
+            width: 100%;
+            height: 500px; /* Adjust the height as needed */
+            border: 1px solid #ccc;
+        }
     </style>
     <script>
         function fetchAndGenerateTable(url, containerId, columns) {
@@ -124,9 +137,8 @@
                     tableHTML += `<td>${cols[0]}</td>`;
                     tableHTML += `<td>${cols[1]}</td>`;
                     tableHTML += `<td><img src="${cols[2]}" alt="${cols[1]} Logo"></td>`;
-                } else if (containerId === 'table5') { // For the Profits table
-                    cols.forEach(col => tableHTML += `<td>${col.trim()}</td>`);
                 }
+                // The 'table5' logic for CSV is no longer needed
 
                 tableHTML += '</tr>';
             }
@@ -135,8 +147,8 @@
         }
 
         function showTable(tableId) {
-            document.querySelectorAll('.table-container').forEach(table => {
-                table.style.display = (table.id === tableId) ? 'block' : 'none';
+            document.querySelectorAll('.table-container, #profits-container').forEach(element => {
+                element.style.display = (element.id === tableId || (tableId === 'table5' && element.id === 'profits-container')) ? 'block' : 'none';
             });
         }
 
@@ -146,11 +158,10 @@
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Copy%20of%20Sheet80.csv', 'table4', ['Rank', 'Team', 'Logo']);
 
-            // Initially hide the profits table
-            const profitsTableDiv = document.getElementById('table5');
-            if (profitsTableDiv) {
-                profitsTableDiv.style.display = 'none';
-            }
+            // Initially hide all table containers and the profits container
+            document.querySelectorAll('.table-container, #profits-container').forEach(element => {
+                element.style.display = 'none';
+            });
         });
     </script>
 </head>
@@ -171,6 +182,9 @@
         <div id="table2" class="table-container"></div>
         <div id="table3" class="table-container"></div>
         <div id="table4" class="table-container"></div>
-        <div id="table5" class="table-container"></div> </main>
+        <div id="profits-container">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGd5lae1otlwZPDg7rAvx2Zkar-bFPaKiFBe9UprsZIaO1jStq7AB539tu-jSQuCQfq3XcpgGErXF/pubhtml?gid=0&single=true" frameborder="0"></iframe>
+        </div>
+    </main>
 </body>
 </html>
