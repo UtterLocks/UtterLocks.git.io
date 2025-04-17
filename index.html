@@ -111,7 +111,7 @@
             for (let i = 0; i < rows.length; i++) {
                 const cols = rows[i].split(',');
                 tableHTML += '<tr>';
-                
+
                 if (containerId === 'table1' || containerId === 'table3') {
                     tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
                     tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
@@ -124,8 +124,10 @@
                     tableHTML += `<td>${cols[0]}</td>`;
                     tableHTML += `<td>${cols[1]}</td>`;
                     tableHTML += `<td><img src="${cols[2]}" alt="${cols[1]} Logo"></td>`;
+                } else if (containerId === 'table5') { // For the Profits table
+                    cols.forEach(col => tableHTML += `<td>${col.trim()}</td>`);
                 }
-                
+
                 tableHTML += '</tr>';
             }
             tableHTML += '</tbody></table>';
@@ -143,6 +145,13 @@
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Copy%20of%20Sheet80.csv', 'table4', ['Rank', 'Team', 'Logo']);
+            fetchAndGenerateTable('https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGd5lae1otlwZPDg7rAvx2Zkar-bFPaKiFBe9UprsZIaO1jStq7AB539tu-jSQuCQfq3XcpgGErXF/pubhtml?gid=0&single=true', 'table5');
+
+            // Initially hide the profits table
+            const profitsTableDiv = document.getElementById('table5');
+            if (profitsTableDiv) {
+                profitsTableDiv.style.display = 'none';
+            }
         });
     </script>
 </head>
@@ -154,6 +163,7 @@
             <button onclick="showTable('table2')">NFL ELO</button>
             <button onclick="showTable('table3')">CBB</button>
             <button onclick="showTable('table4')">Rankings</button>
+            <button onclick="showTable('table5')">Profits</button>
         </div>
     </header>
 
@@ -162,6 +172,6 @@
         <div id="table2" class="table-container"></div>
         <div id="table3" class="table-container"></div>
         <div id="table4" class="table-container"></div>
-    </main>
+        <div id="table5" class="table-container"></div> </main>
 </body>
 </html>
