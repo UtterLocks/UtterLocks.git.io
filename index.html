@@ -60,11 +60,12 @@
             display: none;
             text-align: center;
             margin-top: 10px;
+            width: 80%; /* Keep the 80% width for other tables */
         }
 
         table {
             border-collapse: collapse;
-            width: 80%;
+            width: 100%; /* Make tables inside .table-container take full width */
             margin: 20px auto;
             background-color: white;
             color: #000000;
@@ -94,17 +95,22 @@
             margin-top: 5px;
         }
 
-        /* Style for the iframe */
+        /* Style for the profits container when visible */
         #profits-container {
-            width: 80%; /* Adjust as needed */
-            margin: 20px auto;
+            position: fixed; /* Take it out of the normal flow */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Optional: Add a background color */
+            z-index: 10; /* Ensure it's on top of other elements */
             display: none; /* Initially hidden */
         }
 
         #profits-container iframe {
             width: 100%;
-            height: 500px; /* Adjust the height as needed */
-            border: 1px solid #ccc;
+            height: 100%;
+            border: none; /* Remove the border for a cleaner look */
         }
     </style>
     <script>
@@ -138,7 +144,7 @@
                     tableHTML += `<td>${cols[1]}</td>`;
                     tableHTML += `<td><img src="${cols[2]}" alt="${cols[1]} Logo"></td>`;
                 }
-                // The 'table5' logic for CSV is no longer needed
+                // No 'table5' logic needed here
 
                 tableHTML += '</tr>';
             }
@@ -148,8 +154,14 @@
 
         function showTable(tableId) {
             document.querySelectorAll('.table-container, #profits-container').forEach(element => {
-                element.style.display = (element.id === tableId || (tableId === 'table5' && element.id === 'profits-container')) ? 'block' : 'none';
+                element.style.display = 'none'; // Hide all initially
             });
+
+            if (tableId === 'table5') {
+                document.getElementById('profits-container').style.display = 'block';
+            } else {
+                document.getElementById(tableId).style.display = 'block';
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -158,7 +170,7 @@
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
             fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Copy%20of%20Sheet80.csv', 'table4', ['Rank', 'Team', 'Logo']);
 
-            // Initially hide all table containers and the profits container
+            // Initially hide all containers
             document.querySelectorAll('.table-container, #profits-container').forEach(element => {
                 element.style.display = 'none';
             });
@@ -182,9 +194,9 @@
         <div id="table2" class="table-container"></div>
         <div id="table3" class="table-container"></div>
         <div id="table4" class="table-container"></div>
-        <div id="profits-container" style="display: none;">
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGd5lae1otlwZPDg7rAvx2Zkar-bFPaKiFBe9UprsZIaO1jStq7AB539tu-jSQuCQfq3XcpgGErXF/pubhtml?gid=0&single=true" frameborder="0" width="100%" height="600px"></iframe>
-    </div>
+        <div id="profits-container">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGd5lae1otlwZPDg7rAvx2Zkar-bFPaKiFBe9UprsZIaO1jStq7AB539tu-jSQuCQfq3XcpgGErXF/pubhtml?gid=0&single=true" frameborder="0"></iframe>
+        </div>
     </main>
 </body>
 </html>
