@@ -21,38 +21,61 @@
     }
     .shell{ max-width:1100px; margin:0 auto; }
     header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
-    .brand{
-      display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow);
-    }
+    .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
     .brand .logo{ font-size:24px }
     .title{ margin:0; font-size:24px }
     .subtitle{ margin:2px 0 0; color:var(--muted); font-size:13px }
 
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px);
-    }
+    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
 
     .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
-    a.btn, button.btn, label.btn{
-      appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px;
-      border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px;
-    }
+    a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px;
+      border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
     a.btn:hover, button.btn:hover, label.btn:hover{ filter:brightness(1.05) }
 
     #adminBar{ display:none; gap:8px; align-items:center; }
     #adminBar.show{ display:flex; }
     #file{ display:none }
 
-    table{ width:100%; border-collapse: collapse; margin-top:12px; }
-    thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; }
+    .table-wrap{ width:100%; overflow-x:auto; -webkit-overflow-scrolling: touch; }
+    table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: fixed; min-width: 560px; }
+    thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
     tbody tr:hover{ background: rgba(255,255,255,.04); }
     .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
-    .team{ display:flex; align-items:center; gap:8px; }
-    .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; }
+    .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
+    .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
+    .team span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .muted{ color:var(--muted) }
+    .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
+    .num{ white-space:nowrap; }
+
+    /* Column sizing via colgroup */
+    col.col-idx{ width: 56px; }
+    col.col-teams{ width: auto; }
+    col.col-proj{ width: 120px; }
+    col.col-spr{ width: 120px; }
+    col.col-tot{ width: 96px; }
+
+    @media (max-width: 780px){
+      body{ padding:20px; }
+      .title{ font-size:22px; }
+      .subtitle{ font-size:12px; }
+      th, td{ padding:8px 6px; font-size:13px; }
+      .team img{ height:20px; width:20px; flex-basis:20px; }
+      table{ min-width: 520px; }
+    }
+
+    @media (max-width: 520px){
+      /* Save space: hide the # column on very small screens */
+      th:first-child, td:first-child{ display:none; }
+      .title{ font-size:20px; }
+      th, td{ font-size:12px; }
+      .team img{ height:18px; width:18px; flex-basis:18px; }
+      table{ min-width: 480px; }
+    }
 
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
   </style>
@@ -78,18 +101,27 @@
     </header>
 
     <section class="panel">
-      <table id="tbl">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Teams</th>
-            <th>Proj (H-A)</th>
-            <th>Spread (A-H)</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody id="body"></tbody>
-      </table>
+      <div class="table-wrap">
+        <table id="tbl">
+          <colgroup>
+            <col class="col-idx">
+            <col class="col-teams">
+            <col class="col-proj">
+            <col class="col-spr">
+            <col class="col-tot">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Teams</th>
+              <th>Proj (H‑A)</th>
+              <th>Spread (A‑H)</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="body"></tbody>
+        </table>
+      </div>
     </section>
 
     <footer>© <span id="year"></span> Utter Locks • Advice/analysis only</footer>
@@ -97,7 +129,6 @@
 
   <script>
     const $body = document.getElementById('body');
-    const $source = document.getElementById('sourceLabel'); // no longer present; guarded below
 
     // Show admin tools only for you: add ?admin=1 to URL or when running locally
     const isAdmin = new URLSearchParams(location.search).get('admin') === '1' || location.hostname === 'localhost';
@@ -105,7 +136,10 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const REPO_CSV = 'data/cfb.csv'; // commit your CSV here
+    // You can override with ?csv=/abs/or/relative/path.csv
+    const CSV_OVERRIDE = new URLSearchParams(location.search).get('csv');
+    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString()
+                                  : new URL('./data/cfb.csv', location.href).toString(); // commit your CSV here
 
     // Load from repo by default
     loadFromRepo();
@@ -114,26 +148,22 @@
     document.getElementById('file').addEventListener('change', (e)=>{
       const file = e.target.files?.[0]; if(!file) return;
       const reader = new FileReader();
-      reader.onload = ev => {
-        const rows = parseCSV(ev.target.result);
-        if ($source) $source.textContent = 'preview';
-        render(rows);
-      };
+      reader.onload = ev => { const rows = parseCSV(ev.target.result); render(rows); };
       reader.readAsText(file);
     });
 
     async function loadFromRepo(){
       try{
         const bust = Date.now();
-        const res = await fetch(`${REPO_CSV}?v=${bust}`);
-        if(!res.ok) throw new Error('Failed to fetch repo CSV');
+        const url = REPO_CSV + (REPO_CSV.includes('?') ? `&v=${bust}` : `?v=${bust}`);
+        const res = await fetch(url);
+        if(!res.ok){ throw new Error(`HTTP ${res.status} at ${url}`); }
         const text = await res.text();
         const rows = parseCSV(text);
-        if ($source) $source.textContent = 'repo';
         render(rows);
       }catch(err){
         console.error(err);
-        $body.innerHTML = `<tr><td colspan="5" class="muted">No CSV found at <code>${REPO_CSV}</code>. Add your file to that path.</td></tr>`;
+        $body.innerHTML = `<tr><td colspan="5" class="muted">Could not fetch CSV. ${err.message}.<br>Make sure the file exists at <code>${REPO_CSV}</code> in your published branch/folder.</td></tr>`;
       }
     }
 
@@ -153,9 +183,9 @@
       const cells = []; let cur = ''; let q = false;
       for(let i=0;i<line.length;i++){
         const ch = line[i];
-        if(ch=='"'){
-          if(q && line[i+1]=='"'){ cur+='"'; i++; } else { q=!q; }
-        } else if(ch==',' && !q){ cells.push(cur); cur=''; }
+        if(ch==='"'){
+          if(q && line[i+1]==='"'){ cur+='"'; i++; } else { q=!q; }
+        } else if(ch===',' && !q){ cells.push(cur); cur=''; }
         else { cur += ch; }
       }
       cells.push(cur); return cells;
@@ -181,7 +211,7 @@
         const totTxt = tot!=null ? tot.toFixed(1) : '—';
         return `
           <tr>
-            <td>${i}</td>
+            <td class="num">${i}</td>
             <td>
               <div class="teams">
                 <div class="team"><img src="${alogo}" alt="${a}"><span>${a}</span></div>
