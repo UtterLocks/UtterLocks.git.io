@@ -4,69 +4,177 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Utter Locks — CFB</title>
+  <meta name="description" content="College Football picks (Utter Locks)" />
   <style>
-    body { font-family: sans-serif; margin: 20px; background: #f8f9fa; }
-    h1 { text-align: center; }
-    #upload { margin: 20px auto; display: block; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-    th { background: #222; color: #fff; }
-    img { max-height: 28px; }
+    :root{
+      --bg: #0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --good:#78ffa6;
+      --shadow: 0 10px 30px rgba(0,0,0,.35); --radius:18px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow: 0 10px 24px rgba(7, 12, 34, .10); }
+    }
+    *{ box-sizing: border-box }
+    body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
+      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg);
+      padding: 28px; }
+    .shell{ max-width:1100px; margin:0 auto; }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
+    .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
+    .brand .logo{ font-size:24px }
+    .title{ margin:0; font-size:24px }
+    .subtitle{ margin:2px 0 0; color:var(--muted); font-size:13px }
+
+    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
+
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
+    a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px;
+      border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
+    a.btn:hover, button.btn:hover, label.btn:hover{ filter:brightness(1.05) }
+
+    #adminBar{ display:none; gap:8px; align-items:center; }
+    #adminBar.show{ display:flex; }
+    #file{ display:none }
+
+    table{ width:100%; border-collapse: collapse; margin-top:12px; }
+    thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; }
+    th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; }
+    tbody tr:hover{ background: rgba(255,255,255,.04); }
+    .team{ display:flex; align-items:center; gap:8px; justify-content:flex-start; }
+    .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; }
+    .muted{ color:var(--muted) }
+    .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
+
+    footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
   </style>
 </head>
 <body>
-  <h1>College Football Picks</h1>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="logo">🐄</div><div><h1 class="title">Utter Locks — CFB</h1><p class="subtitle">Upload via Git commit; public page auto-loads from /data/cfb.csv</p></div></div>
+      <div class="row">
+        <a class="btn" href="index.html">← Home</a>
+        <div id="adminBar">
+          <input id="file" type="file" accept=".csv" />
+          <label class="btn" for="file">Preview CSV (admin)</label>
+          <button class="btn" id="useRepo">Use repo data</button>
+        </div>
+      </div>
+    </header>
 
-  <!-- Upload input -->
-  <input type="file" id="upload" accept=".csv" />
+    <section class="panel">
+      <div class="row">
+        <div class="muted">Source: <span id="sourceLabel" class="badge">repo</span></div>
+        <div class="muted">Expecting columns: <code>Home, Away, Home_Proj, Away_Proj, Spread, Total, Home_key, Away_key, HomeLogo, AwayLogo</code></div>
+      </div>
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Matchup</th>
+            <th>Proj (H‑A)</th>
+            <th>Spread (A‑H)</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="body"></tbody>
+      </table>
+    </section>
 
-  <!-- Where table will render -->
-  <table id="results"></table>
+    <footer>© <span id="year"></span> Utter Locks • Advice/analysis only</footer>
+  </div>
 
   <script>
-    document.getElementById('upload').addEventListener('change', handleFile);
+    const $body = document.getElementById('body');
+    const $source = document.getElementById('sourceLabel');
 
-    function handleFile(evt) {
-      const file = evt.target.files[0];
-      if (!file) return;
+    // Show admin tools only for you: add ?admin=1 to URL or when running locally
+    const isAdmin = new URLSearchParams(location.search).get('admin') === '1' || location.hostname === 'localhost';
+    if (isAdmin) document.getElementById('adminBar').classList.add('show');
 
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const REPO_CSV = 'data/cfb.csv'; // commit your CSV here
+
+    // Load from repo by default
+    loadFromRepo();
+
+    document.getElementById('useRepo').addEventListener('click', loadFromRepo);
+    document.getElementById('file').addEventListener('change', (e)=>{
+      const file = e.target.files?.[0]; if(!file) return;
       const reader = new FileReader();
-      reader.onload = e => {
-        const text = e.target.result;
-        renderTable(parseCSV(text));
-      };
+      reader.onload = ev => { const rows = parseCSV(ev.target.result); $source.textContent = 'preview'; render(rows); };
       reader.readAsText(file);
+    });
+
+    async function loadFromRepo(){
+      try{
+        const bust = Date.now();
+        const res = await fetch(`${REPO_CSV}?v=${bust}`);
+        if(!res.ok) throw new Error('Failed to fetch repo CSV');
+        const text = await res.text();
+        const rows = parseCSV(text);
+        $source.textContent = 'repo';
+        render(rows);
+      }catch(err){
+        console.error(err);
+        $body.innerHTML = `<tr><td colspan="5" class="muted">No repo CSV found at <code>${REPO_CSV}</code>. Upload your file to that path.</td></tr>`;
+      }
     }
 
-    function parseCSV(text) {
-      const [headerLine, ...lines] = text.trim().split(/\\r?\\n/);
-      const headers = headerLine.split(',');
-      return lines.map(line => {
-        const cells = line.split(',');
-        const row = {};
-        headers.forEach((h, i) => row[h.trim()] = cells[i]);
-        return row;
-      });
+    function parseCSV(text){
+      // robust-ish CSV parser that handles quoted commas
+      const lines = text.replace(/\r/g,'').split('\n').filter(Boolean);
+      const header = splitCSVLine(lines[0]);
+      const out = [];
+      for(let i=1;i<lines.length;i++){
+        const cells = splitCSVLine(lines[i]);
+        const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim());
+        out.push(row);
+      }
+      return out;
+    }
+    function splitCSVLine(line){
+      const cells = []; let cur = ''; let q = false;
+      for(let i=0;i<line.length;i++){
+        const ch = line[i];
+        if(ch==='"'){
+          if(q && line[i+1]==='"'){ cur+='"'; i++; } else { q=!q; }
+        } else if(ch===',' && !q){ cells.push(cur); cur=''; }
+        else { cur += ch; }
+      }
+      cells.push(cur); return cells;
     }
 
-    function renderTable(rows) {
-      const table = document.getElementById('results');
-      if (!rows.length) return;
+    function n(x){ const v = Number(x); return Number.isFinite(v) ? v : null; }
 
-      const headers = Object.keys(rows[0]);
-      table.innerHTML =
-        '<thead><tr>' +
-        headers.map(h => `<th>${h}</th>`).join('') +
-        '</tr></thead><tbody>' +
-        rows.map(r => {
-          return '<tr>' + headers.map(h => {
-            if (h.toLowerCase().includes('logo')) {
-              return `<td><img src=\"${r[h]}\" alt=\"${r[h]}\"/></td>`;
-            }
-            return `<td>${r[h]}</td>`;
-          }).join('') + '</tr>';
-        }).join('') +
-        '</tbody>';
+    function render(rows){
+      if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
+
+      // sort by descending Total for a fun default (feel free to change)
+      rows = rows.slice().sort((a,b)=> (n(b.Total)||0) - (n(a.Total)||0));
+
+      $body.innerHTML = rows.map((r,idx)=>{
+        const h = r.Home || ''; const a = r.Away || '';
+        const hp = n(r.Home_Proj); const ap = n(r.Away_Proj);
+        const spr = n(r.Spread); const tot = n(r.Total);
+        const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
+        const proj = (hp!=null && ap!=null) ? `${hp.toFixed(1)} – ${ap.toFixed(1)}` : '—';
+        const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
+        const totTxt = tot!=null ? tot.toFixed(1) : '—';
+        return `
+          <tr>
+            <td>${idx+1}</td>
+            <td>
+              <div class="team"><img src="${alogo}" alt="${a}"><span>${a}</span></div>
+              <div class="team" style="margin-top:6px"><img src="${hlogo}" alt="${h}"><span>${h}</span></div>
+            </td>
+            <td>${proj}</td>
+            <td>${sprTxt}</td>
+            <td>${totTxt}</td>
+          </tr>`;
+      }).join('');
     }
   </script>
 </body>
