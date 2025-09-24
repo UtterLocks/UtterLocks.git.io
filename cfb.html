@@ -104,7 +104,10 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const REPO_CSV = 'data/cfb.csv'; // commit your CSV here
+    // You can override with ?csv=/abs/or/relative/path.csv
+    const CSV_OVERRIDE = new URLSearchParams(location.search).get('csv');
+    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString()
+                                  : new URL('./data/cfb.csv', location.href).toString(); // commit your CSV here
 
     // Load from repo by default
     loadFromRepo();
@@ -120,7 +123,20 @@
     async function loadFromRepo(){
       try{
         const bust = Date.now();
-        const res = await fetch(`${REPO_CSV}?v=${bust}`);
+        const url = REPO_CSV + (REPO_CSV.includes('?') ? `&v=${bust}` : `?v=${bust}`);
+        const res = await fetch(url);
+        if(!res.ok){
+          throw new Error(`HTTP ${res.status} at ${url}`);
+        }
+        const text = await res.text();
+        const rows = parseCSV(text);
+        if ($source) $source.textContent = 'repo';
+        render(rows);
+      }catch(err){
+        console.error(err);
+        $body.innerHTML = `<tr><td colspan="5" class="muted">Could not fetch CSV. ${err.message}.<br>Make sure the file exists at <code>${REPO_CSV}</code> in your published branch/folder.</td></tr>`;
+      }
+    }?v=${bust}`);
         if(!res.ok) throw new Error('Failed to fetch repo CSV');
         const text = await res.text();
         const rows = parseCSV(text);
