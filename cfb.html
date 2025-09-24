@@ -14,33 +14,56 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    :root{ --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --good:#78ffa6; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px; }
-    @media (prefers-color-scheme: light){ :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7, 12, 34, .10); } }
+    :root{
+      --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0;
+      --brand:#7bdcff; --good:#78ffa6; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px;
+      --pickGlow: 0 0 0 2px rgba(123,220,255,.95), 0 0 18px rgba(123,220,255,.75), 0 0 36px rgba(123,220,255,.55);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7, 12, 34, .10); }
+    }
     *{ box-sizing: border-box }
     body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
-      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg);
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent),
+                  radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg);
       padding: 28px;
     }
     .shell{ max-width:1100px; margin:0 auto; }
     header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
-    .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
+    .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
     .logo-img{ display:block; width:28px; height:28px; object-fit:cover; border-radius:8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
     .title{ margin:0; font-size:24px; display:inline-flex; gap:10px; align-items:center; }
-    .title::after{ content:""; width:10px; height:10px; border-radius:50%; background: radial-gradient(circle at 30% 30%, var(--brand) 30%, var(--good) 100%); box-shadow: 0 0 12px rgba(123,220,255,.6); }
+    .title::after{ content:""; width:10px; height:10px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--brand) 30%, var(--good) 100%);
+      box-shadow: 0 0 12px rgba(123,220,255,.6); }
     .subtitle{ margin:2px 0 0; color:var(--muted); font-size:13px }
 
     .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10);
       border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
 
     .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
-    a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
+    a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card);
+      padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
     a.btn:hover, button.btn:hover, label.btn:hover{ filter:brightness(1.05) }
 
     #adminBar{ display:none; gap:8px; align-items:center; } #adminBar.show{ display:flex; } #file{ display:none }
 
+    /* Legend */
+    .legend{
+      display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center;
+      color:var(--muted); font-size:13px; margin:6px 2px 8px;
+    }
+    .legend .dot{
+      display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px;
+      box-shadow: var(--pickGlow); background: rgba(123,220,255,.9);
+    }
+    .legend .item{ display:flex; align-items:center; gap:6px; }
+
     .table-wrap{ width:100%; overflow-x:auto; -webkit-overflow-scrolling: touch; }
-    table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: auto; min-width: 560px; }
+    table{ width:100%; border-collapse: collapse; margin-top:8px; table-layout: auto; min-width: 560px; }
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; border-bottom: 1px solid rgba(255,255,255,.18); }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
 
@@ -49,35 +72,30 @@
     tbody tr:hover{ background: rgba(123,220,255,.08); box-shadow: inset 0 0 0 9999px rgba(123,220,255,.06); }
 
     /* align numerics */
-    td:nth-child(3), td:nth-child(4), td:nth-child(5), th:nth-child(3), th:nth-child(4), th:nth-child(5){ font-variant-numeric: tabular-nums; }
+    td:nth-child(3), td:nth-child(4), td:nth-child(5), th:nth-child(3), th:nth-child(4), th:nth-child(5){
+      font-variant-numeric: tabular-nums;
+    }
 
     /* Teams column accent strip */
     td:nth-child(2){ position: relative; }
-    td:nth-child(2)::before{ content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 4px; background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35; }
+    td:nth-child(2)::before{
+      content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 4px;
+      background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35;
+    }
 
     /* Teams stack — inline grid = shrink-to-fit on desktop */
     td:nth-child(2), th:nth-child(2){ width:1%; }
     .teams{ display:inline-grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
-    .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
+    .team img{ height:22px; width:22px; object-fit:contain; border-radius:4px; background:#fff; flex:0 0 22px; transition: box-shadow .18s ease; }
     .team span{ display:block; white-space:nowrap; line-height:1.2; }
-    .icon{ margin-left:6px; font-size:13px; opacity:.95; }
-    .icon[title]{ cursor:help; }
+    /* BIG, obvious glow when this team is the spread pick */
+    .team.pick img{ box-shadow: var(--pickGlow); }
+    .team.pick span{ text-shadow: 0 0 12px rgba(123,220,255,.55); }
 
     /* Scores stack (desktop centered) */
-    .scores{
-      display: grid;
-      grid-auto-rows: min-content;
-      gap: 6px;
-      justify-items: center;
-      align-content: center;
-      text-align: center;
-    }
-    .score{
-      line-height: 1.2;
-      font-variant-numeric: tabular-nums;
-      font-feature-settings: "tnum";
-    }
+    .scores{ display:grid; grid-auto-rows:min-content; gap:6px; justify-items:center; align-content:center; text-align:center; }
+    .score{ line-height:1.2; font-variant-numeric: tabular-nums; font-feature-settings:"tnum"; }
 
     .muted{ color:var(--muted) }
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
@@ -99,24 +117,17 @@
 
     @media (max-width: 560px){
       /* Mobile: stacked scores, right aligned */
-      .scores{
-        display:grid;
-        grid-auto-rows:min-content;
-        gap:2px;
-        justify-items:end;
-        align-content:center;
-        text-align:right;
-        white-space:normal;
-      }
+      .scores{ gap:2px; justify-items:end; text-align:right; }
       .scores .score{ font-size:12px; line-height:1.1; }
 
       /* Make Teams column wider on mobile */
-      .table-wrap table{ table-layout: fixed; }   /* enforce colgroup widths */
+      .table-wrap table{ table-layout: fixed; }
       col.col-teams{ width:52%; }
       col.col-proj{  width:100px; }
       col.col-spr{   width:92px; }
       col.col-tot{   width:84px; }
-      th:nth-child(2), td:nth-child(2){ width:auto; } /* override shrink-to-fit */
+      th:nth-child(2), td:nth-child(2){ width:auto; }
+      .legend{ font-size:12px; gap:8px 12px; }
     }
 
     @media (max-width: 520px){
@@ -125,11 +136,11 @@
       .team img{ height:18px; width:18px; flex-basis:18px; }
       .team span{ white-space:normal; font-size:12px; }
       table{ min-width: 460px; }
-      .teams{ display:grid; } /* revert to block grid for small screens */
+      .teams{ display:grid; }
     }
 
     @media (max-width: 420px){
-      col.col-teams{ width:58%; }  /* extra room for very narrow devices */
+      col.col-teams{ width:58%; }
       col.col-proj{  width:96px; }
       col.col-spr{   width:88px; }
       col.col-tot{   width:78px; }
@@ -168,6 +179,14 @@
     </header>
 
     <section class="panel">
+      <!-- Legend replaces the old heading -->
+      <div class="legend" aria-label="Legend">
+        <div class="item"><span class="dot" aria-hidden="true"></span><span>Glow = Spread pick team</span></div>
+        <div class="item">⬆️ <span>Over bet</span></div>
+        <div class="item">⬇️ <span>Under bet</span></div>
+        <div class="item">⭐ <span>Edge ≤ 3</span></div>
+      </div>
+
       <div class="table-wrap">
         <table id="tbl">
           <caption class="sr-only">College Football Model Projections</caption>
@@ -277,38 +296,35 @@
         const totBet = (r['Total Bet'] || '').toLowerCase();
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
 
-        // ✅ which team gets the check?
+        // Which team is the spread pick? Give it the big glow.
         const spreadBetNorm = norm(sprBet);
         const isHomePick = spreadBetNorm && spreadBetNorm === norm(h);
         const isAwayPick = spreadBetNorm && spreadBetNorm === norm(a);
-        const homeCheck = isHomePick ? `<span class="icon" title="Spread bet: ${h}">✅</span>` : '';
-        const awayCheck = isAwayPick ? `<span class="icon" title="Spread bet: ${a}">✅</span>` : '';
 
-        // Stacked (A on top, H below) — mobile stays stacked too
         const projHTML = `
           <div class="scores">
             <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
             <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
           </div>`;
 
-        // Spread cell with tight-line star
-        const starSpread = sprEdge!=null && Math.abs(sprEdge) <= 3 ? `<span class="icon" title="Edge ≤ 3">⭐</span>` : '';
-        const sprTxt = spr!=null ? `${spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)}${starSpread}` : '—';
+        // Spread cell: value + star when tight (≤3)
+        const starSpread = sprEdge!=null && Math.abs(sprEdge) <= 3 ? `<span class="badge" title="Edge ≤ 3">⭐</span>` : '';
+        const sprTxt = spr!=null ? `${spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)} ${starSpread}` : '—';
 
-        // Total cell with arrow + optional star
+        // Total cell: arrow + optional star
         let arrow = '';
-        if(totBet === 'over') arrow = `<span class="icon" title="Total bet: Over">⬆️</span>`;
-        else if(totBet === 'under') arrow = `<span class="icon" title="Total bet: Under">⬇️</span>`;
-        const starTotal = totEdge!=null && Math.abs(totEdge) <= 3 ? `<span class="icon" title="Edge ≤ 3">⭐</span>` : '';
-        const totTxt = tot!=null ? `${tot.toFixed(1)}${arrow}${starTotal}` : '—';
+        if(totBet === 'over') arrow = `<span class="badge" title="Total bet: Over">⬆️</span>`;
+        else if(totBet === 'under') arrow = `<span class="badge" title="Total bet: Under">⬇️</span>`;
+        const starTotal = totEdge!=null && Math.abs(totEdge) <= 3 ? `<span class="badge" title="Edge ≤ 3">⭐</span>` : '';
+        const totTxt = tot!=null ? `${tot.toFixed(1)} ${arrow} ${starTotal}`.trim() : '—';
 
         return `
           <tr>
             <td class="num">${i}</td>
             <td>
               <div class="teams">
-                <div class="team"><img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}${awayCheck}</span></div>
-                <div class="team"><img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}${homeCheck}</span></div>
+                <div class="team ${isAwayPick?'pick':''}" title="${isAwayPick?'Spread pick':''}"><img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}</span></div>
+                <div class="team ${isHomePick?'pick':''}" title="${isHomePick?'Spread pick':''}"><img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}</span></div>
               </div>
             </td>
             <td>${projHTML}</td>
