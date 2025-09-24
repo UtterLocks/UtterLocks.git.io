@@ -54,20 +54,20 @@
     td:nth-child(2){ position: relative; }
     td:nth-child(2)::before{ content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 4px; background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35; }
 
-    /* Teams stack — inline = shrink-to-fit */
+    /* Teams stack — inline grid = shrink-to-fit on desktop */
     td:nth-child(2), th:nth-child(2){ width:1%; }
     .teams{ display:inline-grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
     .team span{ display:block; white-space:nowrap; line-height:1.2; }
 
-    /* Scores stack (desktop defaults centered) */
+    /* Scores stack (desktop centered) */
     .scores{
       display: grid;
       grid-auto-rows: min-content;
       gap: 6px;
-      justify-items: center;   /* centered horizontally */
-      align-content: center;   /* vertical centering */
+      justify-items: center;
+      align-content: center;
       text-align: center;
     }
     .score{
@@ -82,7 +82,7 @@
 
     /* Column sizing via colgroup */
     col.col-idx{ width:56px; }
-    col.col-teams{ width:1%; }  /* shrink-to-fit */
+    col.col-teams{ width:1%; }  /* shrink-to-fit desktop */
     col.col-proj{ width:120px; }
     col.col-spr{  width:120px; }
     col.col-tot{  width:96px; }
@@ -94,35 +94,42 @@
       table{ min-width: 520px; }
     }
 
+    @media (max-width: 560px){
+      /* Mobile: stacked scores, right aligned */
+      .scores{
+        display:grid;
+        grid-auto-rows:min-content;
+        gap:2px;
+        justify-items:end;
+        align-content:center;
+        text-align:right;
+        white-space:normal;
+      }
+      .scores .score{ font-size:12px; line-height:1.1; }
+
+      /* Make Teams column wider on mobile */
+      .table-wrap table{ table-layout: fixed; }   /* enforce colgroup widths */
+      col.col-teams{ width:52%; }
+      col.col-proj{  width:100px; }
+      col.col-spr{   width:92px; }
+      col.col-tot{   width:84px; }
+      th:nth-child(2), td:nth-child(2){ width:auto; } /* override shrink-to-fit */
+    }
+
     @media (max-width: 520px){
       th:first-child, td:first-child{ display:none; }
       .title{ font-size:20px; } th, td{ font-size:12px; }
       .team img{ height:18px; width:18px; flex-basis:18px; }
-      .team span{ white-space:normal; font-size:12px; } /* allow wrap on phones */
+      .team span{ white-space:normal; font-size:12px; }
       table{ min-width: 460px; }
       .teams{ display:grid; } /* revert to block grid for small screens */
     }
 
     @media (max-width: 420px){
-      col.col-proj{ width: 96px; } col.col-spr{  width: 90px; } col.col-tot{  width: 78px; }
-    }
-
-    /* OVERRIDE: Mobile = stacked scores (no dot), right-aligned */
-    @media (max-width: 560px){
-      .scores{
-        display:grid;            /* stack again */
-        grid-auto-rows:min-content;
-        gap:2px;
-        justify-items:end;       /* right align for readability */
-        align-content:center;
-        text-align:right;
-        white-space:normal;      /* allow stacking */
-      }
-      .scores .score{
-        font-size:12px;
-        line-height:1.1;
-      }
-      .scores .score:first-child::after{ content:none !important; }
+      col.col-teams{ width:58%; }  /* extra room for very narrow devices */
+      col.col-proj{  width:96px; }
+      col.col-spr{   width:88px; }
+      col.col-tot{   width:78px; }
     }
 
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
@@ -253,7 +260,7 @@
         const spr = n(r.Spread); const tot = n(r.Total);
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
 
-        // Proj: stacked (desktop) and stacked on mobile (override above)
+        // Stacked (A on top, H below) — mobile stays stacked too
         const projHTML = `
           <div class="scores">
             <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
