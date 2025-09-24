@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Utter Locks — NFL</title>
+  <meta name="description" content="NFL picks (Utter Locks)" />
+  <style>
+    :root{
+      --bg: #0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --good:#78ffa6;
+      --shadow: 0 10px 30px rgba(0,0,0,.35); --radius:18px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow: 0 10px 24px rgba(7, 12, 34, .10); }
+    }
+    *{ box-sizing: border-box }
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
+      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg);
+      padding: 28px;
+    }
+    .shell{ max-width:1100px; margin:0 auto; }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
+    .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
+    .brand .logo{ font-size:24px }
+    .title{ margin:0; font-size:24px }
+    .subtitle{ margin:2px 0 0; color:var(--muted); font-size:13px }
+
+    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
+
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
+    a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px;
+      border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
+    a.btn:hover, button.btn:hover, label.btn:hover{ filter:brightness(1.05) }
+
+    #adminBar{ display:none; gap:8px; align-items:center; }
+    #adminBar.show{ display:flex; }
+    #file{ display:none }
+
+    .table-wrap{ width:100%; overflow-x:auto; -webkit-overflow-scrolling: touch; }
+    table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: auto; min-width: 560px; }
+    thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; }
+    th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
+    tbody tr:hover{ background: rgba(255,255,255,.04); }
+    .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
+    .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
+    .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
+    .team span{ display:block; white-space:normal; line-height:1.2; }
+    .muted{ color:var(--muted) }
+    .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
+
+    /* Column sizing via colgroup */
+    col.col-idx{ width: 56px; }
+    col.col-teams{ width: auto; }
+    col.col-proj{ width: 120px; }
+    col.col-spr{ width: 120px; }
+    col.col-tot{ width: 96px; }
+
+    @media (max-width: 780px){
+      body{ padding:20px; }
+      .title{ font-size:22px; }
+      .subtitle{ font-size:12px; }
+      th, td{ padding:8px 6px; font-size:13px; }
+      .team img{ height:20px; width:20px; flex-basis:20px; }
+      .team span{ font-size:13px; }
+      table{ min-width: 520px; }
+    }
+
+    @media (max-width: 520px){
+      /* Hide index column to save space */
+      th:first-child, td:first-child{ display:none; }
+      .title{ font-size:20px; }
+      th, td{ font-size:12px; }
+      .team img{ height:18px; width:18px; flex-basis:18px; }
+      .team span{ font-size:12px; }
+      col.col-proj{ width: 110px; }
+      col.col-spr{ width: 100px; }
+      col.col-tot{ width: 86px; }
+      table{ min-width: 460px; }
+    }
+
+    footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand">
+        <div class="logo">🏈</div>
+        <div>
+          <h1 class="title">Utter Locks — NFL</h1>
+          <p class="subtitle">National Football League Picks</p>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn" href="index.html">← Home</a>
+        <div id="adminBar">
+          <input id="file" type="file" accept=".csv" />
+          <label class="btn" for="file">Preview CSV (admin)</label>
+          <button class="btn" id="useRepo">Use repo data</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="table-wrap">
+        <table id="tbl">
+          <colgroup>
+            <col class="col-idx">
+            <col class="col-teams">
+            <col class="col-proj">
+            <col class="col-spr">
+            <col class="col-tot">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Teams</th>
+              <th>Proj (H‑A)</th>
+              <th>Spread (A‑H)</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Utter Locks • Advice/analysis only</footer>
+  </div>
+
+  <script>
+    const $body = document.getElementById('body');
+
+    // Show admin tools only for you: add ?admin=1 to URL or when running locally
+    const isAdmin = new URLSearchParams(location.search).get('admin') === '1' || location.hostname === 'localhost';
+    if (isAdmin) document.getElementById('adminBar').classList.add('show');
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Allow ?csv= override; default to repo file
+    const CSV_OVERRIDE = new URLSearchParams(location.search).get('csv');
+    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString()
+                                  : new URL('./data/nfl.csv', location.href).toString();
+
+    loadFromRepo();
+
+    document.getElementById('useRepo').addEventListener('click', loadFromRepo);
+    document.getElementById('file').addEventListener('change', (e)=>{
+      const file = e.target.files?.[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => { const rows = parseCSV(ev.target.result); render(rows); };
+      reader.readAsText(file);
+    });
+
+    async function loadFromRepo(){
+      try{
+        const bust = Date.now();
+        const url = REPO_CSV + (REPO_CSV.includes('?') ? `&v=${bust}` : `?v=${bust}`);
+        const res = await fetch(url);
+        if(!res.ok){ throw new Error(`HTTP ${res.status} at ${url}`); }
+        const text = await res.text();
+        const rows = parseCSV(text);
+        render(rows);
+      }catch(err){
+        console.error(err);
+        $body.innerHTML = `<tr><td colspan="5" class="muted">Could not fetch CSV. ${err.message}.<br>Make sure the file exists at <code>${REPO_CSV}</code>.</td></tr>`;
+      }
+    }
+
+    function parseCSV(text){
+      const lines = text.replace(/\r/g,'').split('\n').filter(Boolean);
+      const header = splitCSVLine(lines[0]);
+      const out = [];
+      for(let i=1;i<lines.length;i++){
+        const cells = splitCSVLine(lines[i]);
+        const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim());
+        out.push(row);
+      }
+      return out;
+    }
+    function splitCSVLine(line){
+      const cells = []; let cur = ''; let q = false;
+      for(let i=0;i<line.length;i++){
+        const ch = line[i];
+        if(ch==='"'){
+          if(q && line[i+1]==='"'){ cur+='"'; i++; } else { q=!q; }
+        } else if(ch===',' && !q){ cells.push(cur); cur=''; }
+        else { cur += ch; }
+      }
+      cells.push(cur); return cells;
+    }
+
+    function n(x){ const v = Number(x); return Number.isFinite(v) ? v : null; }
+
+    function render(rows){
+      if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
+
+      $body.innerHTML = rows.map((r,idx)=>{
+        const i = idx + 1;
+        const h = r.Home || ''; const a = r.Away || '';
+        const hp = n(r.xHome); const ap = n(r.xAway);
+        const spr = n(r.xSpread); const tot = n(r.xTotal);
+        const hlogo = r['Home Logo'] || r.HomeLogo; // support either label
+        const alogo = r['Away Logo'] || r.AwayLogo;
+        const proj = (hp!=null && ap!=null) ? `${hp.toFixed(1)} – ${ap.toFixed(1)}` : '—';
+        const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
+        const totTxt = tot!=null ? tot.toFixed(1) : '—';
+        return `
+          <tr>
+            <td>${i}</td>
+            <td>
+              <div class="teams">
+                <div class="team"><img src="${alogo}" alt="${a}"><span>${a}</span></div>
+                <div class="team"><img src="${hlogo}" alt="${h}"><span>${h}</span></div>
+              </div>
+            </td>
+            <td>${proj}</td>
+            <td>${sprTxt}</td>
+            <td>${totTxt}</td>
+          </tr>`;
+      }).join('');
+    }
+  </script>
+</body>
+</html>
