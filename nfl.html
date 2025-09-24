@@ -14,14 +14,8 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    :root{
-      --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0;
-      --brand:#7bdcff; --good:#78ffa6; --bad:#ff6b6b;
-      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px;
-    }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7, 12, 34, .10); }
-    }
+    :root{ --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --good:#78ffa6; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px; }
+    @media (prefers-color-scheme: light){ :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7, 12, 34, .10); } }
     *{ box-sizing: border-box }
     body{
       margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
@@ -49,66 +43,51 @@
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; border-bottom: 1px solid rgba(255,255,255,.18); }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
 
+    /* zebra + hover */
     tbody tr:nth-child(odd){ background: rgba(255,255,255,.02); }
     tbody tr:hover{ background: rgba(123,220,255,.08); box-shadow: inset 0 0 0 9999px rgba(123,220,255,.06); }
 
-    /* numeric alignment */
+    /* align numerics */
     td:nth-child(3), td:nth-child(4), td:nth-child(5), th:nth-child(3), th:nth-child(4), th:nth-child(5){ font-variant-numeric: tabular-nums; }
 
     /* Teams column accent strip */
     td:nth-child(2){ position: relative; }
-    td:nth-child(2)::before{
-      content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 4px;
-      background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35;
-    }
+    td:nth-child(2)::before{ content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 4px; background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35; }
 
-    /* Teams stack — inline grid = shrink-to-fit on desktop */
-    td:nth-child(2), th:nth-child(2){ width:1%; }
-    .teams{ display:inline-grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
+    /* Teams stack */
+    .teams{ display:inline-grid; grid-template-columns: 1fr; gap:6px; text-align:left; } /* inline = shrink to content */
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
-    .team span{ display:block; white-space:nowrap; line-height:1.2; }
+    .team span{ display:block; white-space:nowrap; line-height:1.2; } /* no wrap on desktop */
 
-    /* pick/fade dots (with pulsing glow) */
-    .dot{
-      display:inline-block; width:10px; height:10px; border-radius:50%;
-      margin-left:6px; vertical-align:middle;
-      box-shadow: 0 0 0 0 rgba(255,255,255,0.0);
-    }
-    @keyframes pulse-green{
-      0%{ box-shadow: 0 0 0 0 rgba(120,255,166,.55); }
-      70%{ box-shadow: 0 0 12px 6px rgba(120,255,166,.08); }
-      100%{ box-shadow: 0 0 0 0 rgba(120,255,166,0); }
-    }
-    @keyframes pulse-red{
-      0%{ box-shadow: 0 0 0 0 rgba(255,107,107,.65); }
-      70%{ box-shadow: 0 0 14px 7px rgba(255,107,107,.10); }
-      100%{ box-shadow: 0 0 0 0 rgba(255,107,107,0); }
-    }
-    .dot--pick{ background: var(--good); animation: pulse-green 1.6s ease-out infinite; }
-    .dot--fade{ background: var(--bad);  animation: pulse-red   1.6s ease-out infinite; }
-
-    /* Scores stack (centered) */
+    /* Scores stack */
+    .scores{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:right; }
+    .score{ line-height:1.2; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+    /* Center the stacked projected scores */
     .scores{
-      display: grid; grid-auto-rows: min-content; gap: 6px;
-      justify-items: center; align-content: center; text-align: center;
+      display: grid;
+      grid-auto-rows: min-content;
+      gap: 6px;
+      justify-items: center;   /* <-- center horizontally */
+      align-content: center;   /* nice vertical centering inside the cell */
+      text-align: center;      /* numbers centered */
     }
-    .score{ line-height: 1.2; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+    .score{
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+    }
 
-    .subtle{
-      display:block; margin-top:4px; font-size:11px; color:var(--muted);
-      letter-spacing:.2px;
-    }
 
     .muted{ color:var(--muted) }
-    .num{ white-space:nowrap; }
+    .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
 
     /* Column sizing via colgroup */
     col.col-idx{ width:56px; }
-    col.col-teams{ width:1%; }  /* shrink-to-fit desktop */
+    col.col-teams{ width:1%; }     /* shrink-to-fit */
     col.col-proj{ width:120px; }
-    col.col-spr{  width:150px; } /* a little wider to fit sublabels */
-    col.col-tot{  width:130px; }
+    col.col-spr{  width:120px; }
+    col.col-tot{  width:96px; }
 
     @media (max-width: 780px){
       body{ padding:20px; } .title{ font-size:22px; } .subtitle{ font-size:12px; }
@@ -116,40 +95,20 @@
       .team img{ height:20px; width:20px; flex-basis:20px; } .team span{ font-size:13px; }
       table{ min-width: 520px; }
     }
-    @media (max-width: 560px){
-      th:first-child, td:first-child{ display:none; } /* hide index */
+    @media (max-width: 520px){
+      th:first-child, td:first-child{ display:none; }
       .title{ font-size:20px; } th, td{ font-size:12px; }
       .team img{ height:18px; width:18px; flex-basis:18px; }
-      .team span{ white-space:normal; font-size:12px; }
-      .teams{ display:grid; } /* let it fill */
-      .scores{ gap:2px; justify-items:end; text-align:right; }
-      .subtle{ display:none; } /* hide sublabels on small screens */
-      /* give Teams more room */
-      .table-wrap table{ table-layout: fixed; }
-      col.col-teams{ width:52%; }
-      col.col-proj{  width:100px; }
-      col.col-spr{   width:104px; }
-      col.col-tot{   width:92px; }
+      .team span{ white-space:normal; font-size:12px; }  /* allow wrap on phones */
+      col.col-proj{ width:110px; } col.col-spr{ width:100px; } col.col-tot{ width:86px; }
+      table{ min-width: 460px; }
+      .teams{ display:grid; } /* revert to block grid so it can fill cell on small screens */
     }
-    @media (max-width: 420px){
-      col.col-teams{ width:58%; }
-      col.col-proj{  width:96px; }
-      col.col-spr{   width:96px; }
-      col.col-tot{   width:86px; }
-    }
+    @media (max-width: 420px){ col.col-proj{ width:96px; } col.col-spr{ width:90px; } col.col-tot{ width:78px; } }
 
     .sr-only{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
   </style>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FGSY9FNSQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7FGSY9FNSQ');
-  </script>
 </head>
 <body>
   <div class="shell">
@@ -183,7 +142,7 @@
               <th scope="col">#</th>
               <th scope="col">Teams</th>
               <th scope="col">Proj (A-H)</th>
-              <th scope="col">Spread</th>
+              <th scope="col">Spread (A-H)</th>
               <th scope="col">Total</th>
             </tr>
           </thead>
@@ -201,10 +160,8 @@
     if (isAdmin) document.getElementById('adminBar').classList.add('show');
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // CSV: Home, Away, Home Logo, Away Logo, xHome, xAway, xSpread, xTotal, Spread Edge, Total Edge, Vegas_Spread, Vegas_Total
     const CSV_OVERRIDE = new URLSearchParams(location.search).get('csv');
-    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString()
-                                  : new URL('./data/nfl.csv', location.href).toString();
+    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString() : new URL('./data/nfl.csv', location.href).toString();
 
     loadFromRepo();
     document.getElementById('useRepo').addEventListener('click', loadFromRepo);
@@ -231,13 +188,8 @@
 
     function parseCSV(text){
       const lines = text.replace(/\r/g,'').split('\n').filter(Boolean);
-      const header = splitCSVLine(lines[0]);
-      const out = [];
-      for(let i=1;i<lines.length;i++){
-        const cells = splitCSVLine(lines[i]);
-        const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim());
-        out.push(row);
-      }
+      const header = splitCSVLine(lines[0]); const out = [];
+      for(let i=1;i<lines.length;i++){ const cells = splitCSVLine(lines[i]); const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim()); out.push(row); }
       return out;
     }
     function splitCSVLine(line){
@@ -250,7 +202,6 @@
       }
       cells.push(cur); return cells;
     }
-
     const n = x => { const v = Number(x); return Number.isFinite(v) ? v : null; };
 
     function render(rows){
@@ -260,64 +211,26 @@
         const i = idx+1;
         const h = r.Home || ''; const a = r.Away || '';
         const hp = n(r.xHome); const ap = n(r.xAway);
-        const xSpr = n(r.xSpread); const xTot = n(r.xTotal);
-        const edgeSpr = n(r['Spread Edge']); const edgeTot = n(r['Total Edge']);
-        const vSpr = n(r['Vegas_Spread']); const vTot = n(r['Vegas_Total']);
-        const hlogo = r['Home Logo'] || r.HomeLogo; const alogo = r['Away Logo'] || r.AwayLogo;
+        const spr = n(r.xSpread); const tot = n(r.xTotal);
+        const hlogo = r['Home Logo'] || r.HomeLogo;
+        const alogo = r['Away Logo'] || r.AwayLogo;
 
-        // Model side from xSpread: >0 favors Away, <0 favors Home (A-H convention)
-        const modelFav = (xSpr==null || xSpr===0) ? 'none' : (xSpr > 0 ? 'away' : 'home');
-
-        // Fade logic: if Spread Edge ≥ 5, fade = opposite of modelFav
-        const isFade = edgeSpr!=null && edgeSpr >= 5 && modelFav !== 'none';
-        const showHomePickDot = !isFade && modelFav==='home';
-        const showAwayPickDot = !isFade && modelFav==='away';
-        const showHomeFadeDot = isFade && modelFav==='away';
-        const showAwayFadeDot = isFade && modelFav==='home';
-
-        const homeDot = showHomePickDot ? `<i class="dot dot--pick" title="Model pick"></i>` :
-                         showHomeFadeDot ? `<i class="dot dot--fade" title="Fade model (opposite pick)"></i>` : '';
-        const awayDot = showAwayPickDot ? `<i class="dot dot--pick" title="Model pick"></i>` :
-                         showAwayFadeDot ? `<i class="dot dot--fade" title="Fade model (opposite pick)"></i>` : '';
-
-        // Projected scores stacked (A on top, H below)
-        const projHTML = `
-          <div class="scores">
-            <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
-            <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
-          </div>`;
-
-        // Spread cell: model number, star if |edge| ≤ 1.5, sublabel with Vegas & Edge
-        const starSpread = edgeSpr!=null && Math.abs(edgeSpr) <= 1.5 ? ' ⭐' : '';
-        const sprTxt = xSpr!=null ? `${xSpr>0?`+${xSpr.toFixed(1)}`:xSpr.toFixed(1)}${starSpread}` : '—';
-        const sprSub = (vSpr!=null || edgeSpr!=null)
-          ? `<small class="subtle">${vSpr!=null?`VG ${vSpr>0?`+${vSpr.toFixed(1)}`:vSpr.toFixed(1)}`:''}${(vSpr!=null && edgeSpr!=null)?' • ':''}${edgeSpr!=null?`Edge ${edgeSpr.toFixed(1)}`:''}</small>`
-          : '';
-
-        // Total cell: model number + arrow (xTotal vs Vegas_Total), star if |edge| ≤ 1.5, sublabel
-        let arrow = '';
-        if (xTot!=null && vTot!=null){
-          if (xTot > vTot) arrow = ' ⬆️';
-          else if (xTot < vTot) arrow = ' ⬇️';
-        }
-        const starTotal = edgeTot!=null && Math.abs(edgeTot) <= 1.5 ? ' ⭐' : '';
-        const totTxt = xTot!=null ? `${xTot.toFixed(1)}${arrow}${starTotal}` : '—';
-        const totSub = (vTot!=null || edgeTot!=null)
-          ? `<small class="subtle">${vTot!=null?`VG ${vTot.toFixed(1)}`:''}${(vTot!=null && edgeTot!=null)?' • ':''}${edgeTot!=null?`Edge ${edgeTot.toFixed(1)}`:''}</small>`
-          : '';
+        const projHTML = `<div class="scores"><div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div><div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div></div>`;
+        const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
+        const totTxt = tot!=null ? tot.toFixed(1) : '—';
 
         return `
           <tr>
             <td>${i}</td>
             <td>
               <div class="teams">
-                <div class="team"><img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}${awayDot}</span></div>
-                <div class="team"><img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}${homeDot}</span></div>
+                <div class="team"><img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}</span></div>
+                <div class="team"><img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}</span></div>
               </div>
             </td>
             <td>${projHTML}</td>
-            <td>${sprTxt}${sprSub}</td>
-            <td>${totTxt}${totSub}</td>
+            <td>${sprTxt}</td>
+            <td>${totTxt}</td>
           </tr>`;
       }).join('');
     }
