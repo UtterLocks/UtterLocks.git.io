@@ -40,14 +40,14 @@
     #file{ display:none }
 
     .table-wrap{ width:100%; overflow-x:auto; -webkit-overflow-scrolling: touch; }
-    table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: fixed; min-width: 560px; }
+    table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: auto; min-width: 560px; }
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
     tbody tr:hover{ background: rgba(255,255,255,.04); }
     .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
-    .team span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .team span{ display:block; overflow:visible; text-overflow:clip; white-space:normal; word-break:keep-all; line-height:1.2; }
     .muted{ color:var(--muted) }
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
     .num{ white-space:nowrap; }
@@ -65,12 +65,29 @@
       .subtitle{ font-size:12px; }
       th, td{ padding:8px 6px; font-size:13px; }
       .team img{ height:20px; width:20px; flex-basis:20px; }
+      .team span{ font-size:13px; }
+      table{ min-width: 520px; }
+    }
+      .title{ font-size:22px; }
+      .subtitle{ font-size:12px; }
+      th, td{ padding:8px 6px; font-size:13px; }
+      .team img{ height:20px; width:20px; flex-basis:20px; }
       table{ min-width: 520px; }
     }
 
     @media (max-width: 520px){
       /* Save space: hide the # column on very small screens */
       th:first-child, td:first-child{ display:none; }
+      .title{ font-size:20px; }
+      th, td{ font-size:12px; }
+      .team img{ height:18px; width:18px; flex-basis:18px; }
+      .team span{ font-size:12px; }
+      /* give Teams more room, squeeze numbers a bit */
+      col.col-proj{ width: 110px; }
+      col.col-spr{ width: 100px; }
+      col.col-tot{ width: 86px; }
+      table{ min-width: 460px; }
+    }
       .title{ font-size:20px; }
       th, td{ font-size:12px; }
       .team img{ height:18px; width:18px; flex-basis:18px; }
