@@ -24,6 +24,8 @@
       --pickGlowPulse: 0 0 0 4px rgba(255, 77, 77, 1),
                        0 0 26px rgba(255, 77, 77, .95),
                        0 0 56px rgba(255, 77, 77, .75);
+      /* tight edge dot color */
+      --tight:#F3C97A;
     }
     @media (prefers-color-scheme: light){
       :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7,12,34,.10); }
@@ -83,18 +85,15 @@
     @media (prefers-reduced-motion: reduce){ .team.pick img{ animation: none; } }
 
     /* Scores stack (desktop centered) */
-    .scores{ display: grid; grid-auto-rows: min-content; gap: 6px; justify-items: center; align-content: center; text-align: center; }
+    .scores{
+      display: grid; grid-auto-rows: min-content; gap: 6px;
+      justify-items: center; align-content: center; text-align: center;
+    }
     .score{ line-height: 1.2; font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 
     .muted{ color:var(--muted) }
+    .icon{ margin-left:6px; font-size:13px; opacity:.95; }
     .num{ white-space:nowrap; }
-
-    /* ----- Set A helpers ----- */
-    .tight{ text-decoration: underline dotted rgba(234,240,255,.66); text-underline-offset: 2px; }
-    .underline-sample{ text-decoration: underline dotted rgba(234,240,255,.66); text-underline-offset: 2px; }
-    .chev{ font-size:12px; opacity:.8; margin-left:6px; }
-    .chev-up{ color: var(--brand); }
-    .chev-down{ color: #f3c97a; }
 
     /* Column sizing via colgroup */
     col.col-idx{ width:56px; }
@@ -108,9 +107,21 @@
       display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center;
       color:var(--muted); font-size:12px; padding:6px 2px 0;
     }
-    .legend .dot{ display:inline-block; width:14px; height:14px; border-radius:4px; vertical-align:middle; margin-right:6px;
+    .legend .dot-glow{ display:inline-block; width:14px; height:14px; border-radius:4px; vertical-align:middle; margin-right:6px;
       box-shadow: var(--pickGlow); background:#fff; }
+    .legend .tight-dot{
+      display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--tight);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.15), 0 0 8px rgba(243,201,122,.55);
+      margin: 0 4px 0 2px; vertical-align:middle;
+    }
     .legend span{ display:inline-flex; align-items:center; gap:6px; }
+
+    /* Tight edge dot used inline after numbers */
+    .tight-dot{
+      display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--tight);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.15), 0 0 8px rgba(243,201,122,.55);
+      margin-left:6px; vertical-align:middle;
+    }
 
     @media (max-width: 780px){
       body{ padding:20px; } .title{ font-size:22px; } .subtitle{ font-size:12px; }
@@ -120,9 +131,11 @@
     }
 
     @media (max-width: 560px){
+      /* Mobile: stacked scores, right aligned */
       .scores{ gap:2px; justify-items:end; text-align:right; }
       .scores .score{ font-size:12px; line-height:1.1; }
 
+      /* Make Teams column wider on mobile */
       .table-wrap table{ table-layout: fixed; }
       col.col-teams{ width:52%; }
       col.col-proj{  width:100px; }
@@ -182,10 +195,10 @@
     <section class="panel">
       <!-- Legend -->
       <div class="legend" aria-label="Legend">
-        <span><span class="dot" aria-hidden="true"></span>Spread Pick (logo glow)</span>
-        <span><span class="underline-sample">-6.5</span> Tight Edge ≤ 3</span>
-        <span>▲ Total Bet: Over</span>
-        <span>▼ Total Bet: Under</span>
+        <span><span class="dot-glow" aria-hidden="true"></span>Spread Pick (logo glow)</span>
+        <span><span class="tight-dot" aria-hidden="true"></span>Tight Edge ≤ 3</span>
+        <span>⬆️ Total Bet: Over</span>
+        <span>⬇️ Total Bet: Under</span>
       </div>
 
       <div class="table-wrap">
@@ -308,19 +321,23 @@
             <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
           </div>`;
 
-        // Spread with dotted underline when edge is tight (≤ 3)
-        let sprVal = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : null;
-        const sprTxt = sprVal!=null
-          ? (sprEdge!=null && Math.abs(sprEdge) <= 3
-              ? `<span class="tight" title="Tight edge ≤ 3">${sprVal}</span>`
-              : sprVal)
+        // Tight edge dot helper
+        const tightDot = `<span class="tight-dot" aria-label="Tight edge ≤ 3" title="Tight edge ≤ 3"></span>`;
+
+        // Spread text (add dot if |edge| ≤ 3)
+        const spreadIsTight = sprEdge!=null && Math.abs(sprEdge) <= 3;
+        const sprTxt = spr!=null
+          ? `${spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)}${spreadIsTight ? tightDot : ''}`
           : '—';
 
-        // Total with chevrons (▲ Over / ▼ Under) and optional tight underline if you want later
-        let totMark = '';
-        if(totBet === 'over')   totMark = `<span class="chev chev-up" title="Total bet: Over">▲</span>`;
-        else if(totBet === 'under') totMark = `<span class="chev chev-down" title="Total bet: Under">▼</span>`;
-        const totTxt = tot!=null ? `${tot.toFixed(1)} ${totMark}`.trim() : '—';
+        // Total text with arrow + optional dot (dot right after number)
+        let arrow = '';
+        if(totBet === 'over') arrow = ` <span class="icon" title="Total bet: Over">⬆️</span>`;
+        else if(totBet === 'under') arrow = ` <span class="icon" title="Total bet: Under">⬇️</span>`;
+        const totalIsTight = totEdge!=null && Math.abs(totEdge) <= 3;
+        const totTxt = tot!=null
+          ? `${tot.toFixed(1)}${totalIsTight ? tightDot : ''}${arrow}`
+          : '—';
 
         return `
           <tr>
