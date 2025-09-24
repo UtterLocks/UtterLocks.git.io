@@ -40,19 +40,18 @@
     #file{ display:none }
 
     .table-wrap{ width:100%; overflow-x:auto; -webkit-overflow-scrolling: touch; }
-    table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: auto; min-width: 560px; }
+    table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: auto; min-width: 520px; }
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
     tbody tr:hover{ background: rgba(255,255,255,.04); }
 
+    /* Teams column with inline points */
     .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
-    .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
-    .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
-    .team span{ display:block; overflow:visible; text-overflow:clip; white-space:normal; word-break:keep-all; line-height:1.2; }
-
-    /* NEW: stacked scores to mirror stacked team names (Away on top, Home below) */
-    .scores{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:right; }
-    .score{ line-height:1.2; }
+    .team-line{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .team-left{ display:flex; align-items:center; gap:8px; min-width:0; }
+    .team-left img{ height:22px; width:22px; object-fit:contain; border-radius:4px; background:#fff; flex:0 0 22px; }
+    .team-left span{ display:block; overflow:visible; text-overflow:clip; white-space:normal; word-break:keep-all; line-height:1.2; }
+    .pts{ margin-left:8px; font-variant-numeric: tabular-nums; }
 
     .muted{ color:var(--muted) }
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
@@ -61,8 +60,7 @@
     /* Column sizing via colgroup */
     col.col-idx{ width: 56px; }
     col.col-teams{ width: auto; }
-    col.col-proj{ width: 120px; }
-    col.col-spr{ width: 120px; }
+    col.col-spr{ width: 130px; }
     col.col-tot{ width: 96px; }
 
     @media (max-width: 780px){
@@ -70,9 +68,10 @@
       .title{ font-size:22px; }
       .subtitle{ font-size:12px; }
       th, td{ padding:8px 6px; font-size:13px; }
-      .team img{ height:20px; width:20px; flex-basis:20px; }
-      .team span{ font-size:13px; }
-      table{ min-width: 520px; }
+      .team-left img{ height:20px; width:20px; }
+      .team-left span{ font-size:13px; }
+      .pts{ font-size:13px; }
+      table{ min-width: 500px; }
     }
 
     @media (max-width: 520px){
@@ -80,13 +79,11 @@
       th:first-child, td:first-child{ display:none; }
       .title{ font-size:20px; }
       th, td{ font-size:12px; }
-      .team img{ height:18px; width:18px; flex-basis:18px; }
-      .team span{ font-size:12px; }
-      /* give Teams more room, squeeze numbers a bit */
-      col.col-proj{ width: 110px; }
-      col.col-spr{ width: 100px; }
+      .team-left img{ height:18px; width:18px; }
+      .team-left span, .pts{ font-size:12px; }
+      col.col-spr{ width: 110px; }
       col.col-tot{ width: 86px; }
-      table{ min-width: 460px; }
+      table{ min-width: 440px; }
     }
 
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
@@ -118,7 +115,6 @@
           <colgroup>
             <col class="col-idx">
             <col class="col-teams">
-            <col class="col-proj">
             <col class="col-spr">
             <col class="col-tot">
           </colgroup>
@@ -126,7 +122,6 @@
             <tr>
               <th>#</th>
               <th>Teams</th>
-              <th>Proj (A-H)</th>
               <th>Spread (A-H)</th>
               <th>Total</th>
             </tr>
@@ -175,7 +170,7 @@
         render(rows);
       }catch(err){
         console.error(err);
-        $body.innerHTML = `<tr><td colspan="5" class="muted">Could not fetch CSV. ${err.message}.<br>Make sure the file exists at <code>${REPO_CSV}</code> in your published branch/folder.</td></tr>`;
+        $body.innerHTML = `<tr><td colspan="4" class="muted">Could not fetch CSV. ${err.message}.<br>Make sure the file exists at <code>${REPO_CSV}</code> in your published branch/folder.</td></tr>`;
       }
     }
 
@@ -206,7 +201,7 @@
     function n(x){ const v = Number(x); return Number.isFinite(v) ? v : null; }
 
     function render(rows){
-      if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
+      if(!rows?.length){ $body.innerHTML = '<tr><td colspan="4" class="muted">No rows</td></tr>'; return; }
 
       // keep original order if '#' provided; otherwise sort by Total desc
       const hasIndex = rows[0] && ('#' in rows[0]);
@@ -219,13 +214,8 @@
         const spr = n(r.Spread); const tot = n(r.Total);
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
 
-        // Stacked projected scores: Away on top, Home below (mirrors .teams)
-        const projHTML = `
-          <div class="scores">
-            <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
-            <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
-          </div>`;
-
+        const apTxt = ap!=null ? ap.toFixed(1) : '—';
+        const hpTxt = hp!=null ? hp.toFixed(1) : '—';
         const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
         const totTxt = tot!=null ? tot.toFixed(1) : '—';
 
@@ -234,11 +224,16 @@
             <td class="num">${i}</td>
             <td>
               <div class="teams">
-                <div class="team"><img src="${alogo}" alt="${a}"><span>${a}</span></div>
-                <div class="team"><img src="${hlogo}" alt="${h}"><span>${h}</span></div>
+                <div class="team-line">
+                  <div class="team-left"><img src="${alogo}" alt="${a}"><span>${a}</span></div>
+                  <div class="pts">${apTxt}</div>
+                </div>
+                <div class="team-line">
+                  <div class="team-left"><img src="${hlogo}" alt="${h}"><span>${h}</span></div>
+                  <div class="pts">${hpTxt}</div>
+                </div>
               </div>
             </td>
-            <td>${projHTML}</td>
             <td>${sprTxt}</td>
             <td>${totTxt}</td>
           </tr>`;
