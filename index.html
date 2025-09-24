@@ -1,208 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Utter Locks</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
-    <style>
-        /* General styling */
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh; /* Use min-height to allow content to expand */
-            margin: 0;
-            color: #000000;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Utter Locks</title>
+  <meta name="description" content="Utter Locks — betting picks hub" />
+  <style>
+    :root{
+      --bg: #0b1020; /* deep navy */
+      --bg2:#0f1730; /* slightly lighter */
+      --card:#111a36;
+      --text:#eaf0ff;
+      --muted:#a8b3d0;
+      --brand:#7bdcff; /* accent */
+      --accent:#78ffa6; /* success accent */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877;
+        --shadow: 0 10px 24px rgba(7, 12, 34, .10);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent),
+                  radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent),
+                  var(--bg);
+      display:flex; align-items:center; justify-content:center;
+      padding:32px;
+    }
+    .shell{max-width:980px; width:100%}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      margin-bottom:28px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      padding:14px 18px; border-radius:calc(var(--radius) + 6px);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+    }
+    .logo{font-size:26px; line-height:1}
+    .title{margin:0; font-size:28px; letter-spacing:.4px}
+    .subtitle{color:var(--muted); font-size:14px; margin:2px 0 0}
 
-        header {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            text-align: center;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: sticky; /* Keep it at the top during scrolling */
-            top: 0;
-            z-index: 20; /* Ensure header is above the profits tab */
-        }
+    main{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:22px; backdrop-filter: blur(8px);
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 24px;
-            font-family: 'Fjalla One', sans-serif;
-        }
+    nav{ display:grid; grid-template-columns: repeat(5, 1fr); gap:14px; }
+    @media (max-width: 860px){ nav{ grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px){ nav{ grid-template-columns: repeat(2, 1fr); } }
 
-        .nav-buttons {
-            margin: 5px;
-        }
+    .btn{
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      padding:18px 16px; border-radius:16px; text-decoration:none; font-weight:700; letter-spacing:.3px;
+      color:var(--text); background:var(--card); border:1px solid rgba(255,255,255,.08);
+      position:relative; overflow:hidden; transition:.18s transform ease, .18s box-shadow ease, .18s filter ease;
+      box-shadow: 0 2px 0 rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .btn span{opacity:.9}
+    .btn:focus-visible{ outline: 3px solid var(--brand); outline-offset: 2px; }
+    .btn:hover{ transform: translateY(-1px); filter:brightness(1.05); }
+    .btn:active{ transform: translateY(0); filter:brightness(0.98); }
 
-        .nav-buttons button {
-            padding: 5px 10px;
-            margin: 3px;
-            border: 1px solid #007bff;
-            background-color: transparent;
-            color: #007bff;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-family: 'Fjalla One', sans-serif;
-        }
+    /* subtle per-sport accents */
+    .btn[data-sport="NFL"]{ background:
+      linear-gradient(180deg, rgba(123,220,255,.12), rgba(123,220,255,.02)), var(--card);
+    }
+    .btn[data-sport="CFB"]{ background:
+      linear-gradient(180deg, rgba(120,255,166,.12), rgba(120,255,166,.02)), var(--card);
+    }
+    .btn[data-sport="CBB"]{ background:
+      linear-gradient(180deg, rgba(255,220,123,.12), rgba(255,220,123,.02)), var(--card);
+    }
+    .btn[data-sport="WNBA"]{ background:
+      linear-gradient(180deg, rgba(255,163,97,.14), rgba(255,163,97,.03)), var(--card);
+    }
+    .btn[data-sport="NBA"]{ background:
+      linear-gradient(180deg, rgba(173,134,255,.14), rgba(173,134,255,.03)), var(--card);
+    }
 
-        .nav-buttons button:hover {
-            background-color: #007bff;
-            color: white;
-        }
+    .btn .arrow{ font-size:18px; opacity:.55; transform: translateX(0); transition:.18s transform ease, .18s opacity ease; }
+    .btn:hover .arrow{ transform: translateX(2px); opacity:.9; }
 
-        .table-container {
-            display: none;
-            text-align: center;
-            margin-top: 10px;
-            width: 80%; /* Keep the 80% width for other tables */
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%; /* Make tables inside .table-container take full width */
-            margin: 20px auto;
-            background-color: white;
-            color: #000000;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: center;
-            font-family: 'Fjalla One', sans-serif;
-        }
-
-        th {
-            background-color: rgba(255, 255, 255, 0.8);
-            z-index: 2;
-        }
-
-        img {
-            width: 50px;
-            height: auto;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .team-name {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        /* Style for the profits container when visible */
-        #profits-container {
-            position: fixed; /* Take it out of the normal flow */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white; /* Optional: Add a background color */
-            z-index: 10; /* Keep it below the header */
-            display: none; /* Initially hidden */
-            display: flex; /* Enable Flexbox for centering the iframe */
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center horizontally */
-            justify-content: center; /* Center vertically */
-            padding-top: 60px; /* Add some top padding to lower the content */
-            box-sizing: border-box; /* Include padding in width and height */
-        }
-
-        #profits-container iframe {
-            width: 80%; /* Adjust as needed for the iframe's size within the full screen */
-            height: 80%; /* Adjust as needed for the iframe's size within the full screen */
-            border: none; /* Remove the border for a cleaner look */
-        }
-    </style>
-    <script>
-        function fetchAndGenerateTable(url, containerId, columns) {
-            fetch(url)
-                .then(response => response.text())
-                .then(csvData => generateTable(csvData, containerId, columns))
-                .catch(error => console.error('Error fetching CSV:', error));
-        }
-
-        function generateTable(csvData, containerId, columns) {
-            const rows = csvData.split('\n').filter(row => row.trim() !== '');
-            let tableHTML = '<table><thead><tr>';
-            columns.forEach(col => tableHTML += `<th>${col}</th>`);
-            tableHTML += '</tr></thead><tbody>';
-
-            for (let i = 0; i < rows.length; i++) {
-                const cols = rows[i].split(',');
-                tableHTML += '<tr>';
-
-                if (containerId === 'table1' || containerId === 'table3') {
-                    tableHTML += `<td><img src="${cols[2]}" alt="Home Logo"><div class="team-name">${cols[0]}</div></td>`;
-                    tableHTML += `<td><img src="${cols[3]}" alt="Away Logo"><div class="team-name">${cols[1]}</div></td>`;
-                    tableHTML += `<td>${cols[4]}</td>`;
-                    tableHTML += `<td>${cols[5]}</td>`;
-                } else if (containerId === 'table2') {
-                    tableHTML += `<td><img src="${cols[0].trim()}" alt="Team Logo"><div class="team-name">${cols[1].trim()}</div></td>`;
-                    tableHTML += `<td>${cols[2].trim()}</td>`;
-                } else if (containerId === 'table4') {
-                    tableHTML += `<td>${cols[0]}</td>`;
-                    tableHTML += `<td>${cols[1]}</td>`;
-                    tableHTML += `<td><img src="${cols[2]}" alt="${cols[1]} Logo"></td>`;
-                }
-                // No 'table5' logic needed here
-
-                tableHTML += '</tr>';
-            }
-            tableHTML += '</tbody></table>';
-            document.getElementById(containerId).innerHTML = tableHTML;
-        }
-
-        function showTable(tableId) {
-            document.querySelectorAll('.table-container, #profits-container').forEach(element => {
-                element.style.display = 'none'; // Hide all initially
-            });
-
-            if (tableId === 'table5') {
-                document.getElementById('profits-container').style.display = 'block';
-            } else {
-                document.getElementById(tableId).style.display = 'block';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/WNBA%20TESTER%202023-2024%20Season%20-%20Logo%20%26%20Retrieval.csv', 'table1', ['Home', 'Away', 'Spread', 'Total']);
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/NFL_ELO', 'table2', ['Team', 'ELO']);
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Sheet81.csv', 'table3', ['Home', 'Away', 'Spread', 'Total']);
-            fetchAndGenerateTable('https://raw.githubusercontent.com/UtterLocks/UtterLocks.git.io/main/Logo%20Retrieval%20and%20SQ24%20-%20Copy%20of%20Sheet80.csv', 'table4', ['Rank', 'Team', 'Logo']);
-
-            // Initially hide all containers
-            document.querySelectorAll('.table-container, #profits-container').forEach(element => {
-                element.style.display = 'none';
-            });
-        });
-    </script>
+    footer{ display:flex; justify-content:center; margin-top:18px; color:var(--muted); font-size:12px; }
+    footer a{ color:var(--brand); text-decoration: none; }
+    footer a:hover{ text-decoration: underline; }
+  </style>
 </head>
 <body>
+  <div class="shell">
     <header>
-        <h1>Utter Locks</h1>
-        <div class="nav-buttons">
-            <button onclick="showTable('table1')">NFL</button>
-            <button onclick="showTable('table2')">NFL ELO</button>
-            <button onclick="showTable('table3')">CBB</button>
-            <button onclick="showTable('table4')">Rankings</button>
-            <button onclick="showTable('table5')">Profits</button>
+      <div class="brand" aria-label="Utter Locks brand">
+        <div class="logo" aria-hidden="true">🐄</div>
+        <div>
+          <h1 class="title">Utter Locks</h1>
+          <p class="subtitle">Data‑driven betting picks</p>
         </div>
+      </div>
     </header>
 
     <main>
-        <div id="table1" class="table-container"></div>
-        <div id="table2" class="table-container"></div>
-        <div id="table3" class="table-container"></div>
-        <div id="table4" class="table-container"></div>
-        <div id="profits-container">
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGd5lae1otlwZPDg7rAvx2Zkar-bFPaKiFBe9UprsZIaO1jStq7AB539tu-jSQuCQfq3XcpgGErXF/pubhtml?gid=0&single=true" frameborder="0"></iframe>
-        </div>
+      <nav aria-label="Sections">
+        <a class="btn" data-sport="NFL" href="nfl.html"><span>NFL</span> <span class="arrow">→</span></a>
+        <a class="btn" data-sport="CFB" href="cfb.html"><span>CFB</span> <span class="arrow">→</span></a>
+        <a class="btn" data-sport="CBB" href="cbb.html"><span>CBB</span> <span class="arrow">→</span></a>
+        <a class="btn" data-sport="WNBA" href="wnba.html"><span>WNBA</span> <span class="arrow">→</span></a>
+        <a class="btn" data-sport="NBA" href="nba.html"><span>NBA</span> <span class="arrow">→</span></a>
+      </nav>
     </main>
+
+    <footer>
+      <div>© <span id="year"></span> Utter Locks • Advice/analysis only</div>
+    </footer>
+  </div>
+
+  <script>
+    // Auto year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
