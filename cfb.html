@@ -94,33 +94,6 @@
       table{ min-width: 520px; }
     }
 
-    /* --- Mobile tweaks: Proj inline & no wrapping --- */
-    @media (max-width: 560px){
-      .scores{
-        display:flex;
-        gap:4px;
-        justify-content:flex-end;
-        align-items:center;
-        flex-wrap:nowrap;    /* keep single line */
-        white-space:nowrap;  /* keep whole pair together */
-        text-align:right;
-      }
-      .scores .score{
-        font-size:12px;
-        line-height:1.05;
-        white-space:nowrap;  /* each number stays unwrapped */
-      }
-      .scores .score:first-child::after{
-        content:"·";
-        margin:0 4px;
-        opacity:.7;
-      }
-
-      /* ensure Proj column has enough width to avoid wrapping */
-      td:nth-child(3){ min-width:118px; }
-      col.col-proj{ width:118px; }
-    }
-
     @media (max-width: 520px){
       th:first-child, td:first-child{ display:none; }
       .title{ font-size:20px; } th, td{ font-size:12px; }
@@ -131,8 +104,25 @@
     }
 
     @media (max-width: 420px){
-      col.col-proj{ width: 122px; } /* tiny bump for very narrow devices */
-      td:nth-child(3){ min-width:122px; }
+      col.col-proj{ width: 96px; } col.col-spr{  width: 90px; } col.col-tot{  width: 78px; }
+    }
+
+    /* OVERRIDE: Mobile = stacked scores (no dot), right-aligned */
+    @media (max-width: 560px){
+      .scores{
+        display:grid;            /* stack again */
+        grid-auto-rows:min-content;
+        gap:2px;
+        justify-items:end;       /* right align for readability */
+        align-content:center;
+        text-align:right;
+        white-space:normal;      /* allow stacking */
+      }
+      .scores .score{
+        font-size:12px;
+        line-height:1.1;
+      }
+      .scores .score:first-child::after{ content:none !important; }
     }
 
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
@@ -263,7 +253,7 @@
         const spr = n(r.Spread); const tot = n(r.Total);
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
 
-        // Proj: stacked (desktop), inline "A · H" on mobile via CSS above
+        // Proj: stacked (desktop) and stacked on mobile (override above)
         const projHTML = `
           <div class="scores">
             <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
