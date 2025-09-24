@@ -48,6 +48,11 @@
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
     .team span{ display:block; white-space:normal; line-height:1.2; }
+
+    /* NEW: stacked scores to mirror stacked team names (Away on top, Home below) */
+    .scores{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:right; }
+    .score{ line-height:1.2; }
+
     .muted{ color:var(--muted) }
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
 
@@ -118,8 +123,8 @@
             <tr>
               <th>#</th>
               <th>Teams</th>
-              <th>Proj (H‑A)</th>
-              <th>Spread (A‑H)</th>
+              <th>Proj (A-H)</th>
+              <th>Spread (A-H)</th>
               <th>Total</th>
             </tr>
           </thead>
@@ -205,7 +210,14 @@
         const spr = n(r.xSpread); const tot = n(r.xTotal);
         const hlogo = r['Home Logo'] || r.HomeLogo; // support either label
         const alogo = r['Away Logo'] || r.AwayLogo;
-        const proj = (hp!=null && ap!=null) ? `${hp.toFixed(1)} – ${ap.toFixed(1)}` : '—';
+
+        // Stacked projected scores: Away on top, Home below (mirrors .teams)
+        const projHTML = `
+          <div class="scores">
+            <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
+            <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
+          </div>`;
+
         const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
         const totTxt = tot!=null ? tot.toFixed(1) : '—';
         return `
@@ -217,7 +229,7 @@
                 <div class="team"><img src="${hlogo}" alt="${h}"><span>${h}</span></div>
               </div>
             </td>
-            <td>${proj}</td>
+            <td>${projHTML}</td>
             <td>${sprTxt}</td>
             <td>${totTxt}</td>
           </tr>`;
