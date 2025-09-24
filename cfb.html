@@ -302,7 +302,13 @@
         const i = r['#'] || (idx+1);
         const h = r.Home || ''; const a = r.Away || '';
         const hp = n(r.Home_Proj); const ap = n(r.Away_Proj);
-        const spr = n(r.Spread); const tot = n(r.Total);
+
+        /* Spread: use model xSpread */
+        const xSpr = n(r.xSpread);
+
+        /* Total: now use model xTotal */
+        const xTot = n(r.xTotal);
+
         const sprEdge = n(r['Spread Edge']);
         const totEdge = n(r['Total Edge']);
         const sprBet = r['Spread Bet'] || '';          // full team name string
@@ -324,19 +330,19 @@
         // Tight edge dot helper
         const tightDot = `<span class="tight-dot" aria-label="Tight edge ≤ 3" title="Tight edge ≤ 3"></span>`;
 
-        // Spread text (add dot if |edge| ≤ 3)
+        // Spread text (xSpread) + tight dot
         const spreadIsTight = sprEdge!=null && Math.abs(sprEdge) <= 3;
-        const sprTxt = spr!=null
-          ? `${spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)}${spreadIsTight ? tightDot : ''}`
+        const sprTxt = xSpr!=null
+          ? `${xSpr>0?`+${xSpr.toFixed(1)}`:xSpr.toFixed(1)}${spreadIsTight ? tightDot : ''}`
           : '—';
 
-        // Total text with chevron + optional dot
+        // Total text (xTotal) with chevron + optional dot
         let chev = '';
         if(totBet === 'over') chev = ` <span class="chev" title="Total: Over">▲</span>`;
         else if(totBet === 'under') chev = ` <span class="chev" title="Total: Under">▼</span>`;
         const totalIsTight = totEdge!=null && Math.abs(totEdge) <= 3;
-        const totTxt = tot!=null
-          ? `${tot.toFixed(1)}${totalIsTight ? tightDot : ''}${chev}`
+        const totTxt = xTot!=null
+          ? `${xTot.toFixed(1)}${totalIsTight ? tightDot : ''}${chev}`
           : '—';
 
         return `
