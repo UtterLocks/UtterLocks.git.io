@@ -57,7 +57,7 @@
       padding:22px; backdrop-filter: blur(8px);
     }
 
-    nav{ display:grid; grid-template-columns: repeat(5, 1fr); gap:14px; }
+    nav{ display:grid; grid-template-columns: repeat(6, 1fr); gap:14px; }
     @media (max-width: 860px){ nav{ grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 560px){ nav{ grid-template-columns: repeat(2, 1fr); } }
 
@@ -89,6 +89,9 @@
     .btn[data-sport="NBA"]{ background:
       linear-gradient(180deg, rgba(173,134,255,.14), rgba(173,134,255,.03)), var(--card);
     }
+    .btn[data-sport="Tracking"]{ background:
+      linear-gradient(180deg, rgba(255,97,153,.14), rgba(255,97,153,.03)), var(--card);
+    }
 
     .btn .arrow{ font-size:18px; opacity:.55; transform: translateX(0); transition:.18s transform ease, .18s opacity ease; }
     .btn:hover .arrow{ transform: translateX(2px); opacity:.9; }
@@ -117,6 +120,7 @@
         <a class="btn" data-sport="CBB" href="cbb.html"><span>CBB</span> <span class="arrow">→</span></a>
         <a class="btn" data-sport="WNBA" href="wnba.html"><span>WNBA</span> <span class="arrow">→</span></a>
         <a class="btn" data-sport="NBA" href="nba.html"><span>NBA</span> <span class="arrow">→</span></a>
+        <a class="btn" data-sport="Tracking" href="tracking.html"><span>Tracking</span> <span class="arrow">→</span></a>
       </nav>
     </main>
 
