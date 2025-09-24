@@ -110,6 +110,14 @@
       border:1px solid rgba(255,77,77,.5); color:#ffd9d9; background:rgba(255,77,77,.12); margin-left:8px; white-space:nowrap;
     }
 
+    /* Legend (compact, matches indicators) */
+    .legend{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; color:var(--muted); font-size:12px; padding:6px 2px 0; }
+    .legend span{ display:inline-flex; align-items:center; gap:6px; }
+    .legend .glow-demo{
+      display:inline-block; width:14px; height:14px; border-radius:4px; background:#fff;
+      box-shadow: var(--pickGlow);
+    }
+
     /* Mobile tweaks */
     @media (max-width: 780px){
       body{ padding:20px; } .title{ font-size:22px; } .subtitle{ font-size:12px; }
@@ -127,6 +135,7 @@
       col.col-tot{   width:84px; }
       th:nth-child(2), td:nth-child(2){ width:auto; }
       .team span{ white-space:normal; }
+      .legend{ font-size:11px; }
     }
     @media (max-width: 520px){
       th:first-child, td:first-child{ display:none; }
@@ -166,6 +175,15 @@
     </header>
 
     <section class="panel">
+      <!-- Compact Legend -->
+      <div class="legend" aria-label="Legend">
+        <span><span class="glow-demo" aria-hidden="true"></span> Spread Pick (logo glow)</span>
+        <span><span class="tight-dot" aria-hidden="true"></span> Tight Edge ≤ 1.5</span>
+        <span><span class="chev" aria-hidden="true">▲</span> Total: Over</span>
+        <span><span class="chev" aria-hidden="true">▼</span> Total: Under</span>
+        <span><span class="pill" aria-hidden="true">FADE</span> |Spread Edge| ≥ 5</span>
+      </div>
+
       <div class="table-wrap">
         <table id="tbl">
           <colgroup>
