@@ -44,12 +44,13 @@
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
     tbody tr:hover{ background: rgba(255,255,255,.04); }
+
     .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
     .team span{ display:block; white-space:normal; line-height:1.2; }
 
-    /* NEW: stacked scores to mirror stacked team names (Away on top, Home below) */
+    /* Stacked scores to mirror stacked team names (Away on top, Home below) */
     .scores{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:right; }
     .score{ line-height:1.2; }
 
@@ -84,6 +85,16 @@
       col.col-spr{ width: 100px; }
       col.col-tot{ width: 86px; }
       table{ min-width: 460px; }
+    }
+
+    /* === Desktop narrow Teams column === */
+    @media (min-width: 1000px){
+      table{ table-layout: fixed; } /* make colgroup widths stick */
+      col.col-idx{  width: 64px; }
+      col.col-teams{ width: 32%; }  /* tweak 28–36% to taste */
+      col.col-proj{ width: 150px; } /* a touch wider for stacked scores */
+      col.col-spr{  width: 130px; }
+      col.col-tot{  width: 110px; }
     }
 
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
@@ -163,9 +174,9 @@
     async function loadFromRepo(){
       try{
         const bust = Date.now();
-        const url = REPO_CSV + (REPO_CSV.includes('?') ? `&v=${bust}` : `?v=${bust}`);
-        const res = await fetch(url);
-        if(!res.ok){ throw new Error(`HTTP ${res.status} at ${url}`); }
+        theUrl = REPO_CSV + (REPO_CSV.includes('?') ? `&v=${bust}` : `?v=${bust}`);
+        const res = await fetch(theUrl);
+        if(!res.ok){ throw new Error(`HTTP ${res.status} at ${theUrl}`); }
         const text = await res.text();
         const rows = parseCSV(text);
         render(rows);
@@ -208,7 +219,7 @@
         const h = r.Home || ''; const a = r.Away || '';
         const hp = n(r.xHome); const ap = n(r.xAway);
         const spr = n(r.xSpread); const tot = n(r.xTotal);
-        const hlogo = r['Home Logo'] || r.HomeLogo; // support either label
+        const hlogo = r['Home Logo'] || r.HomeLogo;
         const alogo = r['Away Logo'] || r.AwayLogo;
 
         // Stacked projected scores: Away on top, Home below (mirrors .teams)
@@ -220,6 +231,7 @@
 
         const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
         const totTxt = tot!=null ? tot.toFixed(1) : '—';
+
         return `
           <tr>
             <td>${i}</td>
