@@ -61,40 +61,20 @@
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
     .team span{ display:block; white-space:nowrap; line-height:1.2; }
 
-    /* Scores stack */
-  /* Center the stacked projected scores */
-.scores{
-  display: grid;
-  grid-auto-rows: min-content;
-  gap: 6px;
-  justify-items: center;   /* <-- center horizontally */
-  align-content: center;   /* nice vertical centering inside the cell */
-  text-align: center;      /* numbers centered */
-}
-.score{
-  line-height: 1.2;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-}
-/* Mobile: make Proj compact so it doesn't feel crowded */
-@media (max-width: 560px){
-  .scores{
-    justify-items: end;   /* align numbers to the right (more readable in narrow cols) */
-    align-content: center;
-    text-align: right;
-    gap: 2px;             /* tighter stack */
-  }
-  .score{
-    font-size: 12px;      /* slightly smaller type on phones */
-    line-height: 1.1;
-  }
-
-  /* optional: give Proj a touch more room, trim others */
-  col.col-proj{ width: 106px; }
-  col.col-spr{  width: 94px; }
-  col.col-tot{  width: 82px; }
-}
-
+    /* Scores stack (desktop defaults centered) */
+    .scores{
+      display: grid;
+      grid-auto-rows: min-content;
+      gap: 6px;
+      justify-items: center;   /* centered horizontally */
+      align-content: center;   /* vertical centering */
+      text-align: center;
+    }
+    .score{
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+    }
 
     .muted{ color:var(--muted) }
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
@@ -113,16 +93,40 @@
       .team img{ height:20px; width:20px; flex-basis:20px; } .team span{ font-size:13px; }
       table{ min-width: 520px; }
     }
+
+    @media (max-width: 560px){
+      /* Make Proj inline: "A · H" */
+      .scores{
+        display:flex;
+        gap:6px;
+        justify-content:flex-end;
+        align-items:center;
+        text-align:right;
+      }
+      .scores .score{
+        font-size:12px;
+        line-height:1.1;
+      }
+      .scores .score:first-child::after{
+        content:" · ";
+        opacity:.7;
+      }
+
+      /* give Proj a touch more room, trim others */
+      col.col-proj{ width:106px; }
+      col.col-spr{  width:94px; }
+      col.col-tot{  width:82px; }
+    }
+
     @media (max-width: 520px){
       th:first-child, td:first-child{ display:none; }
       .title{ font-size:20px; } th, td{ font-size:12px; }
       .team img{ height:18px; width:18px; flex-basis:18px; }
       .team span{ white-space:normal; font-size:12px; } /* allow wrap on phones */
-      /* give Teams more room, squeeze numbers a bit */
-      col.col-proj{ width:110px; } col.col-spr{ width:100px; } col.col-tot{ width:86px; }
       table{ min-width: 460px; }
       .teams{ display:grid; } /* revert to block grid for small screens */
     }
+
     @media (max-width: 420px){
       col.col-proj{ width: 96px; } col.col-spr{  width: 90px; } col.col-tot{  width: 78px; }
     }
@@ -137,7 +141,7 @@
         <img class="logo-img" src="assets/utter-locks-logo.jpg" alt="Utter Locks logo" width="28" height="28">
         <div>
           <h1 class="title">Utter Locks — CFB</h1>
-          <p class="subtitle">College Football Picks</p>
+        <p class="subtitle">College Football Picks</p>
         </div>
       </div>
       <div class="row">
@@ -255,7 +259,7 @@
         const spr = n(r.Spread); const tot = n(r.Total);
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
 
-        // Stacked projected scores: Away (top), Home (bottom)
+        // Proj: stacked (desktop), inline "A · H" on mobile via CSS above
         const projHTML = `
           <div class="scores">
             <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
