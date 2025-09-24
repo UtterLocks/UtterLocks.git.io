@@ -45,13 +45,20 @@
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
     tbody tr:hover{ background: rgba(255,255,255,.04); }
 
-    /* Teams column with inline points */
-    .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
-    .team-line{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    /* Teams column with inline points (tight spacing) */
+    .teams{ display:grid; grid-template-columns: 1fr; gap:4px; text-align:left; }
+    .team-line{ display:flex; align-items:center; gap:8px; justify-content:flex-start; flex-wrap:wrap; }
     .team-left{ display:flex; align-items:center; gap:8px; min-width:0; }
     .team-left img{ height:22px; width:22px; object-fit:contain; border-radius:4px; background:#fff; flex:0 0 22px; }
-    .team-left span{ display:block; overflow:visible; text-overflow:clip; white-space:normal; word-break:keep-all; line-height:1.2; }
-    .pts{ margin-left:8px; font-variant-numeric: tabular-nums; }
+    .team-left span{ display:block; white-space:normal; line-height:1.2; }
+    .pts{
+      font-variant-numeric: tabular-nums;
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      line-height: 1.2;
+    }
 
     .muted{ color:var(--muted) }
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
@@ -81,6 +88,7 @@
       th, td{ font-size:12px; }
       .team-left img{ height:18px; width:18px; }
       .team-left span, .pts{ font-size:12px; }
+      .pts{ padding:1px 5px; }
       col.col-spr{ width: 110px; }
       col.col-tot{ width: 86px; }
       table{ min-width: 440px; }
