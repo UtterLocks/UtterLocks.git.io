@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Utter Locks — CFB</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; background: #f8f9fa; }
+    h1 { text-align: center; }
+    #upload { margin: 20px auto; display: block; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #222; color: #fff; }
+    img { max-height: 28px; }
+  </style>
+</head>
+<body>
+  <h1>College Football Picks</h1>
+
+  <!-- Upload input -->
+  <input type="file" id="upload" accept=".csv" />
+
+  <!-- Where table will render -->
+  <table id="results"></table>
+
+  <script>
+    document.getElementById('upload').addEventListener('change', handleFile);
+
+    function handleFile(evt) {
+      const file = evt.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = e => {
+        const text = e.target.result;
+        renderTable(parseCSV(text));
+      };
+      reader.readAsText(file);
+    }
+
+    function parseCSV(text) {
+      const [headerLine, ...lines] = text.trim().split(/\\r?\\n/);
+      const headers = headerLine.split(',');
+      return lines.map(line => {
+        const cells = line.split(',');
+        const row = {};
+        headers.forEach((h, i) => row[h.trim()] = cells[i]);
+        return row;
+      });
+    }
+
+    function renderTable(rows) {
+      const table = document.getElementById('results');
+      if (!rows.length) return;
+
+      const headers = Object.keys(rows[0]);
+      table.innerHTML =
+        '<thead><tr>' +
+        headers.map(h => `<th>${h}</th>`).join('') +
+        '</tr></thead><tbody>' +
+        rows.map(r => {
+          return '<tr>' + headers.map(h => {
+            if (h.toLowerCase().includes('logo')) {
+              return `<td><img src=\"${r[h]}\" alt=\"${r[h]}\"/></td>`;
+            }
+            return `<td>${r[h]}</td>`;
+          }).join('') + '</tr>';
+        }).join('') +
+        '</tbody>';
+    }
+  </script>
+</body>
+</html>
