@@ -39,9 +39,10 @@
 
     table{ width:100%; border-collapse: collapse; margin-top:12px; }
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; }
-    th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; }
+    th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
     tbody tr:hover{ background: rgba(255,255,255,.04); }
-    .team{ display:flex; align-items:center; gap:8px; justify-content:flex-start; }
+    .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
+    .team{ display:flex; align-items:center; gap:8px; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; }
     .muted{ color:var(--muted) }
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
@@ -52,7 +53,7 @@
 <body>
   <div class="shell">
     <header>
-      <div class="brand"><div class="logo">🐄</div><div><h1 class="title">Utter Locks — CFB</h1><p class="subtitle">Upload via Git commit; public page auto-loads from /data/cfb.csv</p></div></div>
+      <div class="brand"><div class="logo">🐄</div><div><h1 class="title">Utter Locks — CFB</h1><p class="subtitle">Commit your CSV to <code>/data/cfb.csv</code> • Only repo writers can change it</p></div></div>
       <div class="row">
         <a class="btn" href="index.html">← Home</a>
         <div id="adminBar">
@@ -66,13 +67,13 @@
     <section class="panel">
       <div class="row">
         <div class="muted">Source: <span id="sourceLabel" class="badge">repo</span></div>
-        <div class="muted">Expecting columns: <code>Home, Away, Home_Proj, Away_Proj, Spread, Total, Home_key, Away_key, HomeLogo, AwayLogo</code></div>
+        <div class="muted">Expecting columns: <code>#, Home, Away, Home_Proj, Away_Proj, Spread, Total, HomeLogo, AwayLogo</code></div>
       </div>
       <table id="tbl">
         <thead>
           <tr>
             <th>#</th>
-            <th>Matchup</th>
+            <th>Teams</th>
             <th>Proj (H‑A)</th>
             <th>Spread (A‑H)</th>
             <th>Total</th>
@@ -152,10 +153,12 @@
     function render(rows){
       if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
 
-      // sort by descending Total for a fun default (feel free to change)
-      rows = rows.slice().sort((a,b)=> (n(b.Total)||0) - (n(a.Total)||0));
+      // keep original order if '#' provided; otherwise sort by Total desc
+      const hasIndex = rows[0] && ('#' in rows[0]);
+      if(!hasIndex){ rows = rows.slice().sort((a,b)=> (n(b.Total)||0) - (n(a.Total)||0)); }
 
       $body.innerHTML = rows.map((r,idx)=>{
+        const i = r['#'] || (idx+1);
         const h = r.Home || ''; const a = r.Away || '';
         const hp = n(r.Home_Proj); const ap = n(r.Away_Proj);
         const spr = n(r.Spread); const tot = n(r.Total);
@@ -165,10 +168,12 @@
         const totTxt = tot!=null ? tot.toFixed(1) : '—';
         return `
           <tr>
-            <td>${idx+1}</td>
+            <td>${i}</td>
             <td>
-              <div class="team"><img src="${alogo}" alt="${a}"><span>${a}</span></div>
-              <div class="team" style="margin-top:6px"><img src="${hlogo}" alt="${h}"><span>${h}</span></div>
+              <div class="teams">
+                <div class="team"><img src="${alogo}" alt="${a}"><span>${a}</span></div>
+                <div class="team"><img src="${hlogo}" alt="${h}"><span>${h}</span></div>
+              </div>
             </td>
             <td>${proj}</td>
             <td>${sprTxt}</td>
