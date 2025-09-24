@@ -6,86 +6,52 @@
   <title>Utter Locks — CFB</title>
   <meta name="description" content="College Football picks (Utter Locks)" />
 
-  <!-- Perf: help logo CDN connect faster -->
   <link rel="preconnect" href="https://a.espncdn.com" crossorigin>
-  <!-- Simple brand favicon -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' x='8' font-size='48'%3E🐄%3C/text%3E%3C/svg%3E">
-  <!-- Social share -->
+  <link rel="icon" type="image/jpeg" href="assets/utter-locks-logo.jpg" />
   <meta property="og:title" content="Utter Locks — CFB Projections">
   <meta property="og:description" content="Data-driven projections & picks.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    :root{
-      --bg: #0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --good:#78ffa6;
-      --shadow: 0 10px 30px rgba(0,0,0,.35); --radius:18px;
-    }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow: 0 10px 24px rgba(7, 12, 34, .10); }
-    }
+    :root{ --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --good:#78ffa6; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px; }
+    @media (prefers-color-scheme: light){ :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7,12,34,.10); } }
     *{ box-sizing: border-box }
-    body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
-      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg);
-      padding: 28px;
-    }
+    body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
+      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg); padding: 28px; }
     .shell{ max-width:1100px; margin:0 auto; }
     header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
-    .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
-    .brand .logo{ font-size:24px }
+    .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
+    .logo-img{ display:block; width:28px; height:28px; object-fit:cover; border-radius:8px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
     .title{ margin:0; font-size:24px; display:inline-flex; gap:10px; align-items:center; }
-    .title::after{
-      content:""; width:10px; height:10px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, var(--brand) 30%, var(--good) 100%);
-      box-shadow: 0 0 12px rgba(123,220,255,.6);
-    }
+    .title::after{ content:""; width:10px; height:10px; border-radius:50%; background: radial-gradient(circle at 30% 30%, var(--brand) 30%, var(--good) 100%); box-shadow: 0 0 12px rgba(123,220,255,.6); }
     .subtitle{ margin:2px 0 0; color:var(--muted); font-size:13px }
 
-    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
+    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
 
     .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
-    a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px;
-      border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
+    a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
     a.btn:hover, button.btn:hover, label.btn:hover{ filter:brightness(1.05) }
 
-    #adminBar{ display:none; gap:8px; align-items:center; }
-    #adminBar.show{ display:flex; }
-    #file{ display:none }
+    #adminBar{ display:none; gap:8px; align-items:center; } #adminBar.show{ display:flex; } #file{ display:none }
 
     .table-wrap{ width:100%; overflow-x:auto; -webkit-overflow-scrolling: touch; }
     table{ width:100%; border-collapse: collapse; margin-top:12px; table-layout: auto; min-width: 560px; }
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; border-bottom: 1px solid rgba(255,255,255,.18); }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
 
-    /* zebra rows + hover glow */
     tbody tr:nth-child(odd){ background: rgba(255,255,255,.02); }
-    tbody tr:hover{
-      background: rgba(123,220,255,.08);
-      box-shadow: inset 0 0 0 9999px rgba(123,220,255,.06);
-    }
+    tbody tr:hover{ background: rgba(123,220,255,.08); box-shadow: inset 0 0 0 9999px rgba(123,220,255,.06); }
 
-    /* numeric columns align nicely */
-    td:nth-child(3), td:nth-child(4), td:nth-child(5),
-    th:nth-child(3), th:nth-child(4), th:nth-child(5){
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* accent bar next to Teams */
+    td:nth-child(3), td:nth-child(4), td:nth-child(5), th:nth-child(3), th:nth-child(4), th:nth-child(5){ font-variant-numeric: tabular-nums; }
     td:nth-child(2){ position: relative; }
-    td:nth-child(2)::before{
-      content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px;
-      border-radius: 4px; background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35;
-    }
+    td:nth-child(2)::before{ content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 4px; background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35; }
 
     .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
     .team span{ display:block; overflow:visible; text-overflow:clip; white-space:normal; word-break:keep-all; line-height:1.2; }
 
-    /* stacked scores to mirror stacked team names (Away on top, Home below) */
     .scores{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:right; }
     .score{ line-height:1.2; }
 
@@ -93,50 +59,24 @@
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
     .num{ white-space:nowrap; }
 
-    /* Column sizing via colgroup */
-    col.col-idx{ width: 56px; }
-    col.col-teams{ width: auto; }
-    col.col-proj{ width: 120px; }
-    col.col-spr{ width: 120px; }
-    col.col-tot{ width: 96px; }
+    col.col-idx{ width: 56px; } col.col-teams{ width: auto; } col.col-proj{ width: 120px; } col.col-spr{ width: 120px; } col.col-tot{ width: 96px; }
 
     @media (max-width: 780px){
-      body{ padding:20px; }
-      .title{ font-size:22px; }
-      .subtitle{ font-size:12px; }
+      body{ padding:20px; } .title{ font-size:22px; } .subtitle{ font-size:12px; }
       th, td{ padding:8px 6px; font-size:13px; }
-      .team img{ height:20px; width:20px; flex-basis:20px; }
-      .team span{ font-size:13px; }
+      .team img{ height:20px; width:20px; flex-basis:20px; } .team span{ font-size:13px; }
       table{ min-width: 520px; }
     }
-
     @media (max-width: 520px){
-      /* Save space: hide the # column on very small screens */
       th:first-child, td:first-child{ display:none; }
-      .title{ font-size:20px; }
-      th, td{ font-size:12px; }
-      .team img{ height:18px; width:18px; flex-basis:18px; }
-      .team span{ font-size:12px; }
-      /* give Teams more room, squeeze numbers a bit */
-      col.col-proj{ width: 110px; }
-      col.col-spr{  width: 100px; }
-      col.col-tot{  width: 86px; }
+      .title{ font-size:20px; } th, td{ font-size:12px; }
+      .team img{ height:18px; width:18px; flex-basis:18px; } .team span{ font-size:12px; }
+      col.col-proj{ width: 110px; } col.col-spr{ width: 100px; } col.col-tot{ width: 86px; }
       table{ min-width: 460px; }
     }
+    @media (max-width: 420px){ col.col-proj{ width: 96px; } col.col-spr{ width: 90px; } col.col-tot{ width: 78px; } }
 
-    /* phone-narrow tweak: trim numeric columns a touch more */
-    @media (max-width: 420px){
-      col.col-proj{ width: 96px; }
-      col.col-spr{  width: 90px; }
-      col.col-tot{  width: 78px; }
-    }
-
-    /* accessibility helpers */
-    .sr-only{
-      position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-    }
-
+    .sr-only{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
   </style>
 </head>
@@ -144,7 +84,7 @@
   <div class="shell">
     <header>
       <div class="brand">
-        <div class="logo">🐄</div>
+        <img class="logo-img" src="assets/utter-locks-logo.jpg" alt="Utter Locks logo" width="28" height="28">
         <div>
           <h1 class="title">Utter Locks — CFB</h1>
           <p class="subtitle">College Football Picks</p>
@@ -165,11 +105,7 @@
         <table id="tbl">
           <caption class="sr-only">College Football model projections</caption>
           <colgroup>
-            <col class="col-idx">
-            <col class="col-teams">
-            <col class="col-proj">
-            <col class="col-spr">
-            <col class="col-tot">
+            <col class="col-idx"><col class="col-teams"><col class="col-proj"><col class="col-spr"><col class="col-tot">
           </colgroup>
           <thead>
             <tr>
@@ -190,21 +126,14 @@
 
   <script>
     const $body = document.getElementById('body');
-
-    // Show admin tools only for you: add ?admin=1 to URL or when running locally
     const isAdmin = new URLSearchParams(location.search).get('admin') === '1' || location.hostname === 'localhost';
     if (isAdmin) document.getElementById('adminBar').classList.add('show');
-
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // You can override with ?csv=/abs/or/relative/path.csv
     const CSV_OVERRIDE = new URLSearchParams(location.search).get('csv');
-    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString()
-                                  : new URL('./data/cfb.csv', location.href).toString(); // commit your CSV here
+    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString() : new URL('./data/cfb.csv', location.href).toString();
 
-    // Load from repo by default
     loadFromRepo();
-
     document.getElementById('useRepo').addEventListener('click', loadFromRepo);
     document.getElementById('file').addEventListener('change', (e)=>{
       const file = e.target.files?.[0]; if(!file) return;
@@ -219,45 +148,34 @@
         const url = REPO_CSV + (REPO_CSV.includes('?') ? `&v=${bust}` : `?v=${bust}`);
         const res = await fetch(url);
         if(!res.ok){ throw new Error(`HTTP ${res.status} at ${url}`); }
-        const text = await res.text();
-        const rows = parseCSV(text);
+        const rows = parseCSV(await res.text());
         render(rows);
       }catch(err){
         console.error(err);
-        $body.innerHTML = `<tr><td colspan="5" class="muted">Could not fetch CSV. ${err.message}.<br>Make sure the file exists at <code>${REPO_CSV}</code> in your published branch/folder.</td></tr>`;
+        $body.innerHTML = `<tr><td colspan="5" class="muted">Could not fetch CSV. ${err.message}.<br>Make sure the file exists at <code>${REPO_CSV}</code>.</td></tr>`;
       }
     }
 
     function parseCSV(text){
-      // robust-ish CSV parser that handles quoted commas
       const lines = text.replace(/\r/g,'').split('\n').filter(Boolean);
-      const header = splitCSVLine(lines[0]);
-      const out = [];
-      for(let i=1;i<lines.length;i++){
-        const cells = splitCSVLine(lines[i]);
-        const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim());
-        out.push(row);
-      }
+      const header = splitCSVLine(lines[0]); const out = [];
+      for(let i=1;i<lines.length;i++){ const cells = splitCSVLine(lines[i]); const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim()); out.push(row); }
       return out;
     }
     function splitCSVLine(line){
       const cells = []; let cur = ''; let q = false;
       for(let i=0;i<line.length;i++){
         const ch = line[i];
-        if(ch==='"'){
-          if(q && line[i+1]==='"'){ cur+='"'; i++; } else { q=!q; }
-        } else if(ch===',' && !q){ cells.push(cur); cur=''; }
+        if(ch==='"'){ if(q && line[i+1]==='"'){ cur+='"'; i++; } else { q=!q; } }
+        else if(ch===',' && !q){ cells.push(cur); cur=''; }
         else { cur += ch; }
       }
       cells.push(cur); return cells;
     }
-
-    function n(x){ const v = Number(x); return Number.isFinite(v) ? v : null; }
+    const n = x => { const v = Number(x); return Number.isFinite(v) ? v : null; };
 
     function render(rows){
       if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
-
-      // keep original order if '#' provided; otherwise sort by Total desc
       const hasIndex = rows[0] && ('#' in rows[0]);
       if(!hasIndex){ rows = rows.slice().sort((a,b)=> (n(b.Total)||0) - (n(a.Total)||0)); }
 
@@ -268,13 +186,7 @@
         const spr = n(r.Spread); const tot = n(r.Total);
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
 
-        // Stacked projected scores: Away on top, Home below (mirrors .teams)
-        const projHTML = `
-          <div class="scores">
-            <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
-            <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
-          </div>`;
-
+        const projHTML = `<div class="scores"><div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div><div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div></div>`;
         const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
         const totTxt = tot!=null ? tot.toFixed(1) : '—';
 
