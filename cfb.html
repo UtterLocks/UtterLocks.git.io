@@ -15,10 +15,13 @@
 
   <style>
     :root{ --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --good:#78ffa6; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px; }
-    @media (prefers-color-scheme: light){ :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7,12,34,.10); } }
+    @media (prefers-color-scheme: light){ :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#ffffff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7, 12, 34, .10); } }
     *{ box-sizing: border-box }
-    body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
-      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg); padding: 28px; }
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial; color:var(--text);
+      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg);
+      padding: 28px;
+    }
     .shell{ max-width:1100px; margin:0 auto; }
     header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
     .brand{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius: calc(var(--radius) + 6px); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); box-shadow:var(--shadow); }
@@ -40,18 +43,25 @@
     thead th{ position:sticky; top:0; background:rgba(15,23,48,.9); color:#fff; font-size:13px; letter-spacing:.3px; z-index:1; border-bottom: 1px solid rgba(255,255,255,.18); }
     th, td{ border-bottom:1px solid rgba(255,255,255,.08); padding:10px; text-align:center; vertical-align: middle; }
 
+    /* zebra + hover */
     tbody tr:nth-child(odd){ background: rgba(255,255,255,.02); }
     tbody tr:hover{ background: rgba(123,220,255,.08); box-shadow: inset 0 0 0 9999px rgba(123,220,255,.06); }
 
+    /* align numerics */
     td:nth-child(3), td:nth-child(4), td:nth-child(5), th:nth-child(3), th:nth-child(4), th:nth-child(5){ font-variant-numeric: tabular-nums; }
+
+    /* Teams column accent strip */
     td:nth-child(2){ position: relative; }
     td:nth-child(2)::before{ content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 4px; background: linear-gradient(180deg, rgba(123,220,255,.9), rgba(120,255,166,.9)); opacity: .35; }
 
-    .teams{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
+    /* Teams stack — inline = shrink-to-fit */
+    td:nth-child(2), th:nth-child(2){ width:1%; }
+    .teams{ display:inline-grid; grid-template-columns: 1fr; gap:6px; text-align:left; }
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
-    .team span{ display:block; overflow:visible; text-overflow:clip; white-space:normal; word-break:keep-all; line-height:1.2; }
+    .team span{ display:block; white-space:nowrap; line-height:1.2; }
 
+    /* Scores stack */
     .scores{ display:grid; grid-template-columns: 1fr; gap:6px; text-align:right; }
     .score{ line-height:1.2; }
 
@@ -59,7 +69,12 @@
     .badge{ font-size:11px; padding:2px 6px; border-radius:10px; border:1px solid rgba(255,255,255,.2); }
     .num{ white-space:nowrap; }
 
-    col.col-idx{ width: 56px; } col.col-teams{ width: auto; } col.col-proj{ width: 120px; } col.col-spr{ width: 120px; } col.col-tot{ width: 96px; }
+    /* Column sizing via colgroup */
+    col.col-idx{ width:56px; }
+    col.col-teams{ width:1%; }  /* shrink-to-fit */
+    col.col-proj{ width:120px; }
+    col.col-spr{  width:120px; }
+    col.col-tot{  width:96px; }
 
     @media (max-width: 780px){
       body{ padding:20px; } .title{ font-size:22px; } .subtitle{ font-size:12px; }
@@ -70,13 +85,17 @@
     @media (max-width: 520px){
       th:first-child, td:first-child{ display:none; }
       .title{ font-size:20px; } th, td{ font-size:12px; }
-      .team img{ height:18px; width:18px; flex-basis:18px; } .team span{ font-size:12px; }
-      col.col-proj{ width: 110px; } col.col-spr{ width: 100px; } col.col-tot{ width: 86px; }
+      .team img{ height:18px; width:18px; flex-basis:18px; }
+      .team span{ white-space:normal; font-size:12px; } /* allow wrap on phones */
+      /* give Teams more room, squeeze numbers a bit */
+      col.col-proj{ width:110px; } col.col-spr{ width:100px; } col.col-tot{ width:86px; }
       table{ min-width: 460px; }
+      .teams{ display:grid; } /* revert to block grid for small screens */
     }
-    @media (max-width: 420px){ col.col-proj{ width: 96px; } col.col-spr{ width: 90px; } col.col-tot{ width: 78px; } }
+    @media (max-width: 420px){
+      col.col-proj{ width: 96px; } col.col-spr{  width: 90px; } col.col-tot{  width: 78px; }
+    }
 
-    .sr-only{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
   </style>
 </head>
@@ -105,7 +124,11 @@
         <table id="tbl">
           <caption class="sr-only">College Football model projections</caption>
           <colgroup>
-            <col class="col-idx"><col class="col-teams"><col class="col-proj"><col class="col-spr"><col class="col-tot">
+            <col class="col-idx">
+            <col class="col-teams">
+            <col class="col-proj">
+            <col class="col-spr">
+            <col class="col-tot">
           </colgroup>
           <thead>
             <tr>
@@ -126,14 +149,19 @@
 
   <script>
     const $body = document.getElementById('body');
+
     const isAdmin = new URLSearchParams(location.search).get('admin') === '1' || location.hostname === 'localhost';
     if (isAdmin) document.getElementById('adminBar').classList.add('show');
+
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // CSV path (override with ?csv=)
     const CSV_OVERRIDE = new URLSearchParams(location.search).get('csv');
-    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString() : new URL('./data/cfb.csv', location.href).toString();
+    const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString()
+                                  : new URL('./data/cfb.csv', location.href).toString();
 
     loadFromRepo();
+
     document.getElementById('useRepo').addEventListener('click', loadFromRepo);
     document.getElementById('file').addEventListener('change', (e)=>{
       const file = e.target.files?.[0]; if(!file) return;
@@ -148,7 +176,8 @@
         const url = REPO_CSV + (REPO_CSV.includes('?') ? `&v=${bust}` : `?v=${bust}`);
         const res = await fetch(url);
         if(!res.ok){ throw new Error(`HTTP ${res.status} at ${url}`); }
-        const rows = parseCSV(await res.text());
+        const text = await res.text();
+        const rows = parseCSV(text);
         render(rows);
       }catch(err){
         console.error(err);
@@ -158,24 +187,33 @@
 
     function parseCSV(text){
       const lines = text.replace(/\r/g,'').split('\n').filter(Boolean);
-      const header = splitCSVLine(lines[0]); const out = [];
-      for(let i=1;i<lines.length;i++){ const cells = splitCSVLine(lines[i]); const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim()); out.push(row); }
+      const header = splitCSVLine(lines[0]);
+      const out = [];
+      for(let i=1;i<lines.length;i++){
+        const cells = splitCSVLine(lines[i]);
+        const row = {}; header.forEach((h,idx)=> row[h.trim()] = (cells[idx] ?? '').trim());
+        out.push(row);
+      }
       return out;
     }
     function splitCSVLine(line){
       const cells = []; let cur = ''; let q = false;
       for(let i=0;i<line.length;i++){
         const ch = line[i];
-        if(ch==='"'){ if(q && line[i+1]==='"'){ cur+='"'; i++; } else { q=!q; } }
-        else if(ch===',' && !q){ cells.push(cur); cur=''; }
+        if(ch==='"'){
+          if(q && line[i+1]==='"'){ cur+='"'; i++; } else { q=!q; }
+        } else if(ch===',' && !q){ cells.push(cur); cur=''; }
         else { cur += ch; }
       }
       cells.push(cur); return cells;
     }
-    const n = x => { const v = Number(x); return Number.isFinite(v) ? v : null; };
+
+    function n(x){ const v = Number(x); return Number.isFinite(v) ? v : null; }
 
     function render(rows){
       if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
+
+      // keep original order if '#' provided; otherwise sort by Total desc
       const hasIndex = rows[0] && ('#' in rows[0]);
       if(!hasIndex){ rows = rows.slice().sort((a,b)=> (n(b.Total)||0) - (n(a.Total)||0)); }
 
@@ -186,7 +224,13 @@
         const spr = n(r.Spread); const tot = n(r.Total);
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
 
-        const projHTML = `<div class="scores"><div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div><div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div></div>`;
+        // Stacked projected scores: Away (top), Home (bottom)
+        const projHTML = `
+          <div class="scores">
+            <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
+            <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
+          </div>`;
+
         const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
         const totTxt = tot!=null ? tot.toFixed(1) : '—';
 
