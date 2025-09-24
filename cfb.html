@@ -94,28 +94,31 @@
       table{ min-width: 520px; }
     }
 
+    /* --- Mobile tweaks: Proj inline & no wrapping --- */
     @media (max-width: 560px){
-      /* Make Proj inline: "A · H" */
       .scores{
         display:flex;
-        gap:6px;
+        gap:4px;
         justify-content:flex-end;
         align-items:center;
+        flex-wrap:nowrap;    /* keep single line */
+        white-space:nowrap;  /* keep whole pair together */
         text-align:right;
       }
       .scores .score{
         font-size:12px;
-        line-height:1.1;
+        line-height:1.05;
+        white-space:nowrap;  /* each number stays unwrapped */
       }
       .scores .score:first-child::after{
-        content:" · ";
+        content:"·";
+        margin:0 4px;
         opacity:.7;
       }
 
-      /* give Proj a touch more room, trim others */
-      col.col-proj{ width:106px; }
-      col.col-spr{  width:94px; }
-      col.col-tot{  width:82px; }
+      /* ensure Proj column has enough width to avoid wrapping */
+      td:nth-child(3){ min-width:118px; }
+      col.col-proj{ width:118px; }
     }
 
     @media (max-width: 520px){
@@ -128,7 +131,8 @@
     }
 
     @media (max-width: 420px){
-      col.col-proj{ width: 96px; } col.col-spr{  width: 90px; } col.col-tot{  width: 78px; }
+      col.col-proj{ width: 122px; } /* tiny bump for very narrow devices */
+      td:nth-child(3){ min-width:122px; }
     }
 
     footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
@@ -141,7 +145,7 @@
         <img class="logo-img" src="assets/utter-locks-logo.jpg" alt="Utter Locks logo" width="28" height="28">
         <div>
           <h1 class="title">Utter Locks — CFB</h1>
-        <p class="subtitle">College Football Picks</p>
+          <p class="subtitle">College Football Picks</p>
         </div>
       </div>
       <div class="row">
