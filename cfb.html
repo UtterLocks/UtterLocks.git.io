@@ -30,7 +30,8 @@
     .title::after{ content:""; width:10px; height:10px; border-radius:50%; background: radial-gradient(circle at 30% 30%, var(--brand) 30%, var(--good) 100%); box-shadow: 0 0 12px rgba(123,220,255,.6); }
     .subtitle{ margin:2px 0 0; color:var(--muted); font-size:13px }
 
-    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
+    .panel{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius); box-shadow:var(--shadow); padding:16px; backdrop-filter: blur(8px); }
 
     .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
     a.btn, button.btn, label.btn{ appearance:none; cursor:pointer; border:none; text-decoration:none; color:var(--text); background:var(--card); padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.10); font-weight:700; letter-spacing:.3px; }
@@ -60,6 +61,8 @@
     .team{ display:flex; align-items:center; gap:8px; min-width: 0; }
     .team img{ height:22px; width:22px; object-fit: contain; border-radius: 4px; background:#fff; flex: 0 0 22px; }
     .team span{ display:block; white-space:nowrap; line-height:1.2; }
+    .icon{ margin-left:6px; font-size:13px; opacity:.95; }
+    .icon[title]{ cursor:help; }
 
     /* Scores stack (desktop centered) */
     .scores{
@@ -254,6 +257,7 @@
     }
 
     function n(x){ const v = Number(x); return Number.isFinite(v) ? v : null; }
+    const norm = s => (s ?? '').toString().toLowerCase().replace(/[^a-z0-9]+/g,'').trim();
 
     function render(rows){
       if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
@@ -267,7 +271,18 @@
         const h = r.Home || ''; const a = r.Away || '';
         const hp = n(r.Home_Proj); const ap = n(r.Away_Proj);
         const spr = n(r.Spread); const tot = n(r.Total);
+        const sprEdge = n(r['Spread Edge']);
+        const totEdge = n(r['Total Edge']);
+        const sprBet = r['Spread Bet'] || '';
+        const totBet = (r['Total Bet'] || '').toLowerCase();
         const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
+
+        // ✅ which team gets the check?
+        const spreadBetNorm = norm(sprBet);
+        const isHomePick = spreadBetNorm && spreadBetNorm === norm(h);
+        const isAwayPick = spreadBetNorm && spreadBetNorm === norm(a);
+        const homeCheck = isHomePick ? `<span class="icon" title="Spread bet: ${h}">✅</span>` : '';
+        const awayCheck = isAwayPick ? `<span class="icon" title="Spread bet: ${a}">✅</span>` : '';
 
         // Stacked (A on top, H below) — mobile stays stacked too
         const projHTML = `
@@ -276,16 +291,24 @@
             <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
           </div>`;
 
-        const sprTxt = spr!=null ? (spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)) : '—';
-        const totTxt = tot!=null ? tot.toFixed(1) : '—';
+        // Spread cell with tight-line star
+        const starSpread = sprEdge!=null && Math.abs(sprEdge) <= 3 ? `<span class="icon" title="Edge ≤ 3">⭐</span>` : '';
+        const sprTxt = spr!=null ? `${spr>0?`+${spr.toFixed(1)}`:spr.toFixed(1)}${starSpread}` : '—';
+
+        // Total cell with arrow + optional star
+        let arrow = '';
+        if(totBet === 'over') arrow = `<span class="icon" title="Total bet: Over">⬆️</span>`;
+        else if(totBet === 'under') arrow = `<span class="icon" title="Total bet: Under">⬇️</span>`;
+        const starTotal = totEdge!=null && Math.abs(totEdge) <= 3 ? `<span class="icon" title="Edge ≤ 3">⭐</span>` : '';
+        const totTxt = tot!=null ? `${tot.toFixed(1)}${arrow}${starTotal}` : '—';
 
         return `
           <tr>
             <td class="num">${i}</td>
             <td>
               <div class="teams">
-                <div class="team"><img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}</span></div>
-                <div class="team"><img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}</span></div>
+                <div class="team"><img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}${awayCheck}</span></div>
+                <div class="team"><img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}${homeCheck}</span></div>
               </div>
             </td>
             <td>${projHTML}</td>
