@@ -76,6 +76,24 @@
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
+/* Mobile: make Proj compact so it doesn't feel crowded */
+@media (max-width: 560px){
+  .scores{
+    justify-items: end;   /* align numbers to the right (more readable in narrow cols) */
+    align-content: center;
+    text-align: right;
+    gap: 2px;             /* tighter stack */
+  }
+  .score{
+    font-size: 12px;      /* slightly smaller type on phones */
+    line-height: 1.1;
+  }
+
+  /* optional: give Proj a touch more room, trim others */
+  col.col-proj{ width: 106px; }
+  col.col-spr{  width: 94px; }
+  col.col-tot{  width: 82px; }
+}
 
 
     .muted{ color:var(--muted) }
