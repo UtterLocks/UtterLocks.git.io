@@ -11,14 +11,10 @@
   <meta property="og:description" content="Data-driven projections & picks.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' x='8' font-size='48'%3E🐄%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/jpeg" href="assets/utter-locks-logo.jpg" />
 
   <style>
-    :root{
-      --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0;
-      --brand:#7bdcff; --accent:#78ffa6;
-      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px;
-    }
+    :root{ --bg:#0b1020; --bg2:#0f1730; --card:#111a36; --text:#eaf0ff; --muted:#a8b3d0; --brand:#7bdcff; --accent:#78ffa6; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px; }
     @media (prefers-color-scheme: light){
       :root{ --bg:#f6f9ff; --bg2:#eef4ff; --card:#fff; --text:#0f1a2a; --muted:#4b5877; --shadow:0 10px 24px rgba(7,12,34,.10); }
     }
@@ -27,39 +23,19 @@
     body{
       margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent),
-        radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent),
-        var(--bg);
+      background: radial-gradient(1200px 800px at 10% -20%, var(--bg2), transparent), radial-gradient(1200px 800px at 100% 120%, var(--bg2), transparent), var(--bg);
       display:flex; align-items:center; justify-content:center; padding:32px;
     }
     .shell{ max-width:980px; width:100% }
 
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:calc(var(--radius) + 6px);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow);
-    }
-    .logo{ font-size:26px; line-height:1 }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px; }
+    .brand{ display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:calc(var(--radius) + 6px); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow); }
+    .logo-img{ display:block; width:32px; height:32px; object-fit:cover; border-radius:10px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
     .title{ margin:0; font-size:28px; letter-spacing:.4px; display:inline-flex; gap:10px; align-items:center; }
-    .title::after{
-      content:""; width:10px; height:10px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, var(--brand) 30%, var(--accent) 100%);
-      box-shadow: 0 0 12px rgba(123,220,255,.6);
-    }
+    .title::after{ content:""; width:10px; height:10px; border-radius:50%; background: radial-gradient(circle at 30% 30%, var(--brand) 30%, var(--accent) 100%); box-shadow: 0 0 12px rgba(123,220,255,.6); }
     .subtitle{ color:var(--muted); font-size:14px; margin:2px 0 0 }
 
-    main{
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:var(--radius); box-shadow:var(--shadow);
-      padding:22px; backdrop-filter: blur(8px);
-    }
-
-    /* auto-fit grid: adjusts to screen width cleanly */
+    main{ background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px; backdrop-filter: blur(8px); }
     nav{ display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:14px; }
 
     .btn{
@@ -75,26 +51,15 @@
     .btn:hover{ transform: translateY(-1px); filter:brightness(1.05); }
     .btn:active{ transform: translateY(0); filter:brightness(0.98); }
     .btn span{ opacity:.92 }
-
-    /* subtle per-sport accents */
     .btn[data-sport="NFL"]{ background:linear-gradient(180deg, rgba(123,220,255,.12), rgba(123,220,255,.02)), var(--card); }
     .btn[data-sport="CFB"]{ background:linear-gradient(180deg, rgba(120,255,166,.12), rgba(120,255,166,.02)), var(--card); }
     .btn[data-sport="CBB"]{ background:linear-gradient(180deg, rgba(255,220,123,.12), rgba(255,220,123,.02)), var(--card); }
     .btn[data-sport="WNBA"]{ background:linear-gradient(180deg, rgba(255,163,97,.14), rgba(255,163,97,.03)), var(--card); }
     .btn[data-sport="NBA"]{ background:linear-gradient(180deg, rgba(173,134,255,.14), rgba(173,134,255,.03)), var(--card); }
     .btn[data-sport="Tracking"]{ background:linear-gradient(180deg, rgba(255,97,153,.14), rgba(255,97,153,.03)), var(--card); }
-
-    /* sheen on hover */
-    .btn::after{
-      content:""; position:absolute; inset:-40% -20%; transform:skewX(-25deg) translateX(-120%);
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
-      transition: transform .6s ease;
-    }
+    .btn::after{ content:""; position:absolute; inset:-40% -20%; transform:skewX(-25deg) translateX(-120%); background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); transition: transform .6s ease; }
     .btn:hover::after{ transform:skewX(-25deg) translateX(160%); }
-    @media (prefers-reduced-motion: reduce){
-      .btn, .btn::after{ transition:none; }
-    }
-
+    @media (prefers-reduced-motion: reduce){ .btn, .btn::after{ transition:none; } }
     .arrow{ font-size:18px; opacity:.55; transform: translateX(0); transition:.18s transform ease, .18s opacity ease; }
     .btn:hover .arrow{ transform: translateX(2px); opacity:.9; }
 
@@ -107,7 +72,7 @@
   <div class="shell">
     <header>
       <div class="brand" aria-label="Utter Locks brand">
-        <div class="logo" aria-hidden="true">🐄</div>
+        <img class="logo-img" src="assets/utter-locks-logo.jpg" alt="Utter Locks logo" width="32" height="32">
         <div>
           <h1 class="title">Utter Locks</h1>
           <p class="subtitle">Data-Driven Investments</p>
@@ -132,15 +97,12 @@
   </div>
 
   <script>
-    // Auto year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Keyboard shortcuts: 1–6 jump to tabs (order as shown)
+    // 1–6 shortcuts for quick nav
     const links = Array.from(document.querySelectorAll('nav a.btn'));
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', e => {
       if (e.altKey || e.ctrlKey || e.metaKey) return;
-      const n = e.key.charCodeAt(0) - 48; // '1' -> 1
-      if (n >= 1 && n <= links.length) { links[n-1].focus(); links[n-1].click(); }
+      const n = e.key.charCodeAt(0) - 48; if (n>=1 && n<=links.length) { links[n-1].focus(); links[n-1].click(); }
     });
   </script>
 </body>
