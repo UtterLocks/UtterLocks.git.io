@@ -196,7 +196,7 @@
       <!-- Legend -->
       <div class="legend" aria-label="Legend">
         <span><span class="dot-glow" aria-hidden="true"></span>Spread Pick (logo glow)</span>
-        <span><span class="tight-dot" aria-hidden="true"></span>Tight Edge ≤ 3</span>
+        <span><span class="tight-dot" aria-hidden="true"></span>Best Edge ≤ 3</span>
         <span><span class="chev" aria-hidden="true">▲</span> Total: Over</span>
         <span><span class="chev" aria-hidden="true">▼</span> Total: Under</span>
       </div>
@@ -328,7 +328,7 @@
           </div>`;
 
         // Tight edge dot helper
-        const tightDot = `<span class="tight-dot" aria-label="Tight edge ≤ 3" title="Best Edge ≤ 3"></span>`;
+        const tightDot = `<span class="tight-dot" aria-label="Tight edge ≤ 3" title="Tight edge ≤ 3"></span>`;
 
         // Spread text (xSpread) + tight dot
         const spreadIsTight = sprEdge!=null && Math.abs(sprEdge) <= 3;
