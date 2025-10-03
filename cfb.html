@@ -182,10 +182,9 @@
       </div>
       <div class="row">
         <a class="btn" href="index.html">← Home</a>
-        <!-- Added: dataset toggle buttons (minimal) -->
+        <!-- ADDED: dataset toggle buttons -->
         <button class="btn" id="showProj">Projections</button>
         <button class="btn" id="showRatings">Ratings</button>
-        <!-- Existing admin controls unchanged -->
         <div id="adminBar">
           <input id="file" type="file" accept=".csv" />
           <label class="btn" for="file">Preview CSV (admin)</label>
@@ -213,7 +212,7 @@
             <col class="col-tot">
           </colgroup>
           <thead>
-            <tr>
+            <tr id="thead-row">
               <th scope="col">#</th>
               <th scope="col">Teams</th>
               <th scope="col">Proj (A-H)</th>
@@ -231,24 +230,39 @@
 
   <script>
     const $body = document.getElementById('body');
+    const $theadRow = document.getElementById('thead-row');
 
     const isAdmin = new URLSearchParams(location.search).get('admin') === '1' || location.hostname === 'localhost';
     if (isAdmin) document.getElementById('adminBar').classList.add('show');
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // CSV path (override with ?csv=) — unchanged
+    // CSV path (override with ?csv=)
     const CSV_OVERRIDE = new URLSearchParams(location.search).get('csv');
     const REPO_CSV = CSV_OVERRIDE ? new URL(CSV_OVERRIDE, location.href).toString()
                                   : new URL('./data/cfb.csv', location.href).toString();
 
-    // Added: second dataset + current selector (defaults to existing REPO_CSV)
+    // ADDED: ratings path + mode
     const RATINGS_CSV = new URL('./data/cfb.ratings', location.href).toString();
     let currentCSV = REPO_CSV;
+    let mode = 'proj'; // 'proj' | 'ratings'
 
+    // Buttons
+    document.getElementById('showProj').addEventListener('click', ()=>{
+      currentCSV = REPO_CSV;
+      mode = 'proj';
+      setHeaders();
+      loadFromRepo();
+    });
+    document.getElementById('showRatings').addEventListener('click', ()=>{
+      currentCSV = RATINGS_CSV;
+      mode = 'ratings';
+      setHeaders();
+      loadFromRepo();
+    });
+
+    // keep your original triggers
     loadFromRepo();
-
-    // Existing admin controls — unchanged
     document.getElementById('useRepo').addEventListener('click', loadFromRepo);
     document.getElementById('file').addEventListener('change', (e)=>{
       const file = e.target.files?.[0]; if(!file) return;
@@ -257,15 +271,26 @@
       reader.readAsText(file);
     });
 
-    // Added: toggle buttons to switch datasets
-    document.getElementById('showProj').addEventListener('click', ()=>{
-      currentCSV = REPO_CSV;    // keep override behavior for projections
-      loadFromRepo();
-    });
-    document.getElementById('showRatings').addEventListener('click', ()=>{
-      currentCSV = RATINGS_CSV; // fixed path for ratings
-      loadFromRepo();
-    });
+    // ADDED: dynamic headers based on mode
+    function setHeaders(){
+      if(mode === 'ratings'){
+        $theadRow.innerHTML = `
+          <th scope="col">Rk</th>
+          <th scope="col">Team</th>
+          <th scope="col">Off Rk</th>
+          <th scope="col">Def Rk</th>
+          <th scope="col">Identity</th>
+        `;
+      }else{
+        $theadRow.innerHTML = `
+          <th scope="col">#</th>
+          <th scope="col">Teams</th>
+          <th scope="col">Proj (A-H)</th>
+          <th scope="col">Spread (A-H)</th>
+          <th scope="col">Total</th>
+        `;
+      }
+    }
 
     async function loadFromRepo(){
       try{
@@ -311,75 +336,109 @@
     function render(rows){
       if(!rows?.length){ $body.innerHTML = '<tr><td colspan="5" class="muted">No rows</td></tr>'; return; }
 
-      // keep original order if '#' provided; otherwise sort by Total desc
-      const hasIndex = rows[0] && ('#' in rows[0]);
-      if(!hasIndex){ rows = rows.slice().sort((a,b)=> (n(b.Total)||0) - (n(a.Total)||0)); }
+      // Ratings vs Projections rendering
+      if(mode === 'ratings' || ('Rk' in rows[0] && 'Team' in rows[0] && 'Off_R' in rows[0])){
+        // ---- RATINGS MODE ----
+        // sort by numeric Rk if needed
+        rows = rows.slice().sort((a,b)=> (n(a.Rk)||0) - (n(b.Rk)||0));
 
-      $body.innerHTML = rows.map((r,idx)=>{
-        const i = r['#'] || (idx+1);
-        const h = r.Home || ''; const a = r.Away || '';
-        const hp = n(r.Home_Proj); const ap = n(r.Away_Proj);
+        $body.innerHTML = rows.map(r=>{
+          const rk  = n(r.Rk) ?? '';
+          const tm  = r.Team || '';
+          const off = n(r.Off_R); 
+          const def = n(r.Def_R);
+          const id  = r.Identity || '';
 
-        /* Spread: use model xSpread */
-        const xSpr = n(r.xSpread);
-
-        /* Total: now use model xTotal */
-        const xTot = n(r.xTotal);
-
-        const sprEdge = n(r['Spread Edge']);
-        const totEdge = n(r['Total Edge']);
-        const sprBet = r['Spread Bet'] || '';          // full team name string
-        const totBet = (r['Total Bet'] || '').toLowerCase();
-        const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
-
-        // Which team is the spread pick? (apply softer red glow to its logo)
-        const spreadBetNorm = norm(sprBet);
-        const isHomePick = spreadBetNorm && spreadBetNorm === norm(h);
-        const isAwayPick = spreadBetNorm && spreadBetNorm === norm(a);
-
-        // Stacked (A on top, H below)
-        const projHTML = `
-          <div class="scores">
-            <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
-            <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
-          </div>`;
-
-        // Tight edge dot helper
-        const tightDot = `<span class="tight-dot" aria-label="Tight edge ≤ 3" title="Tight edge ≤ 3"></span>`;
-
-        // Spread text (xSpread) + tight dot
-        const spreadIsTight = sprEdge!=null && Math.abs(sprEdge) <= 3;
-        const sprTxt = xSpr!=null
-          ? `${xSpr>0?`+${xSpr.toFixed(1)}`:xSpr.toFixed(1)}${spreadIsTight ? tightDot : ''}`
-          : '—';
-
-        // Total text (xTotal) with chevron + optional dot
-        let chev = '';
-        if(totBet === 'over') chev = ` <span class="chev" title="Total: Over">▲</span>`;
-        else if(totBet === 'under') chev = ` <span class="chev" title="Total: Under">▼</span>`;
-        const totalIsTight = totEdge!=null && Math.abs(totEdge) <= 3;
-        const totTxt = xTot!=null
-          ? `${xTot.toFixed(1)}${totalIsTight ? tightDot : ''}${chev}`
-          : '—';
-
-        return `
-          <tr>
-            <td class="num">${i}</td>
-            <td>
-              <div class="teams">
-                <div class="team ${isAwayPick ? 'pick' : ''}">
-                  <img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}</span>
+          return `
+            <tr>
+              <td class="num">${rk}</td>
+              <td>
+                <div class="teams">
+                  <div class="team">
+                    <span>${tm}</span>
+                  </div>
                 </div>
-                <div class="team ${isHomePick ? 'pick' : ''}">
-                  <img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}</span>
+              </td>
+              <td>${off!=null ? off : '—'}</td>
+              <td>${def!=null ? def : '—'}</td>
+              <td>${id || '—'}</td>
+            </tr>
+          `;
+        }).join('');
+
+      } else {
+        // ---- PROJECTIONS MODE (your original logic) ----
+
+        // keep original order if '#' provided; otherwise sort by Total desc
+        const hasIndex = rows[0] && ('#' in rows[0]);
+        if(!hasIndex){ rows = rows.slice().sort((a,b)=> (n(b.Total)||0) - (n(a.Total)||0)); }
+
+        $body.innerHTML = rows.map((r,idx)=>{
+          const i = r['#'] || (idx+1);
+          const h = r.Home || ''; const a = r.Away || '';
+          const hp = n(r.Home_Proj); const ap = n(r.Away_Proj);
+
+          /* Spread: use model xSpread */
+          const xSpr = n(r.xSpread);
+
+          /* Total: now use model xTotal */
+          const xTot = n(r.xTotal);
+
+          const sprEdge = n(r['Spread Edge']);
+          const totEdge = n(r['Total Edge']);
+          const sprBet = r['Spread Bet'] || '';          // full team name string
+          const totBet = (r['Total Bet'] || '').toLowerCase();
+          const hlogo = r.HomeLogo; const alogo = r.AwayLogo;
+
+          // Which team is the spread pick? (apply softer red glow to its logo)
+          const spreadBetNorm = norm(sprBet);
+          const isHomePick = spreadBetNorm && spreadBetNorm === norm(h);
+          const isAwayPick = spreadBetNorm && spreadBetNorm === norm(a);
+
+          // Stacked (A on top, H below)
+          const projHTML = `
+            <div class="scores">
+              <div class="score">${ap!=null ? ap.toFixed(1) : '—'}</div>
+              <div class="score">${hp!=null ? hp.toFixed(1) : '—'}</div>
+            </div>`;
+
+          // Tight edge dot helper
+          const tightDot = `<span class="tight-dot" aria-label="Tight edge ≤ 3" title="Tight edge ≤ 3"></span>`;
+
+          // Spread text (xSpread) + tight dot
+          const spreadIsTight = sprEdge!=null && Math.abs(sprEdge) <= 3;
+          const sprTxt = xSpr!=null
+            ? `${xSpr>0?`+${xSpr.toFixed(1)}`:xSpr.toFixed(1)}${spreadIsTight ? tightDot : ''}`
+            : '—';
+
+          // Total text (xTotal) with chevron + optional dot
+          let chev = '';
+          if(totBet === 'over') chev = ` <span class="chev" title="Total: Over">▲</span>`;
+          else if(totBet === 'under') chev = ` <span class="chev" title="Total: Under">▼</span>`;
+          const totalIsTight = totEdge!=null && Math.abs(totEdge) <= 3;
+          const totTxt = xTot!=null
+            ? `${xTot.toFixed(1)}${totalIsTight ? tightDot : ''}${chev}`
+            : '—';
+
+          return `
+            <tr>
+              <td class="num">${i}</td>
+              <td>
+                <div class="teams">
+                  <div class="team ${isAwayPick ? 'pick' : ''}">
+                    <img loading="lazy" decoding="async" src="${alogo}" alt="${a}"><span>${a}</span>
+                  </div>
+                  <div class="team ${isHomePick ? 'pick' : ''}">
+                    <img loading="lazy" decoding="async" src="${hlogo}" alt="${h}"><span>${h}</span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>${projHTML}</td>
-            <td>${sprTxt}</td>
-            <td>${totTxt}</td>
-          </tr>`;
-      }).join('');
+              </td>
+              <td>${projHTML}</td>
+              <td>${sprTxt}</td>
+              <td>${totTxt}</td>
+            </tr>`;
+        }).join('');
+      }
     }
   </script>
 </body>
